@@ -1,0 +1,67 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": ["**", "!**/*.svg", "!**/routeTree.gen.ts"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"includes": ["**", "!**/$.ts"],
+		"rules": {
+			"style": {
+				"noDescendingSpecificity": "off"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"level": "on",
+					"fix": "safe",
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["clasList", "cn"]
+					}
+				}
+			}
+		},
+		"domains": {
+			"tailwind": "all"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"bracketSameLine": true
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true,
+			"bracketSameLine": true
+		}
+	},
+	"css": {
+		"formatter": {
+			"enabled": true
+		},
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}
