@@ -1,1 +1,125 @@
 @import "tailwindcss";
+
+:root {
+	color-scheme: light dark;
+
+	&[data-theme="light"] {
+		color-scheme: light;
+	}
+
+	&[data-theme="dark"] {
+		color-scheme: dark;
+	}
+}
+
+@theme {
+	/* fonts */
+	--font-sans: "DM Sans Variable", sans-serif;
+	--font-bricolage-grotesque: "Bricolage Grotesque Variable", sans-serif;
+
+	/* font-size */
+	--text-2xs: 0.728125rem;
+	--text-3xs: 0.6875rem;
+
+	/* color */
+	--color-bg-page: light-dark(oklch(0.86 0.08 270), oklch(0.14 0.08 270));
+	--color-bg-card: light-dark(oklch(0.68 0.04 285), oklch(0.32 0.04 285));
+
+	--color-text: light-dark(oklch(0.1 0 0), oklch(0.9 0 0));
+	--color-text-muted: light-dark(oklch(0.3 0 0), oklch(0.7 0 0));
+
+	--color-bg-primary: oklch(0.51 0.2 271);
+	--color-bg-primary-hover: oklch(0.43 0.16 271);
+	--color-text-primary: light-dark(oklch(0.29 0.2 271), oklch(0.71 0.2 271));
+
+	--color-bg-secondary: var(--color-bg-card);
+	--color-bg-secondary-hover: light-dark(
+		oklch(0.72 0.04 285),
+		oklch(0.28 0.04 285)
+	);
+}
+
+@layer base {
+	/* 	RESET */
+	html {
+		/* Reserve scrollbar area */
+		scrollbar-gutter: stable;
+		/* Enable smooth scrolling for anchor links */
+		@media (prefers-reduced-motion: no-preference) {
+			scroll-behavior: smooth;
+		}
+		/* Enable keywords animations */
+		interpolate-size: allow-keywords;
+	}
+
+	body {
+		/* Improve text rendering */
+		-webkit-font-smoothing: antialiased;
+		/* hide horizontal overflow */
+		overflow-x: hidden;
+		/* set default font */
+		font-family: var(--font-serif);
+		/* set-default line height */
+		line-height: 1.5;
+
+		@supports (overflow-x: clip) {
+			overflow-x: clip;
+		}
+	}
+
+	/* remove vertical white space for some element */
+	@supports (text-box: trim-both cap text) {
+		h1,
+		h2,
+		h3,
+		label,
+		li,
+		button,
+		a {
+			text-box: trim-both cap text;
+		}
+	}
+
+	/* Improve media defaults */
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		inline-size: 100%;
+	}
+
+	/* improve focus styles */
+	:focus-visible {
+		outline-offset: 3px;
+		outline-style: solid;
+		outline-width: 3px;
+		outline-color: var(--color-text-primary);
+	}
+}
+
+@utility hover-underline {
+	background:
+		linear-gradient(currentColor 0 0) var(--p, 0) 100% / var(--d, 0) 3px
+		no-repeat;
+	transition:
+		0.3s,
+		background-position 0s 0.3s;
+
+	&:hover {
+		--d: 100%;
+		--p: 100%;
+	}
+}
+
+@utility squircle {
+	corner-shape: squircle;
+}
+
+@utility trim-capital {
+	text-box: trim-both cap alphabetic;
+}
+@utility trim-text {
+	text-box: trim-both cap text;
+}

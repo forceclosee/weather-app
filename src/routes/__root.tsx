@@ -14,6 +14,12 @@ import type { QueryClient } from "@tanstack/react-query";
 import favicon from "/icon.svg";
 import globalCss from "#/styles/global.css?url";
 
+// dm sans 100-1000
+import "@fontsource-variable/dm-sans";
+
+// bricolage grotesque 200-800
+import "@fontsource-variable/bricolage-grotesque";
+
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
@@ -94,11 +100,11 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="bg-bg-page">
 			<head>
 				<HeadContent />
 			</head>
-			<body>
+			<body className="text-text">
 				{children}
 				<TanStackDevtools
 					config={{
