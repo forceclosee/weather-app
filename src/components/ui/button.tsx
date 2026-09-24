@@ -9,7 +9,7 @@ type Props = RACButtonProps & {
 	className?: string;
 };
 
-export default function Button({
+export function Button({
 	children,
 	variant = "primary",
 	className,
