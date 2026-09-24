@@ -1,6 +1,7 @@
 import {
 	HeadContent,
 	Outlet,
+	ScriptOnce,
 	Scripts,
 	createRootRouteWithContext,
 } from "@tanstack/react-router";
@@ -93,8 +94,26 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootComponent() {
 	return (
 		<RootDocument>
-			<Outlet />
+			<ThemeProvider>
+				<Outlet />
+			</ThemeProvider>
 		</RootDocument>
+	);
+}
+
+const themeScript = `(function() {
+  try {
+    const savedTheme = localStorage.getItem("theme") || "system";
+		document.documentElement.setAttribute("data-theme", savedTheme);
+  } catch (e) {}
+})();`;
+
+function ThemeProvider({ children }: { children: React.ReactNode }) {
+	return (
+		<>
+			<ScriptOnce children={themeScript} />
+			{children}
+		</>
 	);
 }
 
