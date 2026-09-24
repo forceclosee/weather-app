@@ -11,7 +11,7 @@ import TanStackQueryDevtools from "#/integrations/tanstack-query/devtools";
 
 import type { QueryClient } from "@tanstack/react-query";
 
-import favicon from "/icon.svg";
+import favicon from "/favicon.ico";
 import globalCss from "#/styles/global.css?url";
 
 // dm sans 100-1000
@@ -28,14 +28,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		meta: [
 			{
-				charset: "utf-8",
+				charSet: "utf-8",
 			},
 			{
 				name: "viewport",
 				content: "width=device-width, initial-scale=1.0",
 			},
 			{
-				title: "Weather App | ForceClose",
+				title: "ForeCast | Your Trusted Weather Forecast",
 			},
 			{
 				name: "author",
@@ -49,7 +49,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			// OG Tags
 			{
 				property: "og:title",
-				content: "Weather App",
+				content: "ForeCast | Reliable Weather Forecast",
 			},
 			{
 				property: "og:description",
@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			{
 				rel: "icon",
 				href: favicon,
-				type: "image/svg+xml",
+				type: "image/x-icon",
 			},
 
 			// css
@@ -100,11 +100,11 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className="bg-bg-page">
+		<html lang="en" className="bg-bg-page" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
-			<body className="text-text">
+			<body className="text-text" suppressHydrationWarning>
 				{children}
 				<TanStackDevtools
 					config={{
