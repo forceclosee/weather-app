@@ -1,22 +1,23 @@
 import React from "react";
 import { Check, ChevronRight } from "lucide-react";
+
 import { cn } from "#/utils/class-helper";
 
 import {
 	Menu as AriaMenu,
 	MenuItem as AriaMenuItem,
-	type MenuProps as AriaMenuProps,
-	type MenuItemProps as AriaMenuItemProps,
 	MenuSection as AriaMenuSection,
-	type MenuSectionProps as AriaMenuSectionProps,
 	MenuTrigger as AriaMenuTrigger,
 	SubmenuTrigger as AriaSubmenuTrigger,
 	Separator,
-	type SeparatorProps,
 	Header,
 	Collection,
-	type SubmenuTriggerProps,
+	type MenuProps as AriaMenuProps,
+	type MenuItemProps as AriaMenuItemProps,
+	type MenuSectionProps as AriaMenuSectionProps,
 	type MenuTriggerProps as AriaMenuTriggerProps,
+	type SeparatorProps,
+	type SubmenuTriggerProps,
 } from "react-aria-components/Menu";
 import { composeRenderProps } from "react-aria-components/composeRenderProps";
 
@@ -95,7 +96,7 @@ export function MenuItem({
 }
 
 export function MenuSeparator(props: SeparatorProps) {
-	return <Separator {...props} className="mx-3 my-1 border-be border-border" />;
+	return <Separator {...props} className="border-be border-border-muted" />;
 }
 
 export type MenuSectionProps<T> = AriaMenuSectionProps<T> & {
@@ -115,15 +116,12 @@ export function MenuSection<T>({
 }: MenuSectionProps<T>) {
 	return (
 		<AriaMenuSection
-			className={cn(
-				"after:block-1.25 first:-mbs-1.25 after:block after:content-['']",
-				className,
-			)}
+			className={cn("flex flex-col gap-1", className)}
 			{...props}>
 			{title && (
 				<Header
 					className={cn(
-						"[&+*]:mbs-1 -mbs-px sticky -inset-bs-1.25 z-10 truncate px-2 py-2 text-sm text-text-muted",
+						"mbe-1 sticky z-10 truncate px-2 py-2 text-sm text-text-muted",
 						headerClassName,
 					)}>
 					{title}

@@ -26,15 +26,15 @@
 	--color-bg-card: light-dark(oklch(0.86 0.05 285), oklch(0.32 0.04 285));
 	--color-bg-selected: light-dark(oklch(0.93 0.04 285), oklch(0.38 0.04 285));
 
-	--color-text: light-dark(oklch(0.1 0 0), oklch(0.9 0 0));
-	--color-text-muted: light-dark(oklch(0.3 0 0), oklch(0.7 0 0));
+	--color-text: light-dark(oklch(0.1 0 none), oklch(0.9 0 none));
+	--color-text-muted: light-dark(oklch(0.3 0 none), oklch(0.7 0 none));
 
-	--color-border: light-dark(oklch(0.4 0 0), oklch(0.6 0 0));
-	--color-border-muted: light-dark(oklch(0.75 0 0), oklch(0.4 0 0));
+	--color-border: light-dark(oklch(0.62 0 none), oklch(0.47 0 none));
+	--color-border-muted: light-dark(oklch(0.72 0 none), oklch(0.38 0 none));
 
 	--color-bg-primary: oklch(0.51 0.2 271);
-	--color-bg-primary-hover: oklch(0.43 0.16 271);
-	--color-text-primary: light-dark(oklch(0.2 0.2 271), oklch(0.8 0.2 271));
+	--color-bg-primary-hover: oklch(0.45 0.16 271);
+	--color-text-primary: light-dark(oklch(0.2 0.12 271), oklch(0.85 0.07 271));
 
 	--color-bg-secondary: var(--color-bg-card);
 	--color-bg-secondary-hover: light-dark(
@@ -42,7 +42,7 @@
 		oklch(0.28 0.04 285)
 	);
 
-	/* spacing and sizing */
+	/* spacing */
 	--spacing-fluid-400: clamp(1rem, 0.8555rem + 0.6163vw, 1.25rem);
 	--spacing-fluid-500: clamp(1.25rem, 1.1055rem + 0.6163vw, 1.5rem);
 }

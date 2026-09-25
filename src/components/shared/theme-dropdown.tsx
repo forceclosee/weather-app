@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Selection } from "react-aria-components/Menu";
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
 
-import { Laptop, Moon, Sun } from "lucide-react";
+import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
 
 import { MenuTrigger, Menu, MenuItem } from "#/components/ui/menu";
 import { Button } from "#/components/ui/button";
@@ -48,9 +48,10 @@ export default function ThemeDropdown({ className }: Props) {
 
 	return (
 		<MenuTrigger popoverClassName={className}>
-			<Button variant="secondary" className="max-block-max flex gap-2">
+			<Button variant="secondary" className="flex gap-2 *:shrink-0">
 				{getThemeIcon()}
-				<span className="hidden shrink-0 min-[21rem]:inline">Theme</span>
+				<span className="hidden min-[24rem]:inline">Theme</span>
+				<ChevronDown className="block-[1.1em] inline-auto" />
 			</Button>
 			<Menu
 				selectionMode="single"
