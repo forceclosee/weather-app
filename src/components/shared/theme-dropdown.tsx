@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import type { Selection } from "react-aria-components/Menu";
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
 
 import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
@@ -21,22 +20,16 @@ export default function ThemeDropdown({ className }: Props) {
 		return (localStorage.getItem("theme") as Theme) || "system";
 	};
 
-	const [theme, setTheme] = useState<Selection>(
-		new Set<Theme>([getInitialTheme()]),
-	);
+	const [theme, setTheme] = useState<Theme>(getInitialTheme());
 
 	// set theme and save to local storage
 	useEffect(() => {
-		const selectedTheme: Theme = Array.from(theme)[0].toString() as Theme;
-
-		document.documentElement.setAttribute("data-theme", selectedTheme);
-		localStorage.setItem("theme", selectedTheme);
+		document.documentElement.setAttribute("data-theme", theme);
+		localStorage.setItem("theme", theme);
 	}, [theme]);
 
 	const getThemeIcon = () => {
-		const selectedTheme: Theme = Array.from(theme)[0].toString() as Theme;
-
-		switch (selectedTheme) {
+		switch (theme) {
 			case "light":
 				return <Sun className="block-[1.3em] inline-auto shrink-0" />;
 			case "dark":
@@ -55,17 +48,19 @@ export default function ThemeDropdown({ className }: Props) {
 			</Button>
 			<Menu
 				selectionMode="single"
-				selectedKeys={theme}
-				onSelectionChange={setTheme}>
-				<MenuItem id="light" labelClassName="gap-2">
+				selectedKeys={[theme]}
+				onSelectionChange={([key]) =>
+					key !== undefined && setTheme(key as Theme)
+				}>
+				<MenuItem<Theme> id="light" labelClassName="gap-2">
 					<Sun className="block-[1.3em] inline-auto" />
 					<span>Light</span>
 				</MenuItem>
-				<MenuItem id="dark" labelClassName="gap-2">
+				<MenuItem<Theme> id="dark" labelClassName="gap-2">
 					<Moon className="block-[1.3em] inline-auto" />
 					<span>Dark</span>
 				</MenuItem>
-				<MenuItem id="system" labelClassName="gap-2">
+				<MenuItem<Theme> id="system" labelClassName="gap-2">
 					<Laptop className="block-[1.3em] inline-auto" />
 					<span>System</span>
 				</MenuItem>
