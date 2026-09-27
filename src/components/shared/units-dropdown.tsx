@@ -1,10 +1,16 @@
-import { useState } from "react";
 import { ChevronDown, Settings } from "lucide-react";
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
-import { Header, type Selection } from "react-aria-components/Menu";
 
 import { cn } from "#/utils/class-helper";
+import type { Temperature, WindSpeed, Precipitation } from "#/types";
+import {
+	getPartialParamState,
+	setPrecipitaion,
+	setTemperature,
+	setWindSpeed,
+} from "#/utils/weather-store";
 
+import { Header } from "react-aria-components/Menu";
 import {
 	MenuTrigger,
 	Menu,
@@ -19,20 +25,9 @@ type Props = Omit<AriaPopoverProps, "children"> & {
 };
 
 export default function UnitsDropdown({ className }: Props) {
-	type Temperature = "celcius" | "fahrenheit";
-	const [temperature, setTemperature] = useState<Selection>(
-		new Set<Temperature>(["celcius"]),
-	);
-
-	type WindSpeed = "km/h" | "mph" | "m/s" | "knots";
-	const [windSpeed, setWindSpeed] = useState<Selection>(
-		new Set<WindSpeed>(["km/h"]),
-	);
-
-	type Precipitation = "milimeters" | "inches";
-	const [precipitation, setPrecipitation] = useState<Selection>(
-		new Set<Precipitation>(["milimeters"]),
-	);
+	const temperature = getPartialParamState("temperature");
+	const windSpeed = getPartialParamState("windSpeed");
+	const precipitation = getPartialParamState("precipitation");
 
 	return (
 		<MenuTrigger
@@ -51,12 +46,17 @@ export default function UnitsDropdown({ className }: Props) {
 				<MenuSection
 					title="Temperature"
 					selectionMode="single"
-					selectedKeys={temperature}
-					onSelectionChange={setTemperature}>
-					<MenuItem hasCheck id="celcius" className="text-text/80">
+					selectedKeys={[temperature]}
+					onSelectionChange={([key]) =>
+						key !== undefined && setTemperature(key as Temperature)
+					}>
+					<MenuItem<Temperature> hasCheck id="celcius" className="text-text/80">
 						Celsius (°C)
 					</MenuItem>
-					<MenuItem hasCheck id="fahrenheit" className="text-text/80">
+					<MenuItem<Temperature>
+						hasCheck
+						id="fahrenheit"
+						className="text-text/80">
 						Fahrenheit (°F)
 					</MenuItem>
 				</MenuSection>
@@ -65,18 +65,20 @@ export default function UnitsDropdown({ className }: Props) {
 				<MenuSection
 					title="Wind Speed"
 					selectionMode="single"
-					selectedKeys={windSpeed}
-					onSelectionChange={setWindSpeed}>
-					<MenuItem hasCheck id="km/h" className="text-text/80">
+					selectedKeys={[windSpeed]}
+					onSelectionChange={([key]) =>
+						key !== undefined && setWindSpeed(key as WindSpeed)
+					}>
+					<MenuItem<WindSpeed> hasCheck id="kmh" className="text-text/80">
 						km/h
 					</MenuItem>
-					<MenuItem hasCheck id="mph" className="text-text/80">
+					<MenuItem<WindSpeed> hasCheck id="mph" className="text-text/80">
 						mph
 					</MenuItem>
-					<MenuItem hasCheck id="m/s" className="text-text/80">
+					<MenuItem<WindSpeed> hasCheck id="ms" className="text-text/80">
 						m/s
 					</MenuItem>
-					<MenuItem hasCheck id="knots" className="text-text/80">
+					<MenuItem<WindSpeed> hasCheck id="kn" className="text-text/80">
 						Knots
 					</MenuItem>
 				</MenuSection>
@@ -85,12 +87,17 @@ export default function UnitsDropdown({ className }: Props) {
 				<MenuSection
 					title="Precipitation"
 					selectionMode="single"
-					selectedKeys={precipitation}
-					onSelectionChange={setPrecipitation}>
-					<MenuItem hasCheck id="milimeters" className="text-text/80">
+					selectedKeys={[precipitation]}
+					onSelectionChange={([key]) =>
+						key !== undefined && setPrecipitaion(key as Precipitation)
+					}>
+					<MenuItem<Precipitation>
+						hasCheck
+						id="milimeters"
+						className="text-text/80">
 						Millimeters (mm)
 					</MenuItem>
-					<MenuItem hasCheck id="inches" className="text-text/80">
+					<MenuItem<Precipitation> hasCheck id="inch" className="text-text/80">
 						Inches (in)
 					</MenuItem>
 				</MenuSection>

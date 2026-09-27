@@ -40,24 +40,27 @@ export function Menu<T>({ className, ...props }: MenuProps<T>) {
 	);
 }
 
-type MenuItemProps = AriaMenuItemProps & {
+type MenuItemProps<T extends string> = Omit<AriaMenuItemProps, "id"> & {
+	id: T;
 	hasCheck?: boolean;
 	className?: string;
 	labelClassName?: string;
 };
 
-export function MenuItem({
+export function MenuItem<T extends string>({
+	id,
 	children,
 	hasCheck,
 	className,
 	labelClassName,
 	...props
-}: MenuItemProps) {
+}: MenuItemProps<T>) {
 	const textValue =
 		props.textValue || (typeof children === "string" ? children : undefined);
 
 	return (
 		<AriaMenuItem
+			id={id}
 			textValue={textValue}
 			className={cn(
 				"squircle flex cursor-pointer items-center rounded-xl p-2 font-normal text-text-muted transition-all duration-200 hover:bg-bg-selected hover:text-text focus-visible:bg-bg-selected focus-visible:text-text data-selected:bg-bg-selected data-selected:font-medium data-selected:text-text",
