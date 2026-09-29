@@ -21,7 +21,7 @@ export const weatherSchema = z.object({
 		wind_direction_10m: z.string(),
 	}),
 	current: z.object({
-		time: z.number(),
+		time: z.string(),
 		interval: z.number(),
 		temperature_2m: z.number(),
 		weather_code: z.number(),
@@ -38,7 +38,7 @@ export const weatherSchema = z.object({
 		weather_code: z.string(),
 	}),
 	hourly: z.object({
-		time: z.array(z.number()),
+		time: z.array(z.string()),
 		temperature_2m: z.array(z.number()),
 		weather_code: z.array(z.number()),
 	}),
@@ -49,7 +49,7 @@ export const weatherSchema = z.object({
 		apparent_temperature_mean: z.string(),
 	}),
 	daily: z.object({
-		time: z.array(z.number()),
+		time: z.array(z.string()),
 		weather_code: z.array(z.number()),
 		temperature_2m_mean: z.array(z.number()),
 		apparent_temperature_mean: z.array(z.number()),

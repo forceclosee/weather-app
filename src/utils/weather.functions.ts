@@ -39,7 +39,7 @@ export const getWeather = createServerFn()
 			}
 		};
 
-		const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}5&daily=weather_code,temperature_2m_mean,apparent_temperature_mean&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,is_day,precipitation,wind_direction_10m&timezone=auto&timeformat=unixtime${getTemperatureParameter()}${getWindSpeedParameter()}${getPrecipitationsParameter()}`;
+		const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}5&daily=weather_code,temperature_2m_mean,apparent_temperature_mean&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,is_day,precipitation,wind_direction_10m&timezone=auto${getTemperatureParameter()}${getWindSpeedParameter()}${getPrecipitationsParameter()}`;
 
 		try {
 			const response = await fetch(url);
@@ -55,9 +55,7 @@ export const getWeather = createServerFn()
 				throw new Error(result.error?.message);
 			}
 
-			const data = result.data;
-
-			return data;
+			return result.data;
 		} catch (error) {
 			if (error instanceof FetchError) {
 				throw new Error(error.message);
