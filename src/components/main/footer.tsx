@@ -6,7 +6,7 @@ export default function Footer() {
 		<footer className="border-border border-bs">
 			<div className="max-inline-304 inline-full mx-auto px-fluid-500">
 				<div className="flex flex-col items-center justify-between gap-4 py-4 *:shrink-0 min-[20rem]:flex-row">
-					<p className="text-center">
+					<p className="text-center text-base">
 						© 2026{" "}
 						<span className="font-bricolage-grotesque font-medium">
 							ForeCast

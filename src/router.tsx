@@ -7,7 +7,7 @@ import { routeTree } from "./routeTree.gen";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 import { getContext } from "./integrations/tanstack-query/root-provider";
 
-import { Button } from "#/components/ui/button";
+import { Button } from "#/components/ui/aria-button";
 
 export function getRouter() {
 	const context = getContext();

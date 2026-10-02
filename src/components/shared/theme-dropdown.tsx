@@ -3,8 +3,8 @@ import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Pop
 
 import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
 
-import { MenuTrigger, Menu, MenuItem } from "#/components/ui/menu";
-import { Button } from "#/components/ui/button";
+import { MenuTrigger, Menu, MenuItem } from "#/components/ui/aria-menu";
+import { Button } from "#/components/ui/aria-button";
 
 type Props = Omit<AriaPopoverProps, "children"> & {
 	className?: string;

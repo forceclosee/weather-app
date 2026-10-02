@@ -123,7 +123,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body className="text-text" suppressHydrationWarning>
+			<body className="relative text-text" suppressHydrationWarning>
 				{children}
 				<TanStackDevtools
 					config={{

@@ -4,10 +4,8 @@ import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Pop
 import { cn } from "#/utils/class-helper";
 import type { Temperature, WindSpeed, Precipitation } from "#/types";
 import {
-	getPartialParamState,
-	setPrecipitaion,
-	setTemperature,
-	setWindSpeed,
+	getPartialWeatherState,
+	updateWeatherState,
 } from "#/utils/weather-store";
 
 import { Header } from "react-aria-components/Menu";
@@ -17,17 +15,17 @@ import {
 	MenuItem,
 	MenuSection,
 	MenuSeparator,
-} from "#/components/ui/menu";
-import { Button } from "#/components/ui/button";
+} from "#/components/ui/aria-menu";
+import { Button } from "#/components/ui/aria-button";
 
 type Props = Omit<AriaPopoverProps, "children"> & {
 	className?: string;
 };
 
 export default function UnitsDropdown({ className }: Props) {
-	const temperature = getPartialParamState("temperature");
-	const windSpeed = getPartialParamState("windSpeed");
-	const precipitation = getPartialParamState("precipitation");
+	const temperature = getPartialWeatherState("temperature");
+	const windSpeed = getPartialWeatherState("windSpeed");
+	const precipitation = getPartialWeatherState("precipitation");
 
 	return (
 		<MenuTrigger
@@ -48,7 +46,8 @@ export default function UnitsDropdown({ className }: Props) {
 					selectionMode="single"
 					selectedKeys={[temperature]}
 					onSelectionChange={([key]) =>
-						key !== undefined && setTemperature(key as Temperature)
+						key !== undefined &&
+						updateWeatherState({ temperature: key as Temperature })
 					}>
 					<MenuItem<Temperature> hasCheck id="celcius" className="text-text/80">
 						Celsius (°C)
@@ -67,7 +66,8 @@ export default function UnitsDropdown({ className }: Props) {
 					selectionMode="single"
 					selectedKeys={[windSpeed]}
 					onSelectionChange={([key]) =>
-						key !== undefined && setWindSpeed(key as WindSpeed)
+						key !== undefined &&
+						updateWeatherState({ windSpeed: key as WindSpeed })
 					}>
 					<MenuItem<WindSpeed> hasCheck id="kmh" className="text-text/80">
 						km/h
@@ -89,7 +89,8 @@ export default function UnitsDropdown({ className }: Props) {
 					selectionMode="single"
 					selectedKeys={[precipitation]}
 					onSelectionChange={([key]) =>
-						key !== undefined && setPrecipitaion(key as Precipitation)
+						key !== undefined &&
+						updateWeatherState({ precipitation: key as Precipitation })
 					}>
 					<MenuItem<Precipitation>
 						hasCheck
