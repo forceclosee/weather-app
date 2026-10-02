@@ -6,8 +6,9 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { RefreshCw } from "lucide-react";
 
-import { Button } from "#/components/ui/button";
+import { Button } from "#/components/ui/aria-button";
 import CurrentWeather from "#/components/main/current-weather";
+import AdditionalInfo from "#/components/main/additional-info";
 
 export default function WeatherDashboard() {
 	return (
@@ -16,7 +17,7 @@ export default function WeatherDashboard() {
 				<ErrorBoundary
 					onReset={reset}
 					fallbackRender={({ resetErrorBoundary }) => (
-						<div className="min-block-full flex flex-col items-center justify-center gap-6 px-fluid-500 py-8 text-center">
+						<div className="min-block-full flex flex-col items-center justify-center gap-8 px-fluid-500 py-8 text-center">
 							<h1>Something went wrong</h1>
 							<p className="mbs-8">
 								We couldn't connect to the server (API Error). Please try again
@@ -31,12 +32,15 @@ export default function WeatherDashboard() {
 							</Button>
 						</div>
 					)}>
-					<div className="grid gap-8 px-fluid-500 py-12">
-						<h1 className="text-center font-bricolage-grotesque font-semibold text-[3.3rem]/16">
+					<div className="@container/weather-dashboard grid gap-8 px-fluid-500 py-12">
+						<h1 className="text-center font-bricolage-grotesque">
 							How's the sky looking today?
 						</h1>
 
-						<CurrentWeather />
+						<div className="@container/current-weather grid gap-fluid-450">
+							<CurrentWeather />
+							<AdditionalInfo />
+						</div>
 					</div>
 				</ErrorBoundary>
 			)}

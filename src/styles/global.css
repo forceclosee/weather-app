@@ -27,6 +27,7 @@
 	--color-bg-selected: light-dark(oklch(0.93 0.04 285), oklch(0.38 0.04 285));
 
 	--color-text: light-dark(oklch(0.1 0 none), oklch(0.9 0 none));
+	--color-text-inverse: light-dark(oklch(0.9 0 none), oklch(0.1 0 none));
 	--color-text-muted: light-dark(oklch(0.3 0 none), oklch(0.7 0 none));
 
 	--color-border: light-dark(oklch(0.62 0 none), oklch(0.47 0 none));
@@ -42,8 +43,11 @@
 		oklch(0.28 0.04 285)
 	);
 
+	--color-bg-info: light-dark(oklch(0.4 0.07 260), oklch(0.8 0.07 260));
+
 	/* spacing */
 	--spacing-fluid-400: clamp(1rem, 0.8555rem + 0.6163vw, 1.25rem);
+	--spacing-fluid-450: clamp(1rem, 0.711rem + 1.2326vw, 1.5rem);
 	--spacing-fluid-500: clamp(1.25rem, 1.1055rem + 0.6163vw, 1.5rem);
 
 	/* z-index */
@@ -114,11 +118,53 @@
 
 	/* TYPOGRAPHY */
 	h1 {
-		@apply font-semibold text-4xl;
+		@apply font-semibold text-[3.3rem]/16;
 	}
 
 	p {
 		@apply text-lg;
+	}
+}
+
+@layer components {
+	.base-arrow {
+		display: block;
+		position: relative;
+		inline-size: 12px;
+		block-size: 6px;
+		overflow: clip;
+
+		&[data-side="top"] {
+			bottom: -6px;
+			rotate: 180deg;
+		}
+
+		&[data-side="bottom"] {
+			top: -6px;
+			rotate: 0deg;
+		}
+
+		&[data-side="left"] {
+			right: -9px;
+			rotate: 90deg;
+		}
+
+		&[data-side="right"] {
+			left: -9px;
+			rotate: -90deg;
+		}
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: 0;
+			inset-inline-start: 50%;
+			width: calc(6px * sqrt(2));
+			height: calc(6px * sqrt(2));
+			background-color: var(--color-bg-info);
+			transform: translate(-50%, 50%) rotate(45deg);
+		}
 	}
 }
 

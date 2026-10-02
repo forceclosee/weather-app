@@ -1,9 +1,9 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { getParamsState, getPartialParamState } from "#/utils/weather-store";
+import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
 import { getWeather } from "#/utils/weather.functions";
-import { getFormattedDate } from "#/utils/date";
+import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 
 import { Skeleton } from "#/components/ui/skeleton";
@@ -31,12 +31,14 @@ export default function CurrentWeather() {
 }
 
 function CurrentWeatherContent() {
-	const city = getPartialParamState("city");
-	const country = getPartialParamState("country");
-	const countryCode = getPartialParamState("countryCode");
+	const timezone = getPartialWeatherState("timezone");
+	const city = getPartialWeatherState("city");
+	const country = getPartialWeatherState("country");
+	const countryCode = getPartialWeatherState("countryCode");
+
 	const countryFlagUrl = `https://hatscripts.github.io/circle-flags/flags/${countryCode}.svg`;
 
-	const weatherParams = getParamsState();
+	const weatherParams = getWeatherState();
 
 	const { data } = useSuspenseQuery({
 		queryKey: ["weather", weatherParams],
@@ -44,29 +46,23 @@ function CurrentWeatherContent() {
 		refetchOnWindowFocus: false,
 	});
 
-	const timestamp = data.current.time;
-	const timezone = data.timezone;
+	const temperature = `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`;
 
 	const { fullDate } = getFormattedDate({
-		timestamp: timestamp,
+		timestamp: data.current.time,
 		timezone: timezone,
 	});
 
-	const weatherCode = data.current.weather_code;
-	const isDay = data.current.is_day;
-
 	const { description, image } = getWeatherDetails({
-		wmoCode: weatherCode,
-		isDay: isDay,
+		wmoCode: data.current.weather_code,
+		isDay: data.current.is_day,
 	});
 
-	const temperature = `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`;
-
 	return (
-		<div className="grid items-center justify-items-center gap-8 p-6 pe-8 text-center md:grid-cols-[1fr_auto] md:justify-items-start md:text-start">
+		<div className="grid @3xl/current-weather:grid-cols-[1fr_auto] items-center @3xl/current-weather:justify-items-start justify-items-center gap-8 p-6 pe-8 text-center @3xl/current-weather:text-start">
 			<div className="grid gap-2">
 				<h2 className="font-medium text-[1.85rem]">
-					{city}, {country}
+					<span>{`${city}, ${country}`}</span>
 					<img
 						src={countryFlagUrl}
 						alt=""
@@ -75,11 +71,12 @@ function CurrentWeatherContent() {
 						className="inline-[1em] block-auto ms-4 inline-block shrink-0"
 					/>
 				</h2>
-				<p className="text-text/77">{fullDate}</p>
+				<span className="text-lg text-text/77">{fullDate}</span>
+				<TimeDisplay />
 			</div>
 
 			<div className="grid gap-2">
-				<div className="flex flex-col items-center gap-8 *:shrink-0 min-[24rem]:flex-row">
+				<div className="flex @min-[30rem]/current-weather:flex-row flex-col items-center gap-8 *:shrink-0">
 					<img
 						src={image}
 						alt={description}
@@ -87,9 +84,9 @@ function CurrentWeatherContent() {
 						height={100}
 						className="inline-24 block-auto origin-center scale-150"
 					/>
-					<p className="trim-capital font-bricolage-grotesque font-semibold text-[6.2rem] italic">
+					<span className="trim-capital font-bricolage-grotesque font-semibold text-[6.2rem] italic">
 						{temperature}
-					</p>
+					</span>
 				</div>
 				<p className="text-center text-text/77">{description}</p>
 			</div>
@@ -97,18 +94,57 @@ function CurrentWeatherContent() {
 	);
 }
 
+function TimeDisplay() {
+	const timezone = getPartialWeatherState("timezone");
+
+	const [currentTime, setCurrentTime] = useState(() =>
+		getFormattedCurrentTime(timezone),
+	);
+
+	// update the current time every minute
+	useEffect(() => {
+		const updateTime = () => setCurrentTime(getFormattedCurrentTime(timezone));
+
+		const now = new Date();
+		const delay = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+
+		// variable to store the interval reference, used to clear it on unmount
+		let interval: NodeJS.Timeout;
+
+		const timeout = setTimeout(() => {
+			updateTime();
+
+			interval = setInterval(updateTime, 1 * 60 * 1000);
+		}, delay);
+
+		return () => {
+			clearTimeout(timeout);
+			if (interval) clearInterval(interval);
+		};
+	}, [timezone]);
+
+	return <span className="text-lg text-text/77">{currentTime}</span>;
+}
+
 function CurrentWeatherSkeleton() {
 	return (
-		<div className="grid items-center justify-items-center gap-8 p-6 pe-8 text-center md:grid-cols-[1fr_auto] md:justify-items-start md:text-start">
-			<div className="grid justify-items-center gap-2">
+		<div className="grid @3xl/current-weather:grid-cols-[1fr_auto] items-center gap-8 p-6">
+			<div className="grid @3xl/current-weather:justify-items-start justify-items-center gap-2">
 				<Skeleton width={285} height={30} />
 				<Skeleton width={260} />
+				<Skeleton width={140} />
 			</div>
 
-			<div className="grid gap-2">
-				<div className="flex flex-col items-center gap-8 *:shrink-0 min-[24rem]:flex-row">
-					<Skeleton width={90} height={90} circle />
-					<Skeleton width={195} height={66} />
+			<div className="grid justify-items-center gap-2">
+				<div className="flex @min-[30rem]/current-weather:flex-row flex-col items-center gap-8">
+					<Skeleton
+						minWidth={70}
+						width={70}
+						height={70}
+						circle
+						className="my-4.5"
+					/>
+					<Skeleton minWidth={195} height={66} />
 				</div>
 				<Skeleton width={150} className="mx-auto" />
 			</div>

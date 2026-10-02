@@ -22,11 +22,8 @@ export function Popover({
 				{trigger}
 			</BasePopover.Trigger>
 			<BasePopover.Portal>
-				<BasePopover.Positioner
-					sideOffset={3}
-					className="max-inline-88"
-					style={{}}>
-					<BasePopover.Popup className="squircle rounded-xl bg-bg-info p-4 duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 motion-safe:transition-all motion-safe:data-ending-style:-translate-y-6 motion-safe:data-starting-style:-translate-y-6 motion-safe:data-ending-style:scale-50 motion-safe:data-starting-style:scale-50 motion-reduce:transition-opacity">
+				<BasePopover.Positioner sideOffset={5}>
+					<BasePopover.Popup className="squircle max-inline-88 rounded-xl bg-bg-info p-4 duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 motion-safe:transition-all motion-safe:data-ending-style:-translate-y-6 motion-safe:data-starting-style:-translate-y-6 motion-safe:data-ending-style:scale-50 motion-safe:data-starting-style:scale-50 motion-reduce:transition-opacity">
 						<BasePopover.Arrow className="base-arrow" />
 						<BasePopover.Title className="text-lg text-text-inverse">
 							{title}
