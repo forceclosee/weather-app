@@ -21,7 +21,7 @@ import {
 } from "react-aria-components/Menu";
 import { composeRenderProps } from "react-aria-components/composeRenderProps";
 
-import { Popover, type PopoverProps } from "#/components/ui/popover";
+import { Popover, type PopoverProps } from "#/components/ui/aria-popover";
 
 type MenuProps<T> = AriaMenuProps<T> & {
 	className?: string;
