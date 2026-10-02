@@ -20,3 +20,29 @@ export const getFormattedDate = ({ timestamp, timezone }: Params) => {
 
 	return { fullDate, weekdayLongOnly, weekdayShortOnly };
 };
+
+export const getFormattedTime = ({ timestamp, timezone }: Params): string => {
+	const dt = DateTime.fromISO(timestamp, { zone: timezone });
+
+	const timeSimple = dt.toLocaleString({
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+		timeZoneName: "short",
+	});
+
+	return timeSimple;
+};
+
+export const getFormattedCurrentTime = (timezone: string) => {
+	const dt = DateTime.now().setZone(timezone);
+
+	const currentTime = dt.toLocaleString({
+		hour: "numeric",
+		minute: "2-digit",
+		hour12: true,
+		timeZoneName: "short",
+	});
+
+	return currentTime;
+};

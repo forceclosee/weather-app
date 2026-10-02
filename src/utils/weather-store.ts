@@ -1,4 +1,5 @@
 import { createStore, useSelector, type Store } from "@tanstack/react-store";
+
 import type { Temperature, WindSpeed, Precipitation } from "#/types";
 
 type Coordinates = {
@@ -8,6 +9,7 @@ type Coordinates = {
 
 export type WeatherStore = {
 	coordinates: Coordinates;
+	timezone: string;
 	city: string;
 	country: string;
 	countryCode: string;
@@ -16,11 +18,12 @@ export type WeatherStore = {
 	precipitation: Precipitation;
 };
 
-export const weatherParamsStateStore: Store<WeatherStore> = createStore({
+export const weatherStateStore: Store<WeatherStore> = createStore({
 	coordinates: {
 		latitude: 52.5244,
 		longitude: 13.4105,
 	},
+	timezone: "Europe/Berlin",
 	city: "Berlin",
 	country: "Germany",
 	countryCode: "de",
@@ -29,75 +32,25 @@ export const weatherParamsStateStore: Store<WeatherStore> = createStore({
 	precipitation: "milimeters",
 });
 
-export const getParamsState = (): WeatherStore => {
-	return useSelector(weatherParamsStateStore);
+export const getWeatherState = (): WeatherStore => {
+	return useSelector(weatherStateStore);
 };
 
-export const getPartialParamState = <K extends keyof WeatherStore>(
+export const getPartialWeatherState = <K extends keyof WeatherStore>(
 	param: K,
 ): WeatherStore[K] => {
-	return useSelector(weatherParamsStateStore, (state) => state[param]);
+	return useSelector(weatherStateStore, (state) => state[param]);
 };
 
-export const setCity = (newCity: string) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			city: newCity,
-		};
-	});
+export const setWeatherState = (newState: WeatherStore) => {
+	weatherStateStore.setState(() => newState);
 };
 
-export const setCountry = (newCountry: string) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			country: newCountry,
-		};
-	});
+export const updateWeatherState = (newState: Partial<WeatherStore>) => {
+	weatherStateStore.setState((prev) => ({
+		...prev,
+		...newState,
+	}));
 };
 
-export const setCountryCode = (newCountryCode: string) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			countryCode: newCountryCode.toLowerCase(),
-		};
-	});
-};
-
-export const setCoordinates = (newCoordinates: Coordinates) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			coordinates: newCoordinates,
-		};
-	});
-};
-
-export const setTemperature = (newTemperature: Temperature) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			temperature: newTemperature,
-		};
-	});
-};
-
-export const setWindSpeed = (newWindSpeed: WindSpeed) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			windSpeed: newWindSpeed,
-		};
-	});
-};
-
-export const setPrecipitaion = (newPrecipitation: Precipitation) => {
-	weatherParamsStateStore.setState((state) => {
-		return {
-			...state,
-			precipitation: newPrecipitation,
-		};
-	});
-};
+// update timezone setelah implement search functionality
