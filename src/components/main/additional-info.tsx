@@ -114,18 +114,21 @@ function AdditionalInfoSkeleton() {
 	return (
 		<>
 			<Card
+				className="pbe-6"
 				layout="additional-info"
 				title="Feels Like"
 				titleIcon={<FeelsLikeIcon height={20} />}
 				content={<Skeleton width={60} height={32} />}
 			/>
 			<Card
+				className="pbe-6"
 				layout="additional-info"
 				title="Humidity"
 				titleIcon={<Droplet className="block-5 inline-auto" />}
 				content={<Skeleton width={60} height={32} />}
 			/>
 			<Card
+				className="pbe-6"
 				layout="additional-info"
 				title="Wind"
 				titleIcon={<Wind className="block-5 inline-auto" />}
@@ -139,6 +142,7 @@ function AdditionalInfoSkeleton() {
 				icon={<Skeleton circle width={32} height={32} />}
 			/>
 			<Card
+				className="pbe-6"
 				layout="additional-info"
 				title="Precipitations"
 				titleIcon={<CloudRainWind className="block-5 inline-auto" />}

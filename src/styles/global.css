@@ -49,12 +49,19 @@
 	--spacing-fluid-400: clamp(1rem, 0.8555rem + 0.6163vw, 1.25rem);
 	--spacing-fluid-450: clamp(1rem, 0.711rem + 1.2326vw, 1.5rem);
 	--spacing-fluid-500: clamp(1.25rem, 1.1055rem + 0.6163vw, 1.5rem);
+	--spacing-fluid-550: clamp(1.25rem, 0.8166rem + 1.8489vw, 2rem);
+	--spacing-fluid-925: clamp(2.3125rem, 1.7346rem + 2.4653vw, 3.3125rem);
 
 	/* z-index */
 	--z-card: 10;
 	--z-nav: 100;
 	--z-dropdown: 200;
 	--z-toast: 500;
+
+	/* drop shadow */
+	--daily-weather-icon-drop-shadow: 0 0 20px
+		light-dark(oklch(0 0 none / 0.6), oklch(1 0 none / 0.9));
+	--current-weather-icon-drop-shadow: 0 0 20px oklch(1 0 none / 0.2);
 }
 
 @layer base {

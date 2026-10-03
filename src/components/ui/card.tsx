@@ -1,16 +1,18 @@
-import { classList } from "#/utils/class-helper";
+import { classList, cn } from "#/utils/class-helper";
 import type { ReactNode, ReactSVGElement } from "react";
 
 type Props = {
+	className?: string;
 	layout: "additional-info" | "daily-forecast" | "hourly-forecast";
-	title: string;
-	titleIcon: Omit<ReactSVGElement, "ref">;
+	title: ReactNode;
+	titleIcon?: Omit<ReactSVGElement, "ref">;
 	popover?: ReactNode;
 	content: ReactNode;
-	icon?: Omit<ReactSVGElement, "ref">;
+	icon?: ReactNode;
 };
 
 export function Card({
+	className,
 	layout,
 	title,
 	titleIcon,
@@ -20,12 +22,17 @@ export function Card({
 }: Props) {
 	return (
 		<div
-			className={classList(
-				"squircle @container grid rounded-2xl bg-bg-card p-5",
+			className={cn(
+				"squircle @container grid rounded-2xl bg-bg-card",
 				{
-					"min-block-[7.4rem] content-between gap-2":
+					"min-block-29.5 content-between gap-2 p-5":
 						layout === "additional-info",
 				},
+				{
+					"min-block-41.25 content-between justify-items-center gap-2 p-3.25":
+						layout === "daily-forecast",
+				},
+				className,
 			)}>
 			{layout === "additional-info" && (
 				<>
@@ -55,6 +62,16 @@ export function Card({
 							)}
 						</>
 					)}
+				</>
+			)}
+
+			{layout === "daily-forecast" && (
+				<>
+					<header className="text-lg">{title}</header>
+					{icon}
+					<div className="flex justify-between gap-4 justify-self-stretch">
+						{content}
+					</div>
 				</>
 			)}
 		</div>

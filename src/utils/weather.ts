@@ -2,13 +2,13 @@ import { weatherInterpretations } from "#/data/weather-interpretations";
 
 type Params = {
 	wmoCode: number | undefined;
-	isDay: number | undefined;
+	isDay?: number;
 };
 
 export const getWeatherDetails = ({ wmoCode, isDay }: Params) => {
 	const valid = wmoCode !== undefined && wmoCode in weatherInterpretations;
 
-	const day = isDay === 1;
+	const day = isDay === 1 || isDay === undefined;
 	const night = isDay === 0;
 
 	// fallback if the wmo code is not on the weather interpretations list or undefined

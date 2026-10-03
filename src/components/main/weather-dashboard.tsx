@@ -9,6 +9,7 @@ import { RefreshCw } from "lucide-react";
 import { Button } from "#/components/ui/aria-button";
 import CurrentWeather from "#/components/main/current-weather";
 import AdditionalInfo from "#/components/main/additional-info";
+import DailyForecast from "#/components/main/daily-forecast";
 
 export default function WeatherDashboard() {
 	return (
@@ -32,15 +33,16 @@ export default function WeatherDashboard() {
 							</Button>
 						</div>
 					)}>
-					<div className="@container/weather-dashboard grid gap-8 px-fluid-500 py-12">
+					<div className="@container/weather-dashboard grid gap-fluid-925 px-fluid-500 py-12">
 						<h1 className="text-center font-bricolage-grotesque">
 							How's the sky looking today?
 						</h1>
 
-						<div className="@container/current-weather grid gap-fluid-450">
+						<div className="@container/current-weather grid gap-fluid-550">
 							<CurrentWeather />
 							<AdditionalInfo />
 						</div>
+						<DailyForecast />
 					</div>
 				</ErrorBoundary>
 			)}

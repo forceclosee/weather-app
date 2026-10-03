@@ -82,7 +82,7 @@ function CurrentWeatherContent() {
 						alt={description}
 						width={100}
 						height={100}
-						className="inline-24 block-auto origin-center scale-150"
+						className="inline-24 block-auto origin-center scale-150 drop-shadow-(--current-weather-icon-drop-shadow)"
 					/>
 					<span className="trim-capital font-bricolage-grotesque font-semibold text-[6.2rem] italic">
 						{temperature}

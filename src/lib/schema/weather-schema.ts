@@ -45,14 +45,14 @@ export const weatherSchema = z.object({
 	daily_units: z.object({
 		time: z.string(),
 		weather_code: z.string(),
-		temperature_2m_mean: z.string(),
-		apparent_temperature_mean: z.string(),
+		temperature_2m_max: z.string(),
+		temperature_2m_min: z.string(),
 	}),
 	daily: z.object({
 		time: z.array(z.string()),
 		weather_code: z.array(z.number()),
-		temperature_2m_mean: z.array(z.number()),
-		apparent_temperature_mean: z.array(z.number()),
+		temperature_2m_max: z.array(z.number()),
+		temperature_2m_min: z.array(z.number()),
 	}),
 });
 

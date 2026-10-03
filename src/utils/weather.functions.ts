@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { weatherSchema } from "#/lib/schema/weather-schema";
 import type { WeatherStore } from "#/utils/weather-store";
 
-export class FetchError extends Error {}
+class FetchError extends Error {}
 
 export const getWeather = createServerFn()
 	.validator((data: WeatherStore) => data)
@@ -39,7 +39,7 @@ export const getWeather = createServerFn()
 			}
 		};
 
-		const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}5&daily=weather_code,temperature_2m_mean,apparent_temperature_mean&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,is_day,precipitation,wind_direction_10m&timezone=auto${getTemperatureParameter()}${getWindSpeedParameter()}${getPrecipitationsParameter()}`;
+		const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}5&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,is_day,precipitation,wind_direction_10m&timezone=auto${getTemperatureParameter()}${getWindSpeedParameter()}${getPrecipitationsParameter()}`;
 
 		try {
 			const response = await fetch(url);
