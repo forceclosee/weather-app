@@ -8,12 +8,17 @@ import { getWeather } from "#/utils/weather.functions";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
+import { cn } from "#/utils/class-helper";
 
-export default function DailyForecast() {
+type Props = {
+	className?: string;
+};
+
+export default function DailyForecast({ className }: Props) {
 	return (
-		<div className="grid gap-4.75">
-			<h2 className="font-medium text-xl">Daily Forecast</h2>
-			<div className="grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4">
+		<div className={cn("grid gap-4.75", className)}>
+			<h2>Daily Forecast</h2>
+			<div className="grid grid-cols-[repeat(auto-fit,minmax(7.6rem,1fr))] gap-4">
 				<Suspense fallback={<CurrentWeatherSkeleton />}>
 					<CurrentWeatherContent />
 				</Suspense>
@@ -33,10 +38,20 @@ function CurrentWeatherContent() {
 		refetchOnWindowFocus: false,
 	});
 
-	const dates = data.daily.time.map((time) => {
+	// format first 2 days with relative day
+	const relativeDays = data.daily.time.slice(0, 2).map((time) => {
 		return getFormattedDate({ timestamp: time, timezone: timezone })
-			.weekdayShortOnly;
+			.relativeDay;
 	});
+
+	// format remaining days with weekday long
+	const weekdays = data.daily.time.slice(2).map((time) => {
+		return getFormattedDate({ timestamp: time, timezone: timezone })
+			.weekdayLongOnly;
+	});
+
+	// all days
+	const days = [...relativeDays, ...weekdays];
 
 	const details = data.daily.weather_code.map((code) => {
 		return getWeatherDetails({ wmoCode: code });
@@ -50,7 +65,7 @@ function CurrentWeatherContent() {
 	// daily weather data
 	const dailyWeathers = Array.from({ length: dayLength }).map((_, index) => {
 		return {
-			date: dates[index],
+			date: days[index],
 			icon: details[index].image,
 			description: details[index].description,
 			maxTemperature: `${Math.round(maxTemperatures[index])}${data.daily_units.temperature_2m_max}`,
@@ -87,14 +102,16 @@ function CurrentWeatherContent() {
 }
 
 function CurrentWeatherSkeleton() {
+	const minWidth = [60, 83, 45, 45, 45, 45, 45];
+
 	return (
 		<>
 			{Array.from({ length: 7 }).map((_, index) => (
 				<Card
-					className="py-4"
 					key={index}
+					className="py-4"
 					layout="daily-forecast"
-					title={<Skeleton minWidth={45} height={24} />}
+					title={<Skeleton minWidth={minWidth[index]} height={24} />}
 					icon={<Skeleton circle width={40} height={40} />}
 					content={
 						<>

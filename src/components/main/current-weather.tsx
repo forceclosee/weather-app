@@ -123,7 +123,11 @@ function TimeDisplay() {
 		};
 	}, [timezone]);
 
-	return <span className="text-lg text-text/77">{currentTime}</span>;
+	return (
+		<span suppressHydrationWarning className="text-lg text-text/77">
+			{currentTime}
+		</span>
+	);
 }
 
 function CurrentWeatherSkeleton() {
