@@ -23,14 +23,18 @@ export function Card({
 	return (
 		<div
 			className={cn(
-				"squircle @container grid rounded-2xl bg-bg-card",
+				"squircle @container grid overflow-clip border border-border-muted",
 				{
-					"min-block-29.5 content-between gap-2 p-5":
+					"min-block-29.5 content-between gap-2 rounded-2xl bg-bg-card p-5":
 						layout === "additional-info",
 				},
 				{
-					"min-block-41.25 content-between justify-items-center gap-2 p-3.25":
+					"min-block-41.25 content-between justify-items-center gap-2 rounded-2xl bg-bg-card px-2.5 py-3.25":
 						layout === "daily-forecast",
+				},
+				{
+					"min-block-15 grid-cols-[3.5rem_1fr_3rem] items-center gap-2 rounded-lg bg-bg-selected px-4 py-1":
+						layout === "hourly-forecast",
 				},
 				className,
 			)}>
@@ -72,6 +76,14 @@ export function Card({
 					<div className="flex justify-between gap-4 justify-self-stretch">
 						{content}
 					</div>
+				</>
+			)}
+
+			{layout === "hourly-forecast" && (
+				<>
+					<span className="text-lg">{title}</span>
+					{icon}
+					<span className="justify-self-end">{content}</span>
 				</>
 			)}
 		</div>

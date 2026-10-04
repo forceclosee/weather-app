@@ -10,7 +10,7 @@ function Home() {
 	return (
 		<div className="min-block-svh grid grid-rows-[auto_1fr_auto]">
 			<Header />
-			<main className="max-inline-304 inline-full mx-auto">
+			<main className="max-inline-316 inline-full @container/main mx-auto">
 				<WeatherDashboard />
 			</main>
 			<Footer />

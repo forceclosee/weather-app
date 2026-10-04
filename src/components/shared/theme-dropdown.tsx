@@ -44,7 +44,7 @@ export default function ThemeDropdown({ className }: Props) {
 			<Button variant="secondary" className="flex gap-2 *:shrink-0">
 				{getThemeIcon()}
 				<span className="hidden min-[24rem]:inline">Theme</span>
-				<ChevronDown className="block-[1.1em] inline-auto" />
+				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
 			</Button>
 			<Menu
 				selectionMode="single"

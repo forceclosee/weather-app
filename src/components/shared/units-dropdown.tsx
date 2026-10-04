@@ -34,7 +34,7 @@ export default function UnitsDropdown({ className }: Props) {
 			<Button variant="secondary" className="flex gap-2 *:shrink-0">
 				<Settings className="block-[1.1em] inline-auto" />
 				<span className="hidden shrink-0 min-[20rem]:inline">Units</span>
-				<ChevronDown className="block-[1.1em] inline-auto" />
+				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
 			</Button>
 			<Menu>
 				<Header className="mbe-1 p-1 text-center font-medium">

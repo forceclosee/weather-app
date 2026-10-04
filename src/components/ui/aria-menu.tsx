@@ -32,7 +32,7 @@ export function Menu<T>({ className, ...props }: MenuProps<T>) {
 		<AriaMenu
 			shouldCloseOnSelect={false}
 			className={cn(
-				"squircle flex flex-col gap-1 overflow-auto rounded-xl bg-bg-card p-2 empty:pb-2 empty:text-center",
+				"squircle flex flex-col gap-1 overflow-auto rounded-xl border border-border-muted bg-bg-card p-2 empty:pb-2 empty:text-center",
 				className,
 			)}
 			{...props}

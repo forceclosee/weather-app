@@ -30,8 +30,8 @@
 	--color-text-inverse: light-dark(oklch(0.9 0 none), oklch(0.1 0 none));
 	--color-text-muted: light-dark(oklch(0.3 0 none), oklch(0.7 0 none));
 
-	--color-border: light-dark(oklch(0.62 0 none), oklch(0.47 0 none));
-	--color-border-muted: light-dark(oklch(0.72 0 none), oklch(0.38 0 none));
+	--color-border: light-dark(oklch(0.62 0.03 270), oklch(0.47 0.03 270));
+	--color-border-muted: light-dark(oklch(0.72 0.03 270), oklch(0.38 0.03 270));
 
 	--color-bg-primary: oklch(0.51 0.2 271);
 	--color-bg-primary-hover: oklch(0.45 0.16 271);
@@ -126,6 +126,10 @@
 	/* TYPOGRAPHY */
 	h1 {
 		@apply font-semibold text-[3.3rem]/16;
+	}
+
+	h2 {
+		@apply font-medium text-xl;
 	}
 
 	p {
