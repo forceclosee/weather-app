@@ -58,5 +58,20 @@
 			"formatter": "prettier"
 		}
 	},
-	"line_ending": "prefer_lf"
+	"line_ending": "prefer_lf",
+	"lsp": {
+		"tailwindcss-language-server": {
+			"settings": {
+				"classAttributes": [
+					"class",
+					"className",
+					"ngClass",
+					"class:list",
+					"viewportClassName",
+					"popoverClassName",
+					"contentClassName"
+				]
+			}
+		}
+	}
 }
