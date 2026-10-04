@@ -10,6 +10,7 @@ import { Button } from "#/components/ui/aria-button";
 import CurrentWeather from "#/components/main/current-weather";
 import AdditionalInfo from "#/components/main/additional-info";
 import DailyForecast from "#/components/main/daily-forecast";
+import HourlyForecast from "#/components/main/hourly-forecast";
 
 export default function WeatherDashboard() {
 	return (
@@ -33,16 +34,19 @@ export default function WeatherDashboard() {
 							</Button>
 						</div>
 					)}>
-					<div className="@container/weather-dashboard grid gap-fluid-925 px-fluid-500 py-12">
-						<h1 className="text-center font-bricolage-grotesque">
+					<div className="@container/weather-dashboard grid gap-x-8 gap-y-fluid-925 px-fluid-500 py-12 lg:grid-cols-[1fr_24rem]">
+						<h1 className="order-1 text-center font-bricolage-grotesque lg:col-span-2">
 							How's the sky looking today?
 						</h1>
 
-						<div className="@container/current-weather grid gap-fluid-550">
+						<div className="@container/current-weather order-2 grid gap-fluid-550">
 							<CurrentWeather />
 							<AdditionalInfo />
 						</div>
-						<DailyForecast />
+
+						<DailyForecast className="order-3 lg:order-4" />
+
+						<HourlyForecast className="order-4 lg:order-3 lg:row-span-2" />
 					</div>
 				</ErrorBoundary>
 			)}

@@ -18,17 +18,17 @@ export const getFormattedDate = ({ timestamp, timezone }: Params) => {
 		weekday: "short",
 	});
 
-	return { fullDate, weekdayLongOnly, weekdayShortOnly };
+	const relativeDay = capitalizeFirstLetter(dt.toRelativeCalendar());
+
+	return { fullDate, weekdayLongOnly, weekdayShortOnly, relativeDay };
 };
 
 export const getFormattedTime = ({ timestamp, timezone }: Params): string => {
 	const dt = DateTime.fromISO(timestamp, { zone: timezone });
 
 	const timeSimple = dt.toLocaleString({
-		hour: "2-digit",
-		minute: "2-digit",
+		hour: "numeric",
 		hour12: true,
-		timeZoneName: "short",
 	});
 
 	return timeSimple;
@@ -46,3 +46,7 @@ export const getFormattedCurrentTime = (timezone: string) => {
 
 	return currentTime;
 };
+
+function capitalizeFirstLetter(value: string | null) {
+	return String(value).charAt(0).toUpperCase() + String(value).slice(1);
+}
