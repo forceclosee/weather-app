@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getFormattedDate } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
+
 import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
 
 import { Card } from "#/components/ui/card";

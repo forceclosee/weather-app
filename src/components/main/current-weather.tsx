@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
+
 import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 import { createWeatherQueryOptions } from "#/query-options/weather";
