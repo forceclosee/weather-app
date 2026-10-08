@@ -3,14 +3,14 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { ArrowDown, CloudRainWind, Droplet, Info, Wind } from "lucide-react";
 
-import { getWeatherState } from "#/utils/weather-store";
-import { getWeather } from "#/utils/weather.functions";
 import { getNamedDirection } from "#/utils/weather";
+import { createWeatherQueryOptions } from "#/query-options/weather";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
 import { Popover } from "#/components/ui/base-popover";
 import FeelsLikeIcon from "#/components/icons/feels-like";
+import { getWeatherState } from "#/utils/weather-store";
 
 export default function AdditionalInfo() {
 	return (
@@ -25,11 +25,7 @@ export default function AdditionalInfo() {
 function CurrentWeatherContent() {
 	const weatherParams = getWeatherState();
 
-	const { data } = useSuspenseQuery({
-		queryKey: ["weather", weatherParams],
-		queryFn: () => getWeather({ data: weatherParams }),
-		refetchOnWindowFocus: false,
-	});
+	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
 
 	const feelsLike = `${Math.round(data.current.apparent_temperature)}${data.current_units.apparent_temperature}`;
 	const humidity = `${data.current.relative_humidity_2m}${data.current_units.relative_humidity_2m}`;

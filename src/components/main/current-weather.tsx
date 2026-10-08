@@ -2,9 +2,9 @@ import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
-import { getWeather } from "#/utils/weather.functions";
 import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
+import { createWeatherQueryOptions } from "#/query-options/weather";
 
 import { Skeleton } from "#/components/ui/skeleton";
 
@@ -41,11 +41,7 @@ function CurrentWeatherContent() {
 
 	const weatherParams = getWeatherState();
 
-	const { data } = useSuspenseQuery({
-		queryKey: ["weather", weatherParams],
-		queryFn: () => getWeather({ data: weatherParams }),
-		refetchOnWindowFocus: false,
-	});
+	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
 
 	const temperature = `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`;
 

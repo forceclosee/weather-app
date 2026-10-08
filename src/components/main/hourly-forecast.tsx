@@ -5,11 +5,11 @@ import { ChevronDown } from "lucide-react";
 
 import type { Days } from "#/types";
 import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
-import { getWeather } from "#/utils/weather.functions";
 import { getFormattedDate, getFormattedTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 import { classList, cn } from "#/utils/class-helper";
 import { getPartialDaysState, updateDaysState } from "#/utils/days-store";
+import { createWeatherQueryOptions } from "#/query-options/weather";
 
 import { Button } from "#/components/ui/aria-button";
 import { Menu, MenuItem, MenuTrigger } from "#/components/ui/aria-menu";
@@ -82,11 +82,7 @@ function HourlyWeatherContent() {
 
 	const weatherParams = getWeatherState();
 
-	const { data } = useSuspenseQuery({
-		queryKey: ["weather", weatherParams],
-		queryFn: () => getWeather({ data: weatherParams }),
-		refetchOnWindowFocus: false,
-	});
+	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
 
 	// format first 2 days with relative day
 	const relativeDays = data.hourly.time.slice(0, 48).map((time) => {

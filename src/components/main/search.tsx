@@ -12,9 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SearchIcon, X } from "lucide-react";
 
-import { getLocation } from "#/utils/geocoding.functions";
 import { updateWeatherState } from "#/utils/weather-store";
 import { classList, cn } from "#/utils/class-helper";
+import { createLocationQueryOptions } from "#/query-options/weather";
 
 import { Button } from "#/components/ui/aria-button";
 
@@ -163,14 +163,9 @@ function SearchDropdown({
 }: SearchDropdownProps) {
 	const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-	const { data, isPending, isError, isSuccess } = useQuery({
-		queryKey: ["location", searchValue],
-		queryFn: () => getLocation({ data: searchValue }),
-		enabled: !!searchValue,
-		refetchOnWindowFocus: false,
-		staleTime: Infinity,
-		retry: false,
-	});
+	const { data, isPending, isError, isSuccess } = useQuery(
+		createLocationQueryOptions(searchValue),
+	);
 
 	const locations = data?.results;
 

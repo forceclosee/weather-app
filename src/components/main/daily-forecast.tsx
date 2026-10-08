@@ -4,11 +4,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getFormattedDate } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
-import { getWeather } from "#/utils/weather.functions";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
 import { classList, cn } from "#/utils/class-helper";
+import { createWeatherQueryOptions } from "#/query-options/weather";
 
 type Props = {
 	className?: string;
@@ -32,11 +32,7 @@ function CurrentWeatherContent() {
 
 	const weatherParams = getWeatherState();
 
-	const { data } = useSuspenseQuery({
-		queryKey: ["weather", weatherParams],
-		queryFn: () => getWeather({ data: weatherParams }),
-		refetchOnWindowFocus: false,
-	});
+	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
 
 	// format first 2 days with relative day
 	const relativeDays = data.daily.time.slice(0, 2).map((time) => {
