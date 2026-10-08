@@ -1,10 +1,10 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
-import { getWeather } from "#/utils/weather.functions";
+import { getPartialWeatherState } from "#/utils/weather-store";
 import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
+import { createWeatherQueryOptions } from "#/query-options/weather";
 
 import { Skeleton } from "#/components/ui/skeleton";
 
@@ -39,13 +39,7 @@ function CurrentWeatherContent() {
 
 	const countryFlagUrl = `https://hatscripts.github.io/circle-flags/flags/${countryCode}.svg`;
 
-	const weatherParams = getWeatherState();
-
-	const { data } = useSuspenseQuery({
-		queryKey: ["weather", weatherParams],
-		queryFn: () => getWeather({ data: weatherParams }),
-		refetchOnWindowFocus: false,
-	});
+	const { data } = useSuspenseQuery(createWeatherQueryOptions());
 
 	const temperature = `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`;
 
