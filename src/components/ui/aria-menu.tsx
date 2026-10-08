@@ -1,4 +1,4 @@
-import React from "react";
+import { Children, type ReactElement } from "react";
 import { Check, ChevronRight } from "lucide-react";
 
 import { cn } from "#/utils/class-helper";
@@ -146,9 +146,9 @@ export function MenuTrigger({
 	popoverClassName,
 	...props
 }: MenuTriggerProps) {
-	const [trigger, menu] = React.Children.toArray(children) as [
-		React.ReactElement,
-		React.ReactElement,
+	const [trigger, menu] = Children.toArray(children) as [
+		ReactElement,
+		ReactElement,
 	];
 
 	return (
@@ -162,9 +162,9 @@ export function MenuTrigger({
 }
 
 export function SubmenuTrigger({ children, ...props }: SubmenuTriggerProps) {
-	const [trigger, menu] = React.Children.toArray(children) as [
-		React.ReactElement,
-		React.ReactElement,
+	const [trigger, menu] = Children.toArray(children) as [
+		ReactElement,
+		ReactElement,
 	];
 
 	return (

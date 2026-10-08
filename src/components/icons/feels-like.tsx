@@ -1,8 +1,8 @@
-import type { SVGProps } from "react";
+import type { ComponentProps } from "react";
 
 import { getSizesValue } from "#/utils/attributes-helper";
 
-type Props = SVGProps<SVGSVGElement> & {
+type Props = ComponentProps<"svg"> & {
 	width?: number;
 	height?: number;
 };

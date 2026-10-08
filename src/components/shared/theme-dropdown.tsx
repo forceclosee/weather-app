@@ -47,6 +47,7 @@ export default function ThemeDropdown({ className }: Props) {
 				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
 			</Button>
 			<Menu
+				shouldCloseOnSelect
 				selectionMode="single"
 				selectedKeys={[theme]}
 				onSelectionChange={([key]) =>
