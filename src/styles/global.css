@@ -57,6 +57,7 @@
 	--spacing-fluid-500: clamp(1.25rem, 1.1055rem + 0.6163vw, 1.5rem);
 	--spacing-fluid-550: clamp(1.25rem, 0.8166rem + 1.8489vw, 2rem);
 	--spacing-fluid-925: clamp(2.3125rem, 1.7346rem + 2.4653vw, 3.3125rem);
+	--spacing-fluid-1600: clamp(4rem, -0.4rem + 22vw, 6.2rem);
 
 	/* z-index */
 	--z-card: 10;
@@ -180,6 +181,50 @@
 			height: calc(6px * sqrt(2));
 			background-color: var(--color-bg-info);
 			transform: translate(-50%, 50%) rotate(45deg);
+		}
+	}
+
+	.loader {
+		--color-1: oklch(1 0 none);
+		--color-2: oklch(1 0 none / 0);
+		--size: 0.667px;
+
+		color: var(--color-1);
+		display: inline-block;
+		position: relative;
+		font-size: calc(24 * var(--size));
+
+		&::before {
+			content: "Search locations";
+		}
+
+		&::after {
+			content: "";
+			inline-size: calc(5 * var(--size));
+			block-size: calc(5 * var(--size));
+			background: currentColor;
+			position: absolute;
+			inset-block-end: calc(10 * var(--size));
+			inset-inline-end: calc(-10 * var(--size));
+			animation: animloader 1s linear infinite;
+		}
+	}
+
+	@keyframes animloader {
+		0% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-2),
+				calc(20 * var(--size)) 0 var(--color-2);
+		}
+		50% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-1),
+				calc(20 * var(--size)) 0 var(--color-2);
+		}
+		100% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-1),
+				calc(20 * var(--size)) 0 var(--color-1);
 		}
 	}
 }

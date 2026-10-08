@@ -8,7 +8,7 @@ import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
 import { getWeather } from "#/utils/weather.functions";
 import { getFormattedDate, getFormattedTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
-import { cn } from "#/utils/class-helper";
+import { classList, cn } from "#/utils/class-helper";
 import { getPartialDaysState, updateDaysState } from "#/utils/days-store";
 
 import { Button } from "#/components/ui/aria-button";
@@ -29,7 +29,7 @@ export default function HourlyForecast({ className }: Props) {
 				className,
 			)}
 			contentClassName="px-6">
-			<div className="pbs-6 pbe-4 sticky inset-bs-0 z-[calc(var(--z-card)+1)] flex items-center justify-between gap-4 bg-bg-card">
+			<div className="pbs-6 pbe-4 sticky inset-bs-0 z-[calc(var(--z-card)+1)] flex items-center justify-between gap-2 bg-bg-card">
 				<h2>Hourly Forecast</h2>
 				<SelectDayDropdown />
 			</div>
@@ -51,7 +51,7 @@ function SelectDayDropdown() {
 		<MenuTrigger placement="bottom end" popoverClassName="min-inline-32">
 			<Button
 				variant="secondary"
-				className="min-block-9.25 flex gap-2 bg-bg-selected *:shrink-0">
+				className="min-block-9.25 flex gap-2 bg-bg-selected *:shrink-0 hover:bg-bg-selected-hover focus-visible:bg-bg-selected-hover">
 				{selectedDay}
 				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
 			</Button>
@@ -115,22 +115,38 @@ function HourlyWeatherContent() {
 		return getFormattedTime({ timestamp: time, timezone: timezone });
 	});
 
-	const details = data.hourly.weather_code.map((code) => {
+	const weatherCodes = data.hourly.weather_code;
+
+	const details = weatherCodes.map((code) => {
 		return getWeatherDetails({ wmoCode: code });
 	});
 
-	const temperatures = data.hourly.temperature_2m;
+	const temperatures = data.hourly.temperature_2m.map((temperature) => {
+		return `${Math.round(temperature)}${data.hourly_units.temperature_2m}`;
+	});
 
 	const dayLength = data.hourly.time.length;
 
 	// all hourly weather data
 	const hourlyWeathers = Array.from({ length: dayLength }).map((_, index) => {
+		// icon with dark color that should be inverted to make visible on dark mode
+		const shouldInvertColor =
+			weatherCodes[index] === 45 ||
+			weatherCodes[index] === 48 ||
+			weatherCodes[index] === 71 ||
+			weatherCodes[index] === 73 ||
+			weatherCodes[index] === 75 ||
+			weatherCodes[index] === 77 ||
+			weatherCodes[index] === 85 ||
+			weatherCodes[index] === 86;
+
 		return {
 			date: allDays[index],
 			time: times[index],
 			icon: details[index].image,
 			description: details[index].description,
-			temperature: `${Math.round(temperatures[index])}${data.hourly_units.temperature_2m}`,
+			temperature: temperatures[index],
+			shouldInvertColor: shouldInvertColor,
 		};
 	});
 
@@ -152,7 +168,13 @@ function HourlyWeatherContent() {
 							alt={weather.description}
 							width={100}
 							height={100}
-							className="inline-10 block-auto origin-center scale-150 drop-shadow-(--daily-weather-icon-drop-shadow)"
+							className={classList(
+								"inline-9 block-auto weather-icon-drop-shadow origin-center scale-150",
+								{
+									"invert-weather-icon-color-on-dark-mode":
+										weather.shouldInvertColor,
+								},
+							)}
 						/>
 					}
 					content={weather.temperature}

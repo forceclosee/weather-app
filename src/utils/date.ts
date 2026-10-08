@@ -14,13 +14,9 @@ export const getFormattedDate = ({ timestamp, timezone }: Params) => {
 		weekday: "long",
 	});
 
-	const weekdayShortOnly = dt.toLocaleString({
-		weekday: "short",
-	});
-
 	const relativeDay = capitalizeFirstLetter(dt.toRelativeCalendar());
 
-	return { fullDate, weekdayLongOnly, weekdayShortOnly, relativeDay };
+	return { fullDate, weekdayLongOnly, relativeDay };
 };
 
 export const getFormattedTime = ({ timestamp, timezone }: Params): string => {

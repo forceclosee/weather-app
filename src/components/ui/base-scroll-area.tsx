@@ -23,7 +23,7 @@ export function ScrollArea({
 				</BaseScrollArea.Content>
 			</BaseScrollArea.Viewport>
 			<BaseScrollArea.Scrollbar className="inline-1.5 pointer-events-none flex justify-center bg-bg-selected opacity-0 transition-opacity data-hovering:pointer-events-auto data-scrolling:pointer-events-auto data-hovering:opacity-100 data-scrolling:opacity-100 data-scrolling:duration-0">
-				<BaseScrollArea.Thumb className="inline-full bg-text-muted" />
+				<BaseScrollArea.Thumb className="inline-full bg-bg-primary" />
 			</BaseScrollArea.Scrollbar>
 		</BaseScrollArea.Root>
 	);

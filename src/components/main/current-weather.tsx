@@ -10,6 +10,7 @@ import { Skeleton } from "#/components/ui/skeleton";
 
 import bgMobile from "#/images/bg-today-small.svg";
 import bgDesktop from "#/images/bg-today-large.svg";
+import { classList } from "#/utils/class-helper";
 
 export default function CurrentWeather() {
 	return (
@@ -53,10 +54,23 @@ function CurrentWeatherContent() {
 		timezone: timezone,
 	});
 
+	const weatherCode = data.current.weather_code;
+
 	const { description, image } = getWeatherDetails({
-		wmoCode: data.current.weather_code,
+		wmoCode: weatherCode,
 		isDay: data.current.is_day,
 	});
+
+	// icon with dark color that should be inverted to make visible on dark mode
+	const shouldInvertColor =
+		weatherCode === 45 ||
+		weatherCode === 48 ||
+		weatherCode === 71 ||
+		weatherCode === 73 ||
+		weatherCode === 75 ||
+		weatherCode === 77 ||
+		weatherCode === 85 ||
+		weatherCode === 86;
 
 	return (
 		<div className="grid @3xl/current-weather:grid-cols-[1fr_auto] items-center @3xl/current-weather:justify-items-start justify-items-center gap-8 p-6 pe-8 text-center @3xl/current-weather:text-start">
@@ -82,9 +96,12 @@ function CurrentWeatherContent() {
 						alt={description}
 						width={100}
 						height={100}
-						className="inline-24 block-auto origin-center scale-150 drop-shadow-(--current-weather-icon-drop-shadow)"
+						className={classList(
+							"inline-24 block-auto origin-center scale-150",
+							{ "invert-weather-icon-color": shouldInvertColor },
+						)}
 					/>
-					<span className="trim-capital font-bricolage-grotesque font-semibold text-[6.2rem] italic">
+					<span className="trim-capital text-(length:--spacing-fluid-1600) font-bricolage-grotesque font-semibold italic">
 						{temperature}
 					</span>
 				</div>
@@ -105,6 +122,9 @@ function TimeDisplay() {
 	useEffect(() => {
 		const updateTime = () => setCurrentTime(getFormattedCurrentTime(timezone));
 
+		// update current time immediately when timezone changes
+		updateTime();
+
 		const now = new Date();
 		const delay = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
 
@@ -114,7 +134,7 @@ function TimeDisplay() {
 		const timeout = setTimeout(() => {
 			updateTime();
 
-			interval = setInterval(updateTime, 1 * 60 * 1000);
+			interval = setInterval(updateTime, 1 * 60 * 1000); /* 1 minute */
 		}, delay);
 
 		return () => {

@@ -8,7 +8,7 @@ import { getWeather } from "#/utils/weather.functions";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
-import { cn } from "#/utils/class-helper";
+import { classList, cn } from "#/utils/class-helper";
 
 type Props = {
 	className?: string;
@@ -53,23 +53,44 @@ function CurrentWeatherContent() {
 	// all days
 	const days = [...relativeDays, ...weekdays];
 
-	const details = data.daily.weather_code.map((code) => {
+	const weatherCodes = data.daily.weather_code;
+
+	const details = weatherCodes.map((code) => {
 		return getWeatherDetails({ wmoCode: code });
 	});
 
-	const maxTemperatures = data.daily.temperature_2m_max;
-	const minTemperatures = data.daily.temperature_2m_min;
+	const maxTemperatures = data.daily.temperature_2m_max.map((temperature) => {
+		return `${Math.round(temperature)}${data.daily_units.temperature_2m_max}`;
+	});
+
+	const minTemperatures = data.daily.temperature_2m_min.map((temperature) => {
+		return `${Math.round(temperature)}${data.daily_units.temperature_2m_min}`;
+	});
+
+	// const minTemperatures = data.daily.temperature_2m_min;
 
 	const dayLength = data.daily.time.length;
 
 	// daily weather data
 	const dailyWeathers = Array.from({ length: dayLength }).map((_, index) => {
+		// icon with dark color that should be inverted to make visible on dark mode
+		const shouldInvertColor =
+			weatherCodes[index] === 45 ||
+			weatherCodes[index] === 48 ||
+			weatherCodes[index] === 71 ||
+			weatherCodes[index] === 73 ||
+			weatherCodes[index] === 75 ||
+			weatherCodes[index] === 77 ||
+			weatherCodes[index] === 85 ||
+			weatherCodes[index] === 86;
+
 		return {
 			date: days[index],
 			icon: details[index].image,
 			description: details[index].description,
-			maxTemperature: `${Math.round(maxTemperatures[index])}${data.daily_units.temperature_2m_max}`,
-			minTemperature: `${Math.round(minTemperatures[index])}${data.daily_units.temperature_2m_min}`,
+			maxTemperature: maxTemperatures[index],
+			minTemperature: minTemperatures[index],
+			shouldInvertColor: shouldInvertColor,
 		};
 	});
 
@@ -86,7 +107,13 @@ function CurrentWeatherContent() {
 							alt={weather.description}
 							width={100}
 							height={100}
-							className="inline-12 block-auto origin-center scale-150 drop-shadow-(--daily-weather-icon-drop-shadow)"
+							className={classList(
+								"inline-12 block-auto weather-icon-drop-shadow origin-center scale-150",
+								{
+									"invert-weather-icon-color-on-dark-mode":
+										weather.shouldInvertColor,
+								},
+							)}
 						/>
 					}
 					content={
@@ -103,6 +130,7 @@ function CurrentWeatherContent() {
 
 function CurrentWeatherSkeleton() {
 	const minWidth = [60, 83, 45, 45, 45, 45, 45];
+	// update width
 
 	return (
 		<>
