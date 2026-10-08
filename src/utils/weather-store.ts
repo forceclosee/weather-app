@@ -52,5 +52,3 @@ export const updateWeatherState = (newState: Partial<WeatherStore>) => {
 		...newState,
 	}));
 };
-
-// update timezone setelah implement search functionality

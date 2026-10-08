@@ -25,6 +25,10 @@
 	--color-bg-page: light-dark(oklch(0.8 0.08 270), oklch(0.14 0.08 270));
 	--color-bg-card: light-dark(oklch(0.86 0.05 285), oklch(0.32 0.04 285));
 	--color-bg-selected: light-dark(oklch(0.93 0.04 285), oklch(0.38 0.04 285));
+	--color-bg-selected-hover: light-dark(
+		oklch(0.95 0.04 285),
+		oklch(0.42 0.04 285)
+	);
 
 	--color-text: light-dark(oklch(0.1 0 none), oklch(0.9 0 none));
 	--color-text-inverse: light-dark(oklch(0.9 0 none), oklch(0.1 0 none));
@@ -45,6 +49,8 @@
 
 	--color-bg-info: light-dark(oklch(0.4 0.07 260), oklch(0.8 0.07 260));
 
+	--color-text-error: light-dark(var(--color-red-900), var(--color-red-200));
+
 	/* spacing */
 	--spacing-fluid-400: clamp(1rem, 0.8555rem + 0.6163vw, 1.25rem);
 	--spacing-fluid-450: clamp(1rem, 0.711rem + 1.2326vw, 1.5rem);
@@ -59,9 +65,8 @@
 	--z-toast: 500;
 
 	/* drop shadow */
-	--daily-weather-icon-drop-shadow: 0 0 20px
+	--weather-icon-drop-shadow: 0 0 20px
 		light-dark(oklch(0 0 none / 0.6), oklch(1 0 none / 0.9));
-	--current-weather-icon-drop-shadow: 0 0 20px oklch(1 0 none / 0.2);
 }
 
 @layer base {
@@ -208,6 +213,10 @@
 	z-index: var(--z-card);
 }
 
+@utility z-dropdown {
+	z-index: var(--z-dropdown);
+}
+
 @utility wave {
 	animation: wave 2s linear infinite;
 }
@@ -218,5 +227,42 @@
 	}
 	100% {
 		background-position: -200% 0;
+	}
+}
+
+@utility hide-default-clear {
+	&::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+		appearance: none;
+	}
+}
+
+/* change weather icon color to white for current weather */
+@utility invert-weather-icon-color {
+	filter: invert(100%);
+}
+
+/* change weather icon color to white on dark theme for daily and hourly weather icon */
+@utility invert-weather-icon-color-on-dark-mode {
+	[data-theme="dark"] & {
+		filter: invert(100%);
+	}
+
+	[data-theme="system"] & {
+		@media (prefers-color-scheme: dark) {
+			filter: invert(100%);
+		}
+	}
+}
+
+@utility weather-icon-drop-shadow {
+	[data-theme="light"] & {
+		filter: drop-shadow(var(--weather-icon-drop-shadow));
+	}
+
+	[data-theme="system"] & {
+		@media (prefers-color-scheme: light) {
+			filter: drop-shadow(var(--weather-icon-drop-shadow));
+		}
 	}
 }

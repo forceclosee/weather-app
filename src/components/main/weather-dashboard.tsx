@@ -11,6 +11,7 @@ import CurrentWeather from "#/components/main/current-weather";
 import AdditionalInfo from "#/components/main/additional-info";
 import DailyForecast from "#/components/main/daily-forecast";
 import HourlyForecast from "#/components/main/hourly-forecast";
+import Search from "./search";
 
 export default function WeatherDashboard() {
 	return (
@@ -39,14 +40,16 @@ export default function WeatherDashboard() {
 							How's the sky looking today?
 						</h1>
 
-						<div className="@container/current-weather order-2 grid gap-fluid-550">
+						<Search className="order-2 lg:col-span-2" />
+
+						<div className="@container/current-weather order-3 grid gap-fluid-550">
 							<CurrentWeather />
 							<AdditionalInfo />
 						</div>
 
-						<DailyForecast className="order-3 lg:order-4" />
+						<DailyForecast className="order-4 lg:order-5" />
 
-						<HourlyForecast className="order-4 lg:order-3 lg:row-span-2" />
+						<HourlyForecast className="order-5 lg:order-4 lg:row-span-2" />
 					</div>
 				</ErrorBoundary>
 			)}
