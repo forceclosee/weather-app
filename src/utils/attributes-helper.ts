@@ -17,3 +17,9 @@ export const getSizesValue = (value: Value): string | undefined => {
 			return `${value / 16}rem`;
 	}
 };
+
+export const toKebabCase = (value: string) => {
+	return value
+		.replace(/((?<=[a-z\d])[A-Z]|(?<=[A-Z\d])[A-Z](?=[a-z]))/g, "-$1")
+		.toLowerCase();
+};
