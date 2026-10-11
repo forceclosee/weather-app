@@ -5,12 +5,12 @@ import { ArrowDown, CloudRainWind, Droplet, Info, Wind } from "lucide-react";
 
 import { getNamedDirection } from "#/utils/weather";
 import { createWeatherQueryOptions } from "#/query-options/weather";
+import { getWeatherState } from "#/utils/weather-store";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
 import { Popover } from "#/components/ui/base-popover";
 import FeelsLikeIcon from "#/components/icons/feels-like";
-import { getWeatherState } from "#/utils/weather-store";
 
 export default function AdditionalInfo() {
 	return (

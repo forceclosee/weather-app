@@ -15,7 +15,7 @@ import { Button } from "#/components/ui/aria-button";
 import { Menu, MenuItem, MenuTrigger } from "#/components/ui/aria-menu";
 import { Card } from "#/components/ui/card";
 import { ScrollArea } from "#/components/ui/base-scroll-area";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "#/components/ui/skeleton";
 
 type Props = {
 	className?: string;
@@ -165,7 +165,7 @@ function HourlyWeatherContent() {
 							width={100}
 							height={100}
 							className={classList(
-								"inline-9 block-auto weather-icon-drop-shadow origin-center scale-150",
+								"inline-8 block-auto weather-icon-drop-shadow",
 								{
 									"invert-weather-icon-color-on-dark-mode":
 										weather.shouldInvertColor,

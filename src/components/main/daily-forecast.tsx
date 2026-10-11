@@ -1,15 +1,14 @@
 import { Suspense } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { classList, cn } from "#/utils/class-helper";
 import { getFormattedDate } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
-
+import { createWeatherQueryOptions } from "#/query-options/weather";
 import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
-import { classList, cn } from "#/utils/class-helper";
-import { createWeatherQueryOptions } from "#/query-options/weather";
 
 type Props = {
 	className?: string;
@@ -105,7 +104,7 @@ function CurrentWeatherContent() {
 							width={100}
 							height={100}
 							className={classList(
-								"inline-12 block-auto weather-icon-drop-shadow origin-center scale-150",
+								"inline-12 block-auto weather-icon-drop-shadow",
 								{
 									"invert-weather-icon-color-on-dark-mode":
 										weather.shouldInvertColor,
@@ -126,7 +125,7 @@ function CurrentWeatherContent() {
 }
 
 function CurrentWeatherSkeleton() {
-	const minWidth = [60, 83, 45, 45, 45, 45, 45];
+	const minWidth = [60, 83, 90, 90, 90, 90, 90];
 	// update width
 
 	return (

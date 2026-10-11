@@ -11,7 +11,7 @@ import CurrentWeather from "#/components/main/current-weather";
 import AdditionalInfo from "#/components/main/additional-info";
 import DailyForecast from "#/components/main/daily-forecast";
 import HourlyForecast from "#/components/main/hourly-forecast";
-import Search from "./search";
+import Search from "#/components/main/search";
 
 export default function WeatherDashboard() {
 	return (

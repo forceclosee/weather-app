@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
 
+import { classList } from "#/utils/class-helper";
 import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 import { createWeatherQueryOptions } from "#/query-options/weather";
@@ -11,7 +12,6 @@ import { Skeleton } from "#/components/ui/skeleton";
 
 import bgMobile from "#/images/bg-today-small.svg";
 import bgDesktop from "#/images/bg-today-large.svg";
-import { classList } from "#/utils/class-helper";
 
 export default function CurrentWeather() {
 	return (
@@ -93,10 +93,9 @@ function CurrentWeatherContent() {
 						alt={description}
 						width={100}
 						height={100}
-						className={classList(
-							"inline-24 block-auto origin-center scale-150",
-							{ "invert-weather-icon-color": shouldInvertColor },
-						)}
+						className={classList("inline-22 block-auto", {
+							"invert-weather-icon-color": shouldInvertColor,
+						})}
 					/>
 					<span className="trim-capital text-(length:--spacing-fluid-1600) font-bricolage-grotesque font-semibold italic">
 						{temperature}
