@@ -14,7 +14,7 @@ import { SearchIcon, X } from "lucide-react";
 
 import { updateWeatherState } from "#/utils/weather-store";
 import { classList, cn } from "#/utils/class-helper";
-import { createLocationQueryOptions } from "#/query-options/weather";
+import { createLocationQueryOptions } from "#/query-options/geocoding";
 
 import { Button } from "#/components/ui/aria-button";
 
@@ -257,7 +257,7 @@ function SearchDropdown({
 			{!searchValue && <p className="text-base">Type the city name</p>}
 
 			{/* loading state */}
-			{isPending && searchValue && <div className="loader"></div>}
+			{isPending && searchValue && <div className="search-loader"></div>}
 
 			{/* error state */}
 			{isError && (

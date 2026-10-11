@@ -197,7 +197,7 @@
 		}
 	}
 
-	.loader {
+	.search-loader {
 		--color-1: light-dark(oklch(0 0 none), oklch(1 0 none));
 		--color-2: light-dark(oklch(0 0 none / 0), oklch(1 0 none / 0));
 		--size: 0.667px;
