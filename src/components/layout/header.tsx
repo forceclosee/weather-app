@@ -1,12 +1,21 @@
-import icon from "#/icons/forecast-icon.png";
+import { Link } from "@tanstack/react-router";
+
 import UnitsDropdown from "#/components/shared/units-dropdown";
 import ThemeDropdown from "#/components/shared/theme-dropdown";
 
-export default function Header() {
+import icon from "#/icons/forecast-icon.png";
+
+type Props = {
+	haveUnitsDropdown?: boolean;
+};
+
+export default function Header({ haveUnitsDropdown }: Props) {
 	return (
 		<header>
 			<div className="max-inline-316 inline-full mx-auto flex items-center justify-between gap-4 p-fluid-500 *:shrink-0">
-				<div className="text-(length:--spacing-fluid-400) flex items-center gap-2 *:shrink-0">
+				<Link
+					to="/"
+					className="text-(length:--spacing-fluid-400) flex items-center gap-2 *:shrink-0">
 					<img
 						src={icon}
 						alt="ForeCast"
@@ -17,11 +26,11 @@ export default function Header() {
 					<span className="hidden font-bricolage-grotesque font-medium min-[29rem]:inline">
 						ForeCast
 					</span>
-				</div>
+				</Link>
 
 				<div className="flex gap-4 *:shrink-0">
+					{haveUnitsDropdown && <UnitsDropdown />}
 					<ThemeDropdown />
-					<UnitsDropdown />
 				</div>
 			</div>
 		</header>
