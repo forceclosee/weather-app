@@ -247,6 +247,31 @@
 		}
 	}
 
+	.login-loader {
+		--color-1: oklch(1 0 none);
+		--color-2: oklch(1 0 none / 0);
+		--size: 0.667px;
+
+		display: inline-block;
+		position: relative;
+		font-size: calc(24 * var(--size));
+
+		&::before {
+			content: "Logging in";
+		}
+
+		&::after {
+			content: "";
+			inline-size: calc(5 * var(--size));
+			block-size: calc(5 * var(--size));
+			background: currentColor;
+			position: absolute;
+			inset-block-end: calc(10 * var(--size));
+			inset-inline-end: calc(-10 * var(--size));
+			animation: animloader 1s linear infinite;
+		}
+	}
+
 	@keyframes animloader {
 		0% {
 			box-shadow:
