@@ -113,8 +113,30 @@ function HourlyWeatherContent() {
 
 	const weatherCodes = data.hourly.weather_code;
 
-	const details = weatherCodes.map((code) => {
-		return getWeatherDetails({ wmoCode: code });
+	// day or night for weather icon
+	const isDays = times.map((time) => {
+		switch (time) {
+			case "6 PM":
+			case "7 PM":
+			case "8 PM":
+			case "9 PM":
+			case "10 PM":
+			case "11 PM":
+			case "12 AM":
+			case "1 AM":
+			case "2 AM":
+			case "3 AM":
+			case "4 AM":
+			case "5 AM":
+				return 0;
+
+			default:
+				return 1;
+		}
+	});
+
+	const details = weatherCodes.map((code, index) => {
+		return getWeatherDetails({ wmoCode: code, isDay: isDays[index] });
 	});
 
 	const temperatures = data.hourly.temperature_2m.map((temperature) => {
@@ -123,26 +145,33 @@ function HourlyWeatherContent() {
 
 	const dayLength = data.hourly.time.length;
 
+	// icon with dark color that should be inverted to make visible on dark mode
+	const shouldInvertColors = weatherCodes.map((code) => {
+		switch (code) {
+			case 45:
+			case 48:
+			case 71:
+			case 73:
+			case 75:
+			case 77:
+			case 85:
+			case 86:
+				return true;
+
+			default:
+				return false;
+		}
+	});
+
 	// all hourly weather data
 	const hourlyWeathers = Array.from({ length: dayLength }).map((_, index) => {
-		// icon with dark color that should be inverted to make visible on dark mode
-		const shouldInvertColor =
-			weatherCodes[index] === 45 ||
-			weatherCodes[index] === 48 ||
-			weatherCodes[index] === 71 ||
-			weatherCodes[index] === 73 ||
-			weatherCodes[index] === 75 ||
-			weatherCodes[index] === 77 ||
-			weatherCodes[index] === 85 ||
-			weatherCodes[index] === 86;
-
 		return {
 			date: allDays[index],
 			time: times[index],
 			icon: details[index].image,
 			description: details[index].description,
 			temperature: temperatures[index],
-			shouldInvertColor: shouldInvertColor,
+			shouldInvertColor: shouldInvertColors[index],
 		};
 	});
 

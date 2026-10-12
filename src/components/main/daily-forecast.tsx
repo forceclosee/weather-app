@@ -67,26 +67,33 @@ function CurrentWeatherContent() {
 
 	const dayLength = data.daily.time.length;
 
+	// icon with dark color that should be inverted to make visible on dark mode
+	const shouldInvertColors = weatherCodes.map((code) => {
+		switch (code) {
+			case 45:
+			case 48:
+			case 71:
+			case 73:
+			case 75:
+			case 77:
+			case 85:
+			case 86:
+				return true;
+
+			default:
+				return false;
+		}
+	});
+
 	// daily weather data
 	const dailyWeathers = Array.from({ length: dayLength }).map((_, index) => {
-		// icon with dark color that should be inverted to make visible on dark mode
-		const shouldInvertColor =
-			weatherCodes[index] === 45 ||
-			weatherCodes[index] === 48 ||
-			weatherCodes[index] === 71 ||
-			weatherCodes[index] === 73 ||
-			weatherCodes[index] === 75 ||
-			weatherCodes[index] === 77 ||
-			weatherCodes[index] === 85 ||
-			weatherCodes[index] === 86;
-
 		return {
 			date: days[index],
 			icon: details[index].image,
 			description: details[index].description,
 			maxTemperature: maxTemperatures[index],
 			minTemperature: minTemperatures[index],
-			shouldInvertColor: shouldInvertColor,
+			shouldInvertColor: shouldInvertColors[index],
 		};
 	});
 
