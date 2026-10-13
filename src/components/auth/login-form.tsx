@@ -1,7 +1,15 @@
+import { useNavigate } from "@tanstack/react-router";
+
 import { useAppForm } from "#/hook/form";
 import { loginSchema } from "#/lib/schema/login-schema";
+import { authClient } from "#/lib/auth-client";
+
+import { useToastManager } from "#/components/ui/base-toast";
 
 export default function LoginForm() {
+	const navigate = useNavigate();
+	const toastManager = useToastManager();
+
 	const form = useAppForm({
 		defaultValues: {
 			loginEmail: "",
@@ -11,9 +19,39 @@ export default function LoginForm() {
 			onChange: loginSchema,
 			onSubmit: loginSchema,
 		},
-		onSubmit: async () => {
-			// lempar ke better auth
+
+		onSubmit: async ({ value, formApi }) => {
+			const { data, error } = await authClient.signIn.email({
+				email: value.loginEmail,
+				password: value.loginPassword,
+			});
+
+			if (error) {
+				toastManager.add({
+					type: "error",
+					title: "Login Failed",
+					description: error.message
+						? `${error.message}, Please try again later`
+						: "Something went wrong, Please try again later",
+				});
+
+				return;
+			}
+
+			formApi.reset();
+
+			toastManager.add({
+				type: "success",
+				title: "Login successfully",
+				description: `Welcome back ${data.user.name}`,
+			});
+
+			/* redirect to profile dashboard */
+			setTimeout(() => {
+				navigate({ to: "/" });
+			}, 4000);
 		},
+
 		onSubmitInvalid() {
 			const invalidInput = document.querySelector<HTMLInputElement>(
 				"[aria-invalid='true']",

@@ -21,6 +21,8 @@ import "@fontsource-variable/dm-sans";
 // bricolage grotesque 200-800
 import "@fontsource-variable/bricolage-grotesque";
 
+import { ToastProvider } from "#/components/ui/base-toast";
+
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
@@ -95,9 +97,38 @@ function RootComponent() {
 	return (
 		<RootDocument>
 			<ThemeProvider>
-				<Outlet />
+				<ToastProvider>
+					<Outlet />
+				</ToastProvider>
 			</ThemeProvider>
 		</RootDocument>
+	);
+}
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+	return (
+		<html lang="en" className="bg-bg-page" suppressHydrationWarning>
+			<head>
+				<HeadContent />
+			</head>
+			<body className="relative text-text" suppressHydrationWarning>
+				{children}
+
+				<TanStackDevtools
+					config={{
+						position: "bottom-right",
+					}}
+					plugins={[
+						{
+							name: "Tanstack Router",
+							render: <TanStackRouterDevtoolsPanel />,
+						},
+						TanStackQueryDevtools,
+					]}
+				/>
+				<Scripts />
+			</body>
+		</html>
 	);
 }
 
@@ -114,31 +145,5 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 			<ScriptOnce children={themeScript} />
 			{children}
 		</>
-	);
-}
-
-function RootDocument({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang="en" className="bg-bg-page" suppressHydrationWarning>
-			<head>
-				<HeadContent />
-			</head>
-			<body className="relative text-text" suppressHydrationWarning>
-				{children}
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-						TanStackQueryDevtools,
-					]}
-				/>
-				<Scripts />
-			</body>
-		</html>
 	);
 }
