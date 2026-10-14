@@ -1,7 +1,21 @@
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
+import { getSession } from "#/utils/auth.functions";
+
 import { useToastManager } from "#/components/ui/base-toast";
-import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_main/dashboard")({
+	beforeLoad: async ({ location }) => {
+		const session = await getSession();
+
+		if (!session) {
+			throw redirect({
+				to: "/login",
+				search: { redirect: location.href },
+			});
+		}
+	},
+
 	component: RouteComponent,
 });
 

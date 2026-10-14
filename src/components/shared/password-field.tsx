@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Field, Input } from "../ui/base-field";
 import { toKebabCase } from "#/utils/attributes-helper";
 import { useFieldContext, useFormContext } from "#/hook/form";
@@ -21,8 +21,6 @@ export default function PasswordField({
 	const field = useFieldContext<string>();
 
 	const inputRef = useRef<HTMLInputElement>(null);
-
-	const anchorInput = `--${useId()}`;
 
 	const [inputType, setInputType] = useState<"password" | "text">("password");
 
@@ -65,7 +63,6 @@ export default function PasswordField({
 											isInputValid,
 									},
 								)}
-								style={{ anchorName: anchorInput }}
 								onChange={(e) => field.handleChange(e.target.value)}
 								onBlur={field.handleBlur}
 								aria-invalid={isInputInvalid}

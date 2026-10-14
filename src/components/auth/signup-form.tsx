@@ -52,7 +52,7 @@ export default function SignupForm() {
 			/* redirect to profile dashboard */
 			setTimeout(() => {
 				navigate({ to: "/dashboard" });
-			}, 4000);
+			}, 1000);
 		},
 
 		onSubmitInvalid() {

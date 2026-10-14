@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { getRouteApi, useNavigate } from "@tanstack/react-router";
 
 import { useAppForm } from "#/hook/form";
 import { loginSchema } from "#/lib/schema/login-schema";
@@ -6,8 +6,12 @@ import { authClient } from "#/lib/auth-client";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
+const routeApi = getRouteApi("/_auth/login");
+
 export default function LoginForm() {
 	const navigate = useNavigate();
+	const { redirect } = routeApi.useSearch();
+
 	const toastManager = useToastManager();
 
 	const form = useAppForm({
@@ -46,10 +50,10 @@ export default function LoginForm() {
 				description: `Welcome back ${data.user.name}`,
 			});
 
-			/* redirect to profile dashboard */
+			/* redirect to previous user route, fallback to homepage */
 			setTimeout(() => {
-				navigate({ to: "/" });
-			}, 4000);
+				navigate({ to: redirect || "/" });
+			}, 1000);
 		},
 
 		onSubmitInvalid() {

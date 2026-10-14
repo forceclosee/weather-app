@@ -7,10 +7,10 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import type { QueryClient } from "@tanstack/react-query";
 
 import TanStackQueryDevtools from "#/integrations/tanstack-query/devtools";
-
-import type { QueryClient } from "@tanstack/react-query";
+import { getSession } from "#/utils/auth.functions";
 
 import favicon from "/favicon.ico";
 import globalCss from "#/styles/global.css?url";
@@ -90,6 +90,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
+
+	beforeLoad: async () => {
+		const session = await getSession();
+
+		return { user: session?.user };
+	},
+
 	component: RootComponent,
 });
 
