@@ -16,7 +16,8 @@ export function ScrollArea({
 	contentClassName,
 }: Props) {
 	return (
-		<BaseScrollArea.Root className={cn("overflow-clip", className)}>
+		<BaseScrollArea.Root
+			className={cn("min-inline-0 overflow-clip", className)}>
 			<BaseScrollArea.Viewport className={cn("block-full", viewportClassName)}>
 				<BaseScrollArea.Content className={contentClassName}>
 					{children}

@@ -30,11 +30,14 @@ export default function UnitsDropdown({ className }: Props) {
 	return (
 		<MenuTrigger
 			placement="bottom end"
-			popoverClassName={cn("min-inline-[12.5rem]", className)}>
-			<Button variant="secondary" className="flex gap-2 *:shrink-0">
+			popoverClassName={cn("min-inline-50", className)}>
+			<Button variant="secondary" className="group flex gap-2 *:shrink-0">
 				<Settings className="block-[1.1em] inline-auto" />
-				<span className="hidden shrink-0 min-[20rem]:inline">Units</span>
-				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
+				<span className="hidden shrink-0 min-[26rem]:inline">Units</span>
+				<ChevronDown
+					strokeWidth={3}
+					className="block-[1.1em] inline-auto hidden transition-transform duration-200 group-data-pressed:rotate-180 min-[23rem]:inline"
+				/>
 			</Button>
 			<Menu>
 				<Header className="mbe-1 p-1 text-center font-medium">

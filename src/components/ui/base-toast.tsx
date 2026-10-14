@@ -1,11 +1,8 @@
-import { cn } from "#/utils/class-helper";
+import type { ReactNode } from "react";
 import { Toast as BaseToast } from "@base-ui/react/toast";
-import { X } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
 
-type ClassNameProps = {
-	className?: string;
-};
+import { cn } from "#/utils/class-helper";
+import { X } from "lucide-react";
 
 type ProviderProps = {
 	children: ReactNode;

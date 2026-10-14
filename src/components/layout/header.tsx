@@ -2,14 +2,19 @@ import { Link } from "@tanstack/react-router";
 
 import UnitsDropdown from "#/components/shared/units-dropdown";
 import ThemeDropdown from "#/components/shared/theme-dropdown";
+import ProfileDropdown from "#/components/shared/profile-dropdown";
 
 import icon from "#/icons/forecast-icon.png";
 
 type Props = {
 	haveUnitsDropdown?: boolean;
+	haveProfileDropdown?: boolean;
 };
 
-export default function Header({ haveUnitsDropdown }: Props) {
+export default function Header({
+	haveUnitsDropdown,
+	haveProfileDropdown,
+}: Props) {
 	return (
 		<header>
 			<div className="max-inline-316 inline-full mx-auto flex items-center justify-between gap-4 p-fluid-500 *:shrink-0">
@@ -23,14 +28,16 @@ export default function Header({ haveUnitsDropdown }: Props) {
 						height={70}
 						className="inline-[2em] block-[2em]"
 					/>
-					<span className="hidden font-bricolage-grotesque font-medium min-[29rem]:inline">
+					<span className="hidden font-bricolage-grotesque font-medium min-[37rem]:inline">
 						ForeCast
 					</span>
 				</Link>
 
-				<div className="flex gap-4 *:shrink-0">
+				<div className="flex items-center gap-4 *:shrink-0">
 					{haveUnitsDropdown && <UnitsDropdown />}
 					<ThemeDropdown />
+
+					{haveProfileDropdown && <ProfileDropdown />}
 				</div>
 			</div>
 		</header>

@@ -1,4 +1,4 @@
-import { Children, type ReactElement } from "react";
+import { Children, type CSSProperties, type ReactElement } from "react";
 import { Check, ChevronRight } from "lucide-react";
 
 import { cn } from "#/utils/class-helper";
@@ -138,12 +138,14 @@ export function MenuSection<T>({
 type MenuTriggerProps = AriaMenuTriggerProps & {
 	placement?: PopoverProps["placement"];
 	popoverClassName?: string;
+	popoverStyle?: CSSProperties;
 };
 
 export function MenuTrigger({
 	children,
 	placement,
 	popoverClassName,
+	popoverStyle,
 	...props
 }: MenuTriggerProps) {
 	const [trigger, menu] = Children.toArray(children) as [
@@ -154,7 +156,10 @@ export function MenuTrigger({
 	return (
 		<AriaMenuTrigger {...props}>
 			{trigger}
-			<Popover placement={placement} className={popoverClassName}>
+			<Popover
+				placement={placement}
+				className={popoverClassName}
+				style={popoverStyle}>
 				{menu}
 			</Popover>
 		</AriaMenuTrigger>

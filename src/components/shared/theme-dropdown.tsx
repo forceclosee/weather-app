@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
 
 import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
@@ -31,20 +31,32 @@ export default function ThemeDropdown({ className }: Props) {
 	const getThemeIcon = () => {
 		switch (theme) {
 			case "light":
-				return <Sun className="block-[1.3em] inline-auto shrink-0" />;
+				return <Sun className="block-[1.3em] inline-auto" />;
 			case "dark":
-				return <Moon className="block-[1.3em] inline-auto shrink-0" />;
+				return <Moon className="block-[1.3em] inline-auto" />;
 			case "system":
-				return <Laptop className="block-[1.3em] inline-auto shrink-0" />;
+				return <Laptop className="block-[1.3em] inline-auto" />;
 		}
 	};
 
+	const anchorDropdownTrigger = `--${useId()}`;
+
 	return (
-		<MenuTrigger popoverClassName={className}>
-			<Button variant="secondary" className="flex gap-2 *:shrink-0">
+		<MenuTrigger
+			popoverClassName={className}
+			popoverStyle={{
+				minInlineSize: `anchor-size(${anchorDropdownTrigger} inline)`,
+			}}>
+			<Button
+				variant="secondary"
+				className="group flex gap-2 *:shrink-0"
+				style={{ anchorName: anchorDropdownTrigger }}>
 				{getThemeIcon()}
-				<span className="hidden min-[24rem]:inline">Theme</span>
-				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
+				<span className="hidden min-[32rem]:inline">Theme</span>
+				<ChevronDown
+					strokeWidth={3}
+					className="block-[1.1em] inline-auto hidden transition-transform duration-200 group-data-pressed:rotate-180 min-[23rem]:inline"
+				/>
 			</Button>
 			<Menu
 				shouldCloseOnSelect

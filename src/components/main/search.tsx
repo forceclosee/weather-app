@@ -1,5 +1,4 @@
 import {
-	useEffect,
 	useRef,
 	useState,
 	type ComponentProps,
@@ -17,6 +16,7 @@ import { classList, cn } from "#/utils/class-helper";
 import { createLocationQueryOptions } from "#/query-options/geocoding";
 
 import { Button } from "#/components/ui/aria-button";
+import { useOutsideClick } from "#/hook/use-outside-click";
 
 type Selected = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -40,19 +40,11 @@ export default function Search({ className }: Props) {
 	const [selected, setSelected] = useState<Selected>(0);
 
 	// close dropdown on outside click
-	useEffect(() => {
-		const handleOutsideClick = (e: MouseEvent | FocusEvent) => {
-			if (!containerRef.current?.contains(e.target as Node)) {
-				setIsOpen(false);
-			}
-		};
-
-		document.addEventListener("mousedown", handleOutsideClick);
-
-		return () => {
-			document.removeEventListener("mousedown", handleOutsideClick);
-		};
-	}, []);
+	useOutsideClick({
+		ref: containerRef,
+		isOpen: isOpen,
+		onClose: () => setIsOpen(false),
+	});
 
 	// close dropdown when the focus moves outside the container
 	const handleContainerBlur = () => {

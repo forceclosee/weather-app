@@ -10,8 +10,6 @@ const databaseUrl = createServerOnlyFn(() => {
 	return url;
 });
 
-console.log(databaseUrl);
-
 const sql = neon(databaseUrl());
 
 export const db = drizzle({ client: sql });
