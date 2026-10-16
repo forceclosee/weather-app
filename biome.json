@@ -29,7 +29,8 @@
 							"classList",
 							"viewportClassName",
 							"popoverClassName",
-							"contentClassName"
+							"contentClassName",
+							"labelClassName"
 						],
 						"functions": ["clasList", "cn"]
 					}

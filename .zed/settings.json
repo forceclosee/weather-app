@@ -69,7 +69,8 @@
 					"class:list",
 					"viewportClassName",
 					"popoverClassName",
-					"contentClassName"
+					"contentClassName",
+					"labelClassName"
 				]
 			}
 		}
