@@ -1,13 +1,11 @@
-import {
-	createRouter as createTanStackRouter,
-	Link,
-} from "@tanstack/react-router";
+import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
-import { getContext } from "./integrations/tanstack-query/root-provider";
+import { getContext } from "#/integrations/tanstack-query/root-provider";
 
 import { Button } from "#/components/ui/aria-button";
+import Link from "#/components/ui/link";
 
 export function getRouter() {
 	const context = getContext();
@@ -27,11 +25,7 @@ export function getRouter() {
 						The page you are looking for doesn't exist. Click button bellow to
 						go to the homepage
 					</p>
-					<Link
-						to="/"
-						className="min-block-9.5 trim-text squircle flex cursor-pointer items-center rounded-xl bg-bg-primary px-4 font-medium text-text transition-all duration-200 hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover active:scale-95">
-						Back To Homepage
-					</Link>
+					<Link to="/">Back To Homepage</Link>
 				</div>
 			);
 		},

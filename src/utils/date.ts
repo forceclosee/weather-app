@@ -43,6 +43,14 @@ export const getFormattedCurrentTime = (timezone: string) => {
 	return currentTime;
 };
 
+export const getFormattedJsDate = (timestamp: Date) => {
+	const dt = DateTime.fromJSDate(timestamp, { zone: "utc" });
+
+	const fullDate = dt.toLocaleString(DateTime.DATE_FULL);
+
+	return fullDate;
+};
+
 function capitalizeFirstLetter(value: string | null) {
 	return String(value).charAt(0).toUpperCase() + String(value).slice(1);
 }

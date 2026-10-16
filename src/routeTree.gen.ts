@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
+import { Route as ProfileRouteRouteImport } from './routes/_profile/route'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
-import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
+import { Route as ProfileDashboardRouteImport } from './routes/_profile/dashboard'
+import { Route as ProfileSettingsRouteImport } from './routes/_profile/settings'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -23,6 +25,10 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
 } as any)
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRouteRoute = ProfileRouteRouteImport.update({
+  id: '/_profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
@@ -40,10 +46,15 @@ const MainIndexRoute = MainIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MainRouteRoute,
 } as any)
-const MainDashboardRoute = MainDashboardRouteImport.update({
+const ProfileDashboardRoute = ProfileDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => MainRouteRoute,
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+const ProfileSettingsRoute = ProfileSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProfileRouteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -55,38 +66,45 @@ export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
-  '/dashboard': typeof MainDashboardRoute
+  '/dashboard': typeof ProfileDashboardRoute
+  '/settings': typeof ProfileSettingsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof MainIndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
-  '/dashboard': typeof MainDashboardRoute
+  '/dashboard': typeof ProfileDashboardRoute
+  '/settings': typeof ProfileSettingsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_main': typeof MainRouteRouteWithChildren
+  '/_profile': typeof ProfileRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
-  '/_main/dashboard': typeof MainDashboardRoute
+  '/_profile/dashboard': typeof ProfileDashboardRoute
+  '/_profile/settings': typeof ProfileSettingsRoute
   '/_main/': typeof MainIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/api/auth/$'
+  fullPaths:
+    '/' | '/login' | '/signup' | '/dashboard' | '/settings' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/api/auth/$'
+  to: '/' | '/login' | '/signup' | '/dashboard' | '/settings' | '/api/auth/$'
   id:
     | '__root__'
     | '/_auth'
     | '/_main'
+    | '/_profile'
     | '/_auth/login'
     | '/_auth/signup'
-    | '/_main/dashboard'
+    | '/_profile/dashboard'
+    | '/_profile/settings'
     | '/_main/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
@@ -94,6 +112,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  ProfileRouteRoute: typeof ProfileRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -111,6 +130,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof MainRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_profile': {
+      id: '/_profile'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ProfileRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/login': {
@@ -134,12 +160,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainIndexRouteImport
       parentRoute: typeof MainRouteRoute
     }
-    '/_main/dashboard': {
-      id: '/_main/dashboard'
+    '/_profile/dashboard': {
+      id: '/_profile/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof MainDashboardRouteImport
-      parentRoute: typeof MainRouteRoute
+      preLoaderRoute: typeof ProfileDashboardRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
+    '/_profile/settings': {
+      id: '/_profile/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ProfileSettingsRouteImport
+      parentRoute: typeof ProfileRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -166,12 +199,10 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 )
 
 interface MainRouteRouteChildren {
-  MainDashboardRoute: typeof MainDashboardRoute
   MainIndexRoute: typeof MainIndexRoute
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
-  MainDashboardRoute: MainDashboardRoute,
   MainIndexRoute: MainIndexRoute,
 }
 
@@ -179,9 +210,24 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
   MainRouteRouteChildren,
 )
 
+interface ProfileRouteRouteChildren {
+  ProfileDashboardRoute: typeof ProfileDashboardRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRoute
+}
+
+const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileDashboardRoute: ProfileDashboardRoute,
+  ProfileSettingsRoute: ProfileSettingsRoute,
+}
+
+const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(
+  ProfileRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   MainRouteRoute: MainRouteRouteWithChildren,
+  ProfileRouteRoute: ProfileRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
