@@ -3,6 +3,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import SignupForm from "#/components/auth/signup-form";
 
 export const Route = createFileRoute("/_auth/signup")({
+	head: () => ({
+		meta: [{ title: "Signup | ForeCast" }],
+	}),
 	component: RouteComponent,
 });
 

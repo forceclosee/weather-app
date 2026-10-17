@@ -8,6 +8,9 @@ const loginSearchSchema = z.object({
 });
 
 export const Route = createFileRoute("/_auth/login")({
+	head: () => ({
+		meta: [{ title: "Login | ForeCast" }],
+	}),
 	validateSearch: loginSearchSchema,
 	component: RouteComponent,
 });

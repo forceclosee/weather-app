@@ -3,6 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import ProfileDetails from "#/components/profile/profile-details";
 
 export const Route = createFileRoute("/_profile/dashboard")({
+	head: () => ({
+		meta: [{ title: "Dashboard | ForeCast" }],
+	}),
 	component: RouteComponent,
 });
 
