@@ -20,7 +20,7 @@ export default function Link({
 			className={cn(
 				"max-block-max trim-text squircle flex cursor-pointer items-center justify-center rounded-xl px-4 font-medium text-text transition-all duration-200 *:shrink-0 active:scale-95",
 				{
-					"min-block-10.75 bg-bg-primary hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover":
+					"min-block-10.75 scheme-dark bg-bg-primary hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover":
 						variant === "primary",
 				},
 				{

@@ -111,7 +111,7 @@ export default function Search({ className }: Props) {
 
 							<Button
 								type="submit"
-								className="max-block-none scheme-dark flex gap-4 px-6 text-text text-xl"
+								className="max-block-none flex gap-4 px-6 text-text text-xl"
 								aria-label="Search location">
 								<SearchIcon
 									strokeWidth={3}

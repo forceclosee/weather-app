@@ -15,7 +15,7 @@ export default function SubmitButton({ label, labelSubmitting }: Props) {
 	return (
 		<form.Subscribe selector={(state) => state.isSubmitting}>
 			{(isSubmitting) => (
-				<Button type="submit" isDisabled={isSubmitting} className="scheme-dark">
+				<Button type="submit" isDisabled={isSubmitting}>
 					{isSubmitting ? labelSubmitting : label}
 				</Button>
 			)}

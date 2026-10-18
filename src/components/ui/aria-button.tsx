@@ -23,7 +23,7 @@ export function Button({
 			className={cn(
 				"min-block-10.75 max-block-max trim-text squircle flex cursor-pointer items-center justify-center rounded-xl px-4 font-medium text-text transition-all duration-200 *:shrink-0 active:not-disabled:scale-95 disabled:cursor-not-allowed",
 				{
-					"bg-bg-primary hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
+					"scheme-dark bg-bg-primary hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
 						variant === "primary",
 				},
 				{
