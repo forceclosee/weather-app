@@ -10,13 +10,14 @@ import {
 import { useQuery } from "@tanstack/react-query";
 
 import { SearchIcon, X } from "lucide-react";
+import { FocusTrap } from "focus-trap-react";
 
 import { updateWeatherState } from "#/utils/weather-store";
 import { classList, cn } from "#/utils/class-helper";
 import { createLocationQueryOptions } from "#/query-options/geocoding";
+import { useOutsideClick } from "#/hook/use-outside-click";
 
 import { Button } from "#/components/ui/aria-button";
-import { useOutsideClick } from "#/hook/use-outside-click";
 
 type Selected = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -46,15 +47,6 @@ export default function Search({ className }: Props) {
 		onClose: () => setIsOpen(false),
 	});
 
-	// close dropdown when the focus moves outside the container
-	const handleContainerBlur = () => {
-		setTimeout(() => {
-			if (!containerRef.current?.contains(document.activeElement)) {
-				setIsOpen(false);
-			}
-		}, 0);
-	};
-
 	// clear search input
 	const handleClearButtonClick = () => {
 		setInputValue("");
@@ -75,68 +67,74 @@ export default function Search({ className }: Props) {
 	};
 
 	return (
-		<search
-			ref={containerRef}
-			onBlur={handleContainerBlur}
-			className={cn("max-inline-2xl inline-full mx-auto", className)}
-			style={{ anchorName: "--search-container" }}>
-			<form onSubmit={(e) => handleSearch(e)}>
-				<label htmlFor="search" className="sr-only">
-					Search Location
-				</label>
+		<FocusTrap active={isOpen}>
+			<div
+				ref={containerRef}
+				className={cn("max-inline-2xl inline-full mx-auto", className)}
+				style={{ anchorName: "--search-container" }}>
+				<search>
+					<form onSubmit={(e) => handleSearch(e)}>
+						<label htmlFor="search" className="sr-only">
+							Search Location
+						</label>
 
-				<div className="min-block-14 grid grid-cols-[1fr_auto] gap-4">
-					<input
-						ref={inputRef}
-						id="search"
-						type="search"
-						placeholder="Search for a place..."
-						value={inputValue}
-						onChange={(e) => setInputValue(e.target.value)}
-						onFocus={() => setIsOpen(true)}
-						className={classList(
-							"squircle hide-default-clear min-inline-0 rounded-xl bg-bg-card ps-4 outline-2 outline-transparent -outline-offset-2 transition-all duration-200 focus:outline-2 focus:outline-inherit",
-							inputValue.length === 0 ? "pe-4" : "pe-8",
-						)}
-						style={{ anchorName: "--search-input" }}
+						<div className="min-block-14 grid grid-cols-[1fr_auto] gap-4">
+							<input
+								ref={inputRef}
+								id="search"
+								type="search"
+								placeholder="Search for a place..."
+								value={inputValue}
+								onChange={(e) => setInputValue(e.target.value)}
+								onFocus={() => setIsOpen(true)}
+								className={classList(
+									"squircle hide-default-clear min-inline-0 rounded-xl bg-bg-card ps-4 outline-2 outline-transparent -outline-offset-2 transition-all duration-200 focus:outline-2 focus:outline-inherit",
+									inputValue.length === 0 ? "pe-4" : "pe-8",
+								)}
+								style={{ anchorName: "--search-input" }}
+							/>
+
+							{/* clear search input button */}
+							{inputValue && (
+								<button
+									type="button"
+									onClick={handleClearButtonClick}
+									className="absolute inset-e-3 cursor-pointer"
+									style={{
+										positionAnchor: "--search-input",
+										positionArea: "center",
+									}}
+									aria-label="Clear search">
+									<X strokeWidth={3} className="block-4 inline-auto" />
+								</button>
+							)}
+
+							<Button
+								type="submit"
+								className="max-block-none scheme-dark flex gap-4 px-6 text-text text-xl"
+								aria-label="Search location">
+								<SearchIcon
+									strokeWidth={3}
+									className="block-[1em] inline-auto"
+								/>
+								<span className="hidden sm:inline" aria-hidden>
+									Search
+								</span>
+							</Button>
+						</div>
+					</form>
+				</search>
+
+				{isOpen && (
+					<SearchDropdown
+						searchValue={searchValue}
+						setSelected={setSelected}
+						setIsOpen={setIsOpen}
+						selected={selected}
 					/>
-
-					{/* clear search input button */}
-					{inputValue && (
-						<button
-							type="button"
-							onClick={handleClearButtonClick}
-							className="absolute inset-e-3 cursor-pointer"
-							style={{
-								positionAnchor: "--search-input",
-								positionArea: "center",
-							}}
-							aria-label="Clear search">
-							<X strokeWidth={3} className="block-4 inline-auto" />
-						</button>
-					)}
-
-					<Button
-						type="submit"
-						className="max-block-none scheme-dark flex gap-4 px-6 text-text text-xl"
-						aria-label="Search location">
-						<SearchIcon strokeWidth={3} className="block-[1em] inline-auto" />
-						<span className="hidden sm:inline" aria-hidden>
-							Search
-						</span>
-					</Button>
-				</div>
-			</form>
-
-			{isOpen && (
-				<SearchDropdown
-					searchValue={searchValue}
-					setSelected={setSelected}
-					setIsOpen={setIsOpen}
-					selected={selected}
-				/>
-			)}
-		</search>
+				)}
+			</div>
+		</FocusTrap>
 	);
 }
 
