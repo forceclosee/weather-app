@@ -1,8 +1,10 @@
 import type { HTMLInputTypeAttribute } from "react";
-import { Field, Input } from "../ui/base-field";
-import { toKebabCase } from "#/utils/attributes-helper";
+
 import { useFieldContext, useFormContext } from "#/hook/form";
+import { toKebabCase } from "#/utils/attributes-helper";
 import { cn } from "#/utils/class-helper";
+
+import { Field, Input } from "#/components/ui/base-field";
 
 type Props = {
 	label: string;

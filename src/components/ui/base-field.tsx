@@ -15,11 +15,14 @@ const Root = (props: BaseField.Root.Props & ClassNameProps) => {
 	);
 };
 
-const Label = (props: BaseField.Label.Props) => {
+const Label = (props: BaseField.Label.Props & ClassNameProps) => {
 	return (
 		<BaseField.Label
-			className="flex gap-1 font-bold text-sm after:text-text-error after:content-['*']"
 			{...props}
+			className={cn(
+				"flex gap-1 font-bold text-sm after:text-text-error after:content-['*']",
+				props.className,
+			)}
 		/>
 	);
 };

@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
-import { Field, Input } from "../ui/base-field";
-import { toKebabCase } from "#/utils/attributes-helper";
-import { useFieldContext, useFormContext } from "#/hook/form";
-import { classList, cn } from "#/utils/class-helper";
+
 import { Check, Eye, EyeOff, X } from "lucide-react";
+
+import { useFieldContext, useFormContext } from "#/hook/form";
+import { toKebabCase } from "#/utils/attributes-helper";
+import { classList, cn } from "#/utils/class-helper";
 import { passwordRules } from "#/lib/schema/signup-schema";
+
+import { Field, Input } from "#/components/ui/base-field";
 
 type Props = {
 	label: string;

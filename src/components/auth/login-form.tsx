@@ -52,7 +52,7 @@ export default function LoginForm() {
 
 			/* redirect to previous user route, fallback to homepage */
 			setTimeout(() => {
-				navigate({ to: redirect || "/" });
+				navigate({ to: redirect || "/", replace: true });
 			}, 1000);
 		},
 
