@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 
 import ProfileDetails from "#/components/profile/profile-details";
+import VerifyBanner from "#/components/profile/verify-banner";
 
 export const Route = createFileRoute("/_profile/dashboard")({
 	head: () => ({
@@ -9,12 +10,21 @@ export const Route = createFileRoute("/_profile/dashboard")({
 	component: RouteComponent,
 });
 
+const RouteApi = getRouteApi("__root__");
+
 function RouteComponent() {
+	const { user } = RouteApi.useRouteContext();
+
 	return (
-		<div className="squircle isolate mx-fluid-500 my-8 grid overflow-clip rounded-xl *:col-start-1 *:col-end-2 *:row-start-1 *:row-end-2">
+		<div className="grid gap-8 px-fluid-500 py-8">
 			<h1 className="sr-only">Profile Dashboard</h1>
-			<div className="z-[-1] bg-bg-primary" aria-hidden></div>
-			<ProfileDetails />
+
+			{!user?.emailVerified && <VerifyBanner />}
+
+			<div className="squircle isolate grid overflow-clip rounded-xl *:col-start-1 *:col-end-2 *:row-start-1 *:row-end-2">
+				<div className="z-[-1] bg-bg-primary" aria-hidden></div>
+				<ProfileDetails />
+			</div>
 		</div>
 	);
 }

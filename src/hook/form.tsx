@@ -1,7 +1,10 @@
+import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
+
+import OtpField from "#/components/shared/otp-field";
 import PasswordField from "#/components/shared/password-field";
+import SettingsSubmitButton from "#/components/shared/settings-submit-button";
 import SubmitButton from "#/components/shared/submit-button";
 import TextField from "#/components/shared/text-field";
-import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
 	createFormHookContexts();
@@ -9,6 +12,6 @@ export const { fieldContext, formContext, useFieldContext, useFormContext } =
 export const { useAppForm } = createFormHook({
 	fieldContext: fieldContext,
 	formContext: formContext,
-	fieldComponents: { TextField: TextField, PasswordField: PasswordField },
-	formComponents: { SubmitButton: SubmitButton },
+	fieldComponents: { TextField, PasswordField, OtpField },
+	formComponents: { SubmitButton, SettingsSubmitButton },
 });

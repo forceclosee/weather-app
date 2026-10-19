@@ -16,7 +16,12 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as ProfileDashboardRouteImport } from './routes/_profile/dashboard'
-import { Route as ProfileSettingsRouteImport } from './routes/_profile/settings'
+import { Route as ProfileSettingsRouteRouteImport } from './routes/_profile/settings/route'
+import { Route as ProfileVerifyEmailRouteImport } from './routes/_profile/verify-email'
+import { Route as ProfileSettingsIndexRouteImport } from './routes/_profile/settings/index'
+import { Route as ProfileSettingsEmailRouteImport } from './routes/_profile/settings/email'
+import { Route as ProfileSettingsPasswordRouteImport } from './routes/_profile/settings/password'
+import { Route as ProfileSettingsProfileRouteImport } from './routes/_profile/settings/profile'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -51,10 +56,35 @@ const ProfileDashboardRoute = ProfileDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
-const ProfileSettingsRoute = ProfileSettingsRouteImport.update({
+const ProfileSettingsRouteRoute = ProfileSettingsRouteRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => ProfileRouteRoute,
+} as any)
+const ProfileVerifyEmailRoute = ProfileVerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+const ProfileSettingsIndexRoute = ProfileSettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileSettingsRouteRoute,
+} as any)
+const ProfileSettingsEmailRoute = ProfileSettingsEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => ProfileSettingsRouteRoute,
+} as any)
+const ProfileSettingsPasswordRoute = ProfileSettingsPasswordRouteImport.update({
+  id: '/password',
+  path: '/password',
+  getParentRoute: () => ProfileSettingsRouteRoute,
+} as any)
+const ProfileSettingsProfileRoute = ProfileSettingsProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ProfileSettingsRouteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -64,49 +94,88 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
+  '/settings': typeof ProfileSettingsRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ProfileDashboardRoute
-  '/settings': typeof ProfileSettingsRoute
+  '/verify-email': typeof ProfileVerifyEmailRoute
+  '/settings/email': typeof ProfileSettingsEmailRoute
+  '/settings/password': typeof ProfileSettingsPasswordRoute
+  '/settings/profile': typeof ProfileSettingsProfileRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/settings/': typeof ProfileSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof MainIndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ProfileDashboardRoute
-  '/settings': typeof ProfileSettingsRoute
+  '/verify-email': typeof ProfileVerifyEmailRoute
+  '/settings/email': typeof ProfileSettingsEmailRoute
+  '/settings/password': typeof ProfileSettingsPasswordRoute
+  '/settings/profile': typeof ProfileSettingsProfileRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/settings': typeof ProfileSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_main': typeof MainRouteRouteWithChildren
   '/_profile': typeof ProfileRouteRouteWithChildren
+  '/_profile/settings': typeof ProfileSettingsRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_profile/dashboard': typeof ProfileDashboardRoute
-  '/_profile/settings': typeof ProfileSettingsRoute
+  '/_profile/verify-email': typeof ProfileVerifyEmailRoute
   '/_main/': typeof MainIndexRoute
+  '/_profile/settings/email': typeof ProfileSettingsEmailRoute
+  '/_profile/settings/password': typeof ProfileSettingsPasswordRoute
+  '/_profile/settings/profile': typeof ProfileSettingsProfileRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/_profile/settings/': typeof ProfileSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/login' | '/signup' | '/dashboard' | '/settings' | '/api/auth/$'
+    | '/'
+    | '/settings'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/verify-email'
+    | '/settings/email'
+    | '/settings/password'
+    | '/settings/profile'
+    | '/api/auth/$'
+    | '/settings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/settings' | '/api/auth/$'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/verify-email'
+    | '/settings/email'
+    | '/settings/password'
+    | '/settings/profile'
+    | '/api/auth/$'
+    | '/settings'
   id:
     | '__root__'
     | '/_auth'
     | '/_main'
     | '/_profile'
+    | '/_profile/settings'
     | '/_auth/login'
     | '/_auth/signup'
     | '/_profile/dashboard'
-    | '/_profile/settings'
+    | '/_profile/verify-email'
     | '/_main/'
+    | '/_profile/settings/email'
+    | '/_profile/settings/password'
+    | '/_profile/settings/profile'
     | '/api/auth/$'
+    | '/_profile/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,8 +240,43 @@ declare module '@tanstack/react-router' {
       id: '/_profile/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof ProfileSettingsRouteImport
+      preLoaderRoute: typeof ProfileSettingsRouteRouteImport
       parentRoute: typeof ProfileRouteRoute
+    }
+    '/_profile/verify-email': {
+      id: '/_profile/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof ProfileVerifyEmailRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
+    '/_profile/settings/': {
+      id: '/_profile/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof ProfileSettingsIndexRouteImport
+      parentRoute: typeof ProfileSettingsRouteRoute
+    }
+    '/_profile/settings/email': {
+      id: '/_profile/settings/email'
+      path: '/email'
+      fullPath: '/settings/email'
+      preLoaderRoute: typeof ProfileSettingsEmailRouteImport
+      parentRoute: typeof ProfileSettingsRouteRoute
+    }
+    '/_profile/settings/password': {
+      id: '/_profile/settings/password'
+      path: '/password'
+      fullPath: '/settings/password'
+      preLoaderRoute: typeof ProfileSettingsPasswordRouteImport
+      parentRoute: typeof ProfileSettingsRouteRoute
+    }
+    '/_profile/settings/profile': {
+      id: '/_profile/settings/profile'
+      path: '/profile'
+      fullPath: '/settings/profile'
+      preLoaderRoute: typeof ProfileSettingsProfileRouteImport
+      parentRoute: typeof ProfileSettingsRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -210,14 +314,33 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
   MainRouteRouteChildren,
 )
 
+interface ProfileSettingsRouteRouteChildren {
+  ProfileSettingsEmailRoute: typeof ProfileSettingsEmailRoute
+  ProfileSettingsPasswordRoute: typeof ProfileSettingsPasswordRoute
+  ProfileSettingsProfileRoute: typeof ProfileSettingsProfileRoute
+  ProfileSettingsIndexRoute: typeof ProfileSettingsIndexRoute
+}
+
+const ProfileSettingsRouteRouteChildren: ProfileSettingsRouteRouteChildren = {
+  ProfileSettingsEmailRoute: ProfileSettingsEmailRoute,
+  ProfileSettingsPasswordRoute: ProfileSettingsPasswordRoute,
+  ProfileSettingsProfileRoute: ProfileSettingsProfileRoute,
+  ProfileSettingsIndexRoute: ProfileSettingsIndexRoute,
+}
+
+const ProfileSettingsRouteRouteWithChildren =
+  ProfileSettingsRouteRoute._addFileChildren(ProfileSettingsRouteRouteChildren)
+
 interface ProfileRouteRouteChildren {
+  ProfileSettingsRouteRoute: typeof ProfileSettingsRouteRouteWithChildren
   ProfileDashboardRoute: typeof ProfileDashboardRoute
-  ProfileSettingsRoute: typeof ProfileSettingsRoute
+  ProfileVerifyEmailRoute: typeof ProfileVerifyEmailRoute
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileSettingsRouteRoute: ProfileSettingsRouteRouteWithChildren,
   ProfileDashboardRoute: ProfileDashboardRoute,
-  ProfileSettingsRoute: ProfileSettingsRoute,
+  ProfileVerifyEmailRoute: ProfileVerifyEmailRoute,
 }
 
 const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(

@@ -1,7 +1,7 @@
 import { getFormattedJsDate } from "#/utils/date";
 import { getRouteApi } from "@tanstack/react-router";
 
-import { Calendar, SquarePenIcon } from "lucide-react";
+import { Calendar, Settings } from "lucide-react";
 
 import { Avatar } from "#/components/ui/base-avatar";
 import Link from "#/components/ui/link";
@@ -20,7 +20,7 @@ export default function ProfileDetails() {
 	return (
 		<div
 			suppressHydrationWarning
-			className="mbs-35 squircle grid gap-4 rounded-ss-xl rounded-se-xl bg-bg-card px-fluid-500 py-(--padding-block) md:grid-cols-[1fr_auto]"
+			className="mbs-35 squircle grid gap-x-4 gap-y-12 rounded-ss-xl rounded-se-xl bg-bg-card px-fluid-500 py-(--padding-block) md:grid-cols-[1fr_auto]"
 			style={{ "--padding-block": "2rem" }}>
 			<div className="grid gap-4">
 				<Avatar.Root
@@ -38,8 +38,8 @@ export default function ProfileDetails() {
 			</div>
 
 			<Link to="/settings" className="gap-2">
-				<SquarePenIcon className="block-[1.3em] inline-auto" />
-				<span>Edit Profile</span>
+				<Settings className="block-[1.3em] inline-auto" />
+				<span>Account Settings</span>
 			</Link>
 		</div>
 	);
