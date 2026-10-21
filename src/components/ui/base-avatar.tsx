@@ -56,7 +56,7 @@ const Fallback = (props: BaseAvatar.Fallback.Props & ClassNameProps) => {
 		<BaseAvatar.Fallback
 			{...props}
 			className={cn(
-				"trim-capital scheme-light inline-flex select-none items-center justify-center font-bold text-[calc(var(--size)*0.5)] text-text",
+				"trim-capital scheme-light inline-flex select-none items-center justify-center font-bold text-[calc(var(--avatar-size)*0.5)] text-text",
 				props.className,
 			)}
 		/>

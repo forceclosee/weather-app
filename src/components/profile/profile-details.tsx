@@ -25,7 +25,7 @@ export default function ProfileDetails() {
 			<div className="grid gap-4">
 				<Avatar.Root
 					size={96}
-					className="-mbs-[calc(var(--size)/2+var(--padding-block))] mbe-4">
+					className="-mbs-[calc(var(--avatar-size)/2+var(--padding-block))] mbe-4">
 					<Avatar.Image src={user.image} />
 					<Avatar.Fallback>{user.name.charAt(0).toUpperCase()}</Avatar.Fallback>
 				</Avatar.Root>
