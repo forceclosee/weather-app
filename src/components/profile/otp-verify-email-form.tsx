@@ -81,7 +81,7 @@ export default function OtpVerifyEmailForm() {
 					{(field) => <field.OtpField />}
 				</form.AppField>
 
-				<form.SettingsSubmitButton
+				<form.VerifyOtpSubmitButton
 					label="Verify"
 					labelSubmitting={<span className="verify-loader"></span>}
 				/>

@@ -99,7 +99,7 @@ function ResendButtonTimer({
 }: ResendButtonTimerProps) {
 	const [disabledTimer, setDisabledTimer] = useState(20);
 
-	// 20 seconds timer countdown
+	// countdown timer
 	useEffect(() => {
 		if (!isDisabled) {
 			setDisabledTimer(20);
@@ -107,17 +107,18 @@ function ResendButtonTimer({
 		}
 
 		const interval = setInterval(() => {
-			setDisabledTimer((prev) => {
-				if (prev <= 1) {
-					setIsDisabled(false);
-					return 20;
-				}
-				return prev - 1;
-			});
+			setDisabledTimer((prev) => prev - 1);
 		}, 1000);
 
 		return () => clearInterval(interval);
-	}, [isDisabled, setIsDisabled]);
+	}, [isDisabled]);
+
+	// enable button when timer reaches 0
+	useEffect(() => {
+		if (disabledTimer <= 0) {
+			setIsDisabled(false);
+		}
+	}, [disabledTimer, setIsDisabled]);
 
 	return (
 		<div>

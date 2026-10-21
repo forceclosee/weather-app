@@ -9,16 +9,17 @@ type Props = {
 	labelSubmitting: string | JSX.Element;
 };
 
-export default function SettingsSubmitButton({
+export default function EditProfileSubmitButton({
 	label,
 	labelSubmitting,
 }: Props) {
 	const form = useFormContext();
 
 	return (
-		<form.Subscribe selector={(state) => [state.isSubmitting, state.canSubmit]}>
-			{([isSubmitting, canSubmit]) => (
-				<Button type="submit" isDisabled={isSubmitting || !canSubmit}>
+		<form.Subscribe
+			selector={(state) => [state.isSubmitting, state.isDefaultValue]}>
+			{([isSubmitting, isDefaultValue]) => (
+				<Button type="submit" isDisabled={isSubmitting || isDefaultValue}>
 					{isSubmitting ? labelSubmitting : label}
 				</Button>
 			)}

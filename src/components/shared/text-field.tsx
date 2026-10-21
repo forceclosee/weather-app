@@ -6,15 +6,17 @@ import { cn } from "#/utils/class-helper";
 
 import { Field, Input } from "#/components/ui/base-field";
 
-type Props = {
-	label: string;
+interface Props {
 	type?: HTMLInputTypeAttribute;
+	label: string;
+	description?: string;
 	placeholder: string;
-};
+}
 
 export default function TextField({
-	label,
 	type = "text",
+	label,
+	description,
 	placeholder,
 }: Props) {
 	const form = useFormContext();
@@ -59,6 +61,10 @@ export default function TextField({
 
 						{isInputInvalid && (
 							<Field.Error match={true}>{errors[0]?.message}</Field.Error>
+						)}
+
+						{description && (
+							<Field.Description>{description}</Field.Description>
 						)}
 					</Field.Root>
 				);
