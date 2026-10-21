@@ -11,6 +11,7 @@ import { FocusTrap } from "focus-trap-react";
 import { ChevronDown, LogIn, LogOut, User } from "lucide-react";
 
 import { useOutsideClick } from "#/hook/use-outside-click";
+import { usePreventScroll } from "#/hook/use-prevent-scroll";
 import { authClient } from "#/lib/auth-client";
 import { classList } from "#/utils/class-helper";
 
@@ -45,6 +46,9 @@ export default function ProfileDropdown() {
 		isOpen: isOpen,
 		onClose: () => setIsOpen(false),
 	});
+
+	// disable page scrolling when dropdown open
+	usePreventScroll(isOpen);
 
 	const handleLogout = () => {
 		startTransition(async () => {
@@ -114,7 +118,7 @@ export default function ProfileDropdown() {
 					aria-expanded={isOpen}
 					aria-controls={ariaControls}>
 					<Avatar.Root size={48} className="">
-						{user.image && <Avatar.Image src={user.image} />}
+						<Avatar.Image src={user.image} />
 						<Avatar.Fallback>
 							{user.name.charAt(0).toUpperCase()}
 						</Avatar.Fallback>
@@ -168,7 +172,7 @@ export default function ProfileDropdown() {
 								type="button"
 								tabIndex={index === 1 ? 0 : -1}
 								disabled={isLoggingOut}
-								className="trim-capital squircle flex cursor-pointer items-center gap-2 rounded-xl p-2 font-medium text-text transition-all duration-200 *:shrink-0 hover:bg-bg-selected focus-visible:bg-bg-selected"
+								className="trim-capital squircle flex cursor-pointer items-center gap-2 rounded-xl p-2 font-medium text-text-error transition-all duration-200 *:shrink-0 hover:bg-bg-selected focus-visible:bg-bg-selected"
 								onClick={handleLogout}>
 								<LogOut className="block-[1.3em] inline-auto" />
 								{isLoggingOut ? (

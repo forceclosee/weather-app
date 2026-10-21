@@ -12,10 +12,11 @@ import { useQuery } from "@tanstack/react-query";
 import { SearchIcon, X } from "lucide-react";
 import { FocusTrap } from "focus-trap-react";
 
+import { useOutsideClick } from "#/hook/use-outside-click";
+import { usePreventScroll } from "#/hook/use-prevent-scroll";
 import { updateWeatherState } from "#/utils/weather-store";
 import { classList, cn } from "#/utils/class-helper";
 import { createLocationQueryOptions } from "#/query-options/geocoding";
-import { useOutsideClick } from "#/hook/use-outside-click";
 
 import { Button } from "#/components/ui/aria-button";
 
@@ -46,6 +47,9 @@ export default function Search({ className }: Props) {
 		isOpen: isOpen,
 		onClose: () => setIsOpen(false),
 	});
+
+	// disable page scrolling when modal open
+	usePreventScroll(isOpen);
 
 	// clear search input
 	const handleClearButtonClick = () => {

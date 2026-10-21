@@ -26,7 +26,7 @@ export default function ProfileDetails() {
 				<Avatar.Root
 					size={96}
 					className="-mbs-[calc(var(--size)/2+var(--padding-block))] mbe-4">
-					{user.image && <Avatar.Image src={user.image} />}
+					<Avatar.Image src={user.image} />
 					<Avatar.Fallback>{user.name.charAt(0).toUpperCase()}</Avatar.Fallback>
 				</Avatar.Root>
 				<h2 className="text-3xl">{user.name}</h2>

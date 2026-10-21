@@ -25,8 +25,10 @@ export default function OtpVerifyEmailForm() {
 		},
 
 		onSubmit: async ({ value, formApi }) => {
+			if (!user) return;
+
 			const { data, error } = await authClient.emailOtp.verifyEmail({
-				email: user?.email ?? "",
+				email: user.email,
 				otp: value.otp,
 			});
 
