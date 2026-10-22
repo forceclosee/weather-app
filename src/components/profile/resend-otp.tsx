@@ -88,10 +88,10 @@ export default function ResendOtp() {
 	);
 }
 
-type ResendButtonTimerProps = {
+interface ResendButtonTimerProps {
 	isDisabled: boolean;
 	setIsDisabled: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 function ResendButtonTimer({
 	isDisabled,

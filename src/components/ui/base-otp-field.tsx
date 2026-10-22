@@ -2,11 +2,15 @@ import { OTPField as BaseOTPField } from "@base-ui/react/otp-field";
 
 import { cn } from "#/utils/class-helper";
 
-type ClassNameProps = {
+interface ClassNameProps {
 	className?: string;
-};
+}
 
-const Root = (props: BaseOTPField.Root.Props & ClassNameProps) => {
+interface RootProps
+	extends Omit<BaseOTPField.Root.Props, "className">,
+		ClassNameProps {}
+
+const Root = (props: RootProps) => {
 	return (
 		<BaseOTPField.Root
 			{...props}
@@ -15,7 +19,11 @@ const Root = (props: BaseOTPField.Root.Props & ClassNameProps) => {
 	);
 };
 
-const Input = (props: BaseOTPField.Input.Props & ClassNameProps) => {
+interface InputProps
+	extends Omit<BaseOTPField.Input.Props, "className">,
+		ClassNameProps {}
+
+const Input = (props: InputProps) => {
 	return (
 		<BaseOTPField.Input
 			{...props}
@@ -27,7 +35,11 @@ const Input = (props: BaseOTPField.Input.Props & ClassNameProps) => {
 	);
 };
 
-const Separator = (props: BaseOTPField.Separator.Props & ClassNameProps) => {
+interface SeparatorProps
+	extends Omit<BaseOTPField.Separator.Props, "className">,
+		ClassNameProps {}
+
+const Separator = (props: SeparatorProps) => {
 	return (
 		<BaseOTPField.Separator
 			{...props}

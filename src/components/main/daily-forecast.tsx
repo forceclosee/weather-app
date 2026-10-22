@@ -10,9 +10,9 @@ import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
 
-type Props = {
+interface Props {
 	className?: string;
-};
+}
 
 export default function DailyForecast({ className }: Props) {
 	return (

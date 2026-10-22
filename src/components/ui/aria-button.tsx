@@ -1,15 +1,13 @@
 import { cn } from "#/utils/class-helper";
-import type { ComponentPropsWithoutRef } from "react";
 import {
 	Button as AriaButton,
 	type ButtonProps as AriaButtonProps,
 } from "react-aria-components/Button";
 
-type Props = AriaButtonProps &
-	MakeRequired<ComponentPropsWithoutRef<"button">, "children"> & {
-		variant?: "plain" | "primary" | "secondary";
-		className?: string;
-	};
+interface Props extends MakeRequired<AriaButtonProps, "children"> {
+	variant?: "plain" | "primary" | "secondary";
+	className?: string;
+}
 
 export function Button({
 	children,

@@ -1,12 +1,12 @@
 import { Popover as BasePopover } from "@base-ui/react/popover";
 import type { ReactNode } from "react";
 
-type Props = {
+interface Props {
 	trigger: ReactNode;
 	triggerAriaLabel?: string;
 	title: string;
 	description: string;
-};
+}
 
 export function Popover({
 	trigger,

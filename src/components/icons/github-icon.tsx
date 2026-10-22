@@ -1,10 +1,9 @@
 import type { ComponentProps } from "react";
 
-type Props = ComponentProps<"svg"> & {
-	className?: string;
-};
-
-export default function GithubIcon({ className, ...props }: Props) {
+export default function GithubIcon({
+	className,
+	...props
+}: ComponentProps<"svg">) {
 	return (
 		<svg
 			width="98"

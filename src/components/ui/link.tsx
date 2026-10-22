@@ -4,9 +4,9 @@ import {
 	type LinkComponentProps,
 } from "@tanstack/react-router";
 
-type Props = MakeRequired<LinkComponentProps, "children"> & {
+interface Props extends MakeRequired<LinkComponentProps, "children"> {
 	variant?: "plain" | "primary" | "secondary";
-};
+}
 
 export default function Link({
 	to,

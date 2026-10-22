@@ -1,7 +1,7 @@
 import { classList, cn } from "#/utils/class-helper";
 import type { ReactNode, ReactSVGElement } from "react";
 
-type Props = {
+interface Props {
 	className?: string;
 	layout: "additional-info" | "daily-forecast" | "hourly-forecast";
 	title: ReactNode;
@@ -9,7 +9,7 @@ type Props = {
 	popover?: ReactNode;
 	content: ReactNode;
 	icon?: ReactNode;
-};
+}
 
 export function Card({
 	className,

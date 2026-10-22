@@ -6,9 +6,9 @@ import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
 import { MenuTrigger, Menu, MenuItem } from "#/components/ui/aria-menu";
 import { Button } from "#/components/ui/aria-button";
 
-type Props = Omit<AriaPopoverProps, "children"> & {
+interface Props extends Omit<AriaPopoverProps, "children"> {
 	className?: string;
-};
+}
 
 export default function ThemeDropdown({ className }: Props) {
 	type Theme = "light" | "dark" | "system";

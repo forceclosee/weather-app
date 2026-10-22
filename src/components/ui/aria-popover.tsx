@@ -6,11 +6,11 @@ import {
 import type { ReactNode } from "react";
 import { cn } from "#/utils/class-helper";
 
-export type PopoverProps = Omit<AriaPopoverProps, "children"> & {
+export interface PopoverProps extends Omit<AriaPopoverProps, "children"> {
 	showArrow?: boolean;
 	children: ReactNode;
 	className?: string;
-};
+}
 
 export function Popover({
 	children,

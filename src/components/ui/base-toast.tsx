@@ -4,9 +4,9 @@ import { Toast as BaseToast } from "@base-ui/react/toast";
 import { cn } from "#/utils/class-helper";
 import { X } from "lucide-react";
 
-type ProviderProps = {
+interface ProviderProps {
 	children: ReactNode;
-};
+}
 
 export const useToastManager = BaseToast.useToastManager;
 

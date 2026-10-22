@@ -2,12 +2,12 @@ import { cn } from "#/utils/class-helper";
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 import type { ReactNode } from "react";
 
-type Props = {
+interface Props {
 	children: ReactNode;
 	className?: string;
 	viewportClassName?: string;
 	contentClassName?: string;
-};
+}
 
 export function ScrollArea({
 	children,

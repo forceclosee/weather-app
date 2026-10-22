@@ -18,9 +18,9 @@ import {
 } from "#/components/ui/aria-menu";
 import { Button } from "#/components/ui/aria-button";
 
-type Props = Omit<AriaPopoverProps, "children"> & {
+interface Props extends Omit<AriaPopoverProps, "children"> {
 	className?: string;
-};
+}
 
 export default function UnitsDropdown({ className }: Props) {
 	const temperature = getPartialWeatherState("temperature");

@@ -9,11 +9,11 @@ import { passwordRules } from "#/lib/schema/signup-schema";
 
 import { Field, Input } from "#/components/ui/base-field";
 
-type Props = {
+interface Props {
 	label: string;
 	placeholder: string;
 	havePasswordRules?: boolean;
-};
+}
 
 export default function PasswordField({
 	label,

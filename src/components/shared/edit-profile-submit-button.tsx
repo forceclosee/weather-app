@@ -4,10 +4,10 @@ import { useFormContext } from "#/hook/form";
 
 import { Button } from "#/components/ui/aria-button";
 
-type Props = {
+interface Props {
 	label: string | JSX.Element;
 	labelSubmitting: string | JSX.Element;
-};
+}
 
 export default function EditProfileSubmitButton({
 	label,

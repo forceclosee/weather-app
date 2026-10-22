@@ -11,10 +11,10 @@ import {
 	Text,
 } from "react-email";
 
-type Props = {
+interface Props {
 	type: "sign-in" | "email-verification" | "forget-password" | "change-email";
 	otp: string;
-};
+}
 
 export default function OtpEmail({ type, otp }: Props) {
 	const getTitle = () => {

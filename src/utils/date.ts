@@ -1,9 +1,9 @@
 import { DateTime } from "luxon";
 
-type Params = {
+interface Params {
 	timestamp: string;
 	timezone: string;
-};
+}
 
 export const getFormattedDate = ({ timestamp, timezone }: Params) => {
 	const dt = DateTime.fromISO(timestamp, { zone: timezone });

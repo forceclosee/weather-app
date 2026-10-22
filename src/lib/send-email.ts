@@ -12,11 +12,11 @@ const resendApiKey = createServerOnlyFn(() => {
 
 const resend = new Resend(resendApiKey());
 
-type SendEmailParams = {
+interface SendEmailParams {
 	type: "sign-in" | "email-verification" | "forget-password" | "change-email";
 	to: string;
 	otp: string;
-};
+}
 
 export async function sendEmail({ type, to, otp }: SendEmailParams) {
 	const emailSubject = () => {

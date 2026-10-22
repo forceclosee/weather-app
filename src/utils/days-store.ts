@@ -1,10 +1,10 @@
 import type { Days } from "#/types";
 import { createStore, type Store, useSelector } from "@tanstack/react-store";
 
-export type DaysStore = {
+export interface DaysStore {
 	days: Days[];
 	selectedDay: Days;
-};
+}
 
 export const daysStore: Store<DaysStore> = createStore({
 	days: [],

@@ -10,9 +10,9 @@ import { Button } from "#/components/ui/aria-button";
 
 const RouteApi = getRouteApi("__root__");
 
-type Props = {
+interface Props {
 	className?: string;
-};
+}
 
 export default function VerifyBanner({ className }: Props) {
 	const { user } = RouteApi.useRouteContext();

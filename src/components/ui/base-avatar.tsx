@@ -51,7 +51,11 @@ const Image = (props: ImageProps) => {
 	);
 };
 
-const Fallback = (props: BaseAvatar.Fallback.Props & ClassNameProps) => {
+interface FallbackProps
+	extends Omit<BaseAvatar.Fallback.Props, "className">,
+		ClassNameProps {}
+
+const Fallback = (props: FallbackProps) => {
 	return (
 		<BaseAvatar.Fallback
 			{...props}

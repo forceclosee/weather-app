@@ -2,11 +2,15 @@ import { cn } from "#/utils/class-helper";
 import { Field as BaseField } from "@base-ui/react/field";
 import { Input as BaseInput } from "@base-ui/react/input";
 
-type ClassNameProps = {
+interface ClassNameProps {
 	className?: string;
-};
+}
 
-const Root = (props: BaseField.Root.Props & ClassNameProps) => {
+interface RootProps
+	extends Omit<BaseField.Root.Props, "className">,
+		ClassNameProps {}
+
+const Root = (props: RootProps) => {
 	return (
 		<BaseField.Root
 			{...props}
@@ -15,7 +19,11 @@ const Root = (props: BaseField.Root.Props & ClassNameProps) => {
 	);
 };
 
-const Label = (props: BaseField.Label.Props & ClassNameProps) => {
+interface LabelProps
+	extends Omit<BaseField.Label.Props, "className">,
+		ClassNameProps {}
+
+const Label = (props: LabelProps) => {
 	return (
 		<BaseField.Label
 			{...props}
@@ -26,16 +34,33 @@ const Label = (props: BaseField.Label.Props & ClassNameProps) => {
 		/>
 	);
 };
+
 const Control = (props: BaseField.Control.Props) => {
 	return <BaseField.Control {...props} />;
 };
-const Description = (props: BaseField.Description.Props) => {
-	return <BaseField.Description {...props} />;
+
+interface DescriptionProps
+	extends Omit<BaseField.Description.Props, "className">,
+		ClassNameProps {}
+
+const Description = (props: DescriptionProps) => {
+	return (
+		<BaseField.Description
+			{...props}
+			className={cn("text-sm", props.className)}
+		/>
+	);
 };
+
 const Item = (props: BaseField.Item.Props) => {
 	return <BaseField.Item {...props} />;
 };
-const FieldError = (props: BaseField.Error.Props & ClassNameProps) => {
+
+interface FieldErrorProps
+	extends Omit<BaseField.Error.Props, "className">,
+		ClassNameProps {}
+
+const FieldError = (props: FieldErrorProps) => {
 	return (
 		<BaseField.Error
 			{...props}
@@ -43,6 +68,7 @@ const FieldError = (props: BaseField.Error.Props & ClassNameProps) => {
 		/>
 	);
 };
+
 const Validity = (props: BaseField.Validity.Props) => {
 	return <BaseField.Validity {...props} />;
 };
@@ -57,7 +83,11 @@ export const Field = {
 	Validity: Validity,
 };
 
-export function Input(props: BaseInput.Props & ClassNameProps) {
+interface InputProps
+	extends Omit<BaseInput.Props, "className">,
+		ClassNameProps {}
+
+export function Input(props: InputProps) {
 	return (
 		<BaseInput
 			{...props}

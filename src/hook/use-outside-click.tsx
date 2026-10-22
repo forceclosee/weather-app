@@ -1,10 +1,10 @@
 import { useEffect, type RefObject } from "react";
 
-type Params = {
+interface Params {
 	ref: RefObject<HTMLElement | null>;
 	isOpen: boolean;
 	onClose: () => void;
-};
+}
 
 export function useOutsideClick({ ref, isOpen, onClose }: Params) {
 	useEffect(() => {

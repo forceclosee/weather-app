@@ -2,7 +2,7 @@ import { getSizesValue } from "#/utils/attributes-helper";
 import { cn } from "#/utils/class-helper";
 import type { CSSProperties } from "react";
 
-type Props = {
+interface Props {
 	/**
 	 * The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element
 	 *
@@ -33,7 +33,7 @@ type Props = {
 	 * @default 1.4rem
 	 */
 	height: number;
-};
+}
 
 export function Skeleton({
 	className,

@@ -6,10 +6,10 @@ import ProfileDropdown from "#/components/shared/profile-dropdown";
 
 import icon from "#/icons/forecast-icon.png";
 
-type Props = {
+interface Props {
 	haveUnitsDropdown?: boolean;
 	haveProfileDropdown?: boolean;
-};
+}
 
 export default function Header({
 	haveUnitsDropdown,

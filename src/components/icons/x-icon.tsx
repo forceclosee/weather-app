@@ -1,10 +1,6 @@
 import type { ComponentProps } from "react";
 
-type Props = ComponentProps<"svg"> & {
-	className?: string;
-};
-
-export default function XIcon({ className, ...props }: Props) {
+export default function XIcon({ className, ...props }: ComponentProps<"svg">) {
 	return (
 		<svg
 			width="1200"

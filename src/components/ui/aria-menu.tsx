@@ -23,9 +23,9 @@ import { composeRenderProps } from "react-aria-components/composeRenderProps";
 
 import { Popover, type PopoverProps } from "#/components/ui/aria-popover";
 
-type MenuProps<T> = AriaMenuProps<T> & {
+interface MenuProps<T> extends AriaMenuProps<T> {
 	className?: string;
-};
+}
 
 export function Menu<T>({ className, ...props }: MenuProps<T>) {
 	return (
@@ -40,12 +40,13 @@ export function Menu<T>({ className, ...props }: MenuProps<T>) {
 	);
 }
 
-type MenuItemProps<T extends string> = Omit<AriaMenuItemProps, "id"> & {
+interface MenuItemProps<T extends string>
+	extends Omit<AriaMenuItemProps, "id"> {
 	id: T;
 	hasCheck?: boolean;
 	className?: string;
 	labelClassName?: string;
-};
+}
 
 export function MenuItem<T extends string>({
 	id,
@@ -102,12 +103,12 @@ export function MenuSeparator(props: SeparatorProps) {
 	return <Separator {...props} className="border-be border-border-muted" />;
 }
 
-export type MenuSectionProps<T> = AriaMenuSectionProps<T> & {
+export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
 	title?: string;
 	items?: Iterable<T> | undefined;
 	className?: string;
 	headerClassName?: string;
-};
+}
 
 export function MenuSection<T>({
 	title,
@@ -135,11 +136,11 @@ export function MenuSection<T>({
 	);
 }
 
-type MenuTriggerProps = AriaMenuTriggerProps & {
+interface MenuTriggerProps extends AriaMenuTriggerProps {
 	placement?: PopoverProps["placement"];
 	popoverClassName?: string;
 	popoverStyle?: CSSProperties;
-};
+}
 
 export function MenuTrigger({
 	children,

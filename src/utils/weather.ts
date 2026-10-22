@@ -1,9 +1,9 @@
 import { weatherInterpretations } from "#/data/weather-interpretations";
 
-type Params = {
+interface Params {
 	wmoCode: number | undefined;
 	isDay?: number;
-};
+}
 
 export const getWeatherDetails = ({ wmoCode, isDay }: Params) => {
 	const valid = wmoCode !== undefined && wmoCode in weatherInterpretations;

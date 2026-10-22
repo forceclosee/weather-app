@@ -17,9 +17,9 @@ import { Card } from "#/components/ui/card";
 import { ScrollArea } from "#/components/ui/base-scroll-area";
 import { Skeleton } from "#/components/ui/skeleton";
 
-type Props = {
+interface Props {
 	className?: string;
-};
+}
 
 export default function HourlyForecast({ className }: Props) {
 	return (

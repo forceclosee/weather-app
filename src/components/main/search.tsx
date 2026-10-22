@@ -22,7 +22,7 @@ import { Button } from "#/components/ui/aria-button";
 
 type Selected = 0 | 1 | 2 | 3 | 4 | 5;
 
-type Props = ComponentProps<"div">;
+interface Props extends ComponentProps<"div"> {}
 
 export default function Search({ className }: Props) {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -142,12 +142,12 @@ export default function Search({ className }: Props) {
 	);
 }
 
-type SearchDropdownProps = {
+interface SearchDropdownProps {
 	searchValue: string;
 	setSelected: Dispatch<SetStateAction<Selected>>;
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 	selected: Selected;
-};
+}
 
 function SearchDropdown({
 	searchValue,

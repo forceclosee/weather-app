@@ -2,10 +2,10 @@ import type { ComponentProps } from "react";
 
 import { getSizesValue } from "#/utils/attributes-helper";
 
-type Props = ComponentProps<"svg"> & {
+interface Props extends ComponentProps<"svg"> {
 	width?: number;
 	height?: number;
-};
+}
 
 export default function FeelsLikeIcon({ width, height, ...props }: Props) {
 	const widthValue = getSizesValue(width) ?? "auto";

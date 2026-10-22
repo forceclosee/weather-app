@@ -2,12 +2,12 @@ import { createStore, useSelector, type Store } from "@tanstack/react-store";
 
 import type { Temperature, WindSpeed, Precipitation } from "#/types";
 
-type Coordinates = {
+interface Coordinates {
 	latitude: number;
 	longitude: number;
-};
+}
 
-export type WeatherStore = {
+export interface WeatherStore {
 	coordinates: Coordinates;
 	timezone: string;
 	city: string;
@@ -16,7 +16,7 @@ export type WeatherStore = {
 	temperature: Temperature;
 	windSpeed: WindSpeed;
 	precipitation: Precipitation;
-};
+}
 
 export const weatherStateStore: Store<WeatherStore> = createStore({
 	coordinates: {
