@@ -16,7 +16,7 @@ function RouteComponent() {
 	const { user } = RouteApi.useRouteContext();
 
 	return (
-		<div className="grid gap-8 px-fluid-500 py-8">
+		<div className="max-inline-316 inline-full mx-auto grid gap-8 px-fluid-500 py-8">
 			<h1 className="sr-only">Profile Dashboard</h1>
 
 			{!user?.emailVerified && <VerifyBanner />}

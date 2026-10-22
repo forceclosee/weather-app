@@ -21,7 +21,7 @@ function RouteComponent() {
 			className="min-block-svh grid grid-rows-[auto_1fr_auto]">
 			<Header haveProfileDropdown />
 
-			<main className="max-inline-316 inline-full @container/main mx-auto">
+			<main>
 				<Outlet />
 			</main>
 		</div>

@@ -4,4 +4,10 @@ export const verifyOtpSchema = z.object({
 	otp: z.string().min(6, "Please enter the 6 digit OTP"),
 });
 
-export type loginSchema = z.infer<typeof verifyOtpSchema>;
+export type verifyOtpSchema = z.infer<typeof verifyOtpSchema>;
+
+export const editProfileSchema = z.object({
+	newName: z.string().min(2, "Name must be at least 2 characters"),
+});
+
+export type editProfileSchema = z.infer<typeof editProfileSchema>;
