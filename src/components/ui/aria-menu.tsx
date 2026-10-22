@@ -32,7 +32,7 @@ export function Menu<T>({ className, ...props }: MenuProps<T>) {
 		<AriaMenu
 			shouldCloseOnSelect={false}
 			className={cn(
-				"squircle flex flex-col gap-1 overflow-auto rounded-xl border border-border-muted bg-bg-card p-2 empty:pb-2 empty:text-center",
+				"flex flex-col gap-1 overflow-auto rounded-xl border border-border-muted bg-bg-card p-2 squircle empty:pb-2 empty:text-center",
 				className,
 			)}
 			{...props}
@@ -64,7 +64,7 @@ export function MenuItem<T extends string>({
 			id={id}
 			textValue={textValue}
 			className={cn(
-				"squircle flex cursor-pointer items-center rounded-xl p-2 font-normal text-text-muted transition-all duration-200 hover:bg-bg-selected hover:text-text focus-visible:bg-bg-selected focus-visible:text-text data-selected:bg-bg-selected data-selected:font-medium data-selected:text-text",
+				"flex cursor-pointer items-center rounded-xl p-2 font-normal text-text-muted transition-all duration-200 squircle hover:bg-bg-selected hover:text-text focus-visible:bg-bg-selected focus-visible:text-text data-selected:bg-bg-selected data-selected:font-medium data-selected:text-text",
 				{ "justify-between gap-2": hasCheck },
 				className,
 			)}
@@ -82,7 +82,7 @@ export function MenuItem<T extends string>({
 						</span>
 
 						{hasCheck && selectionMode !== "none" && (
-							<span className="inline-4 flex items-center">
+							<span className="flex items-center inline-4">
 								{isSelected && (
 									<Check strokeWidth={3} className="block-4 inline-4" />
 								)}
@@ -90,7 +90,7 @@ export function MenuItem<T extends string>({
 						)}
 
 						{hasSubmenu && (
-							<ChevronRight className="block-4 inline-4 absolute inset-e-2" />
+							<ChevronRight className="absolute inset-e-2 block-4 inline-4" />
 						)}
 					</>
 				),
@@ -125,7 +125,7 @@ export function MenuSection<T>({
 			{title && (
 				<Header
 					className={cn(
-						"mbe-1 sticky z-10 truncate px-2 py-2 text-sm text-text-muted",
+						"sticky z-10 mbe-1 truncate px-2 py-2 text-sm text-text-muted",
 						headerClassName,
 					)}>
 					{title}

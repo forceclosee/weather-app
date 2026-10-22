@@ -3,8 +3,8 @@ import XIcon from "#/components/icons/x-icon";
 
 export default function Footer() {
 	return (
-		<footer className="border-border border-bs">
-			<div className="max-inline-316 inline-full mx-auto px-fluid-500">
+		<footer className="border-bs border-border">
+			<div className="mx-auto px-fluid-500 inline-full max-inline-316">
 				<div className="flex flex-col items-center justify-between gap-4 py-4 *:shrink-0 min-[20rem]:flex-row">
 					<p className="text-center text-base">
 						© 2026{" "}
@@ -20,7 +20,7 @@ export default function Footer() {
 							target="_blank"
 							rel="noopener noreferrer">
 							<GithubIcon
-								className="inline-6 block-6 text-text-muted hover:text-text focus-visible:text-text"
+								className="text-text-muted block-6 inline-6 hover:text-text focus-visible:text-text"
 								aria-hidden="true"
 							/>
 						</a>
@@ -31,17 +31,17 @@ export default function Footer() {
 							target="_blank"
 							rel="noopener noreferrer">
 							<XIcon
-								className="inline-6 block-6 text-text-muted hover:text-text focus-visible:text-text"
+								className="text-text-muted block-6 inline-6 hover:text-text focus-visible:text-text"
 								aria-hidden="true"
 							/>
 						</a>
 					</div>
 				</div>
 
-				<p className="border-border-muted border-bs py-2 text-center font-dm-sans text-3xs">
+				<p className="font-dm-sans border-bs border-border-muted py-2 text-center text-3xs">
 					Challenge by{" "}
 					<a
-						className="hover-underline pbe-1 text-text-primary"
+						className="pbe-1 text-text-primary hover-underline"
 						href="https://www.frontendmentor.io?ref=challenge"
 						target="_blank"
 						rel="noopener noreferrer">
@@ -49,7 +49,7 @@ export default function Footer() {
 					</a>
 					. Coded by{" "}
 					<a
-						className="hover-underline pbe-1 text-text-primary"
+						className="pbe-1 text-text-primary hover-underline"
 						href="https://github.com/forceclosee"
 						target="_blank"
 						rel="noopener noreferrer">

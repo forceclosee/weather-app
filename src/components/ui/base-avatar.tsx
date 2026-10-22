@@ -22,7 +22,7 @@ const Root = (props: RootProps) => {
 			suppressHydrationWarning
 			{...props}
 			className={cn(
-				"trim-capital inline-(--avatar-size) block-(--avatar-size) inline-flex select-none items-center justify-center overflow-clip rounded-full border border-border bg-(--profile-background)",
+				"inline-flex items-center justify-center overflow-clip rounded-full border border-border bg-(--profile-background) select-none block-(--avatar-size) inline-(--avatar-size) trim-capital",
 				props.className,
 			)}
 			style={{
@@ -46,7 +46,7 @@ const Image = (props: ImageProps) => {
 			height={96}
 			{...props}
 			src={src}
-			className="inline-full block-full object-cover"
+			className="object-cover block-full inline-full"
 		/>
 	);
 };
@@ -60,7 +60,7 @@ const Fallback = (props: FallbackProps) => {
 		<BaseAvatar.Fallback
 			{...props}
 			className={cn(
-				"trim-capital scheme-light inline-flex select-none items-center justify-center font-bold text-[calc(var(--avatar-size)*0.5)] text-text",
+				"inline-flex items-center justify-center text-[calc(var(--avatar-size)*0.5)] font-bold text-text scheme-light select-none trim-capital",
 				props.className,
 			)}
 		/>

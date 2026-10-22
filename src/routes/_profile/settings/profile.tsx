@@ -18,12 +18,12 @@ function RouteComponent() {
 	const isMobile = useMediaQuery("(width < 48rem)");
 
 	return (
-		<div className="max-inline-132 inline-full mx-auto grid gap-12 py-8">
+		<div className="mx-auto grid gap-12 py-8 inline-full max-inline-132">
 			{isMobile && (
 				<Link
 					to="/settings"
 					variant="secondary"
-					className="max-inline-max gap-2">
+					className="gap-2 max-inline-max">
 					<ChevronLeft strokeWidth={3} className="block-[1.1em] inline-auto" />
 					<span>Back</span>
 				</Link>

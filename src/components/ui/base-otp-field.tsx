@@ -28,7 +28,7 @@ const Input = (props: InputProps) => {
 		<BaseOTPField.Input
 			{...props}
 			className={cn(
-				"inline-12 block-12 squircle rounded-xl border border-border bg-bg-card text-center text-base text-text outline-transparent",
+				"rounded-xl border border-border bg-bg-card text-center text-base text-text outline-transparent block-12 inline-12 squircle",
 				props.className,
 			)}
 		/>
@@ -43,7 +43,7 @@ const Separator = (props: SeparatorProps) => {
 	return (
 		<BaseOTPField.Separator
 			{...props}
-			className={cn("block-px inline-4 bg-current text-text", props.className)}
+			className={cn("bg-current text-text block-px inline-4", props.className)}
 		/>
 	);
 };

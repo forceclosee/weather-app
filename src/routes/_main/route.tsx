@@ -11,10 +11,10 @@ function RouteComponent() {
 	return (
 		<div
 			suppressHydrationWarning
-			className="min-block-svh grid grid-rows-[auto_1fr_auto]">
+			className="grid grid-rows-[auto_1fr_auto] min-block-svh">
 			<Header haveUnitsDropdown haveProfileDropdown />
 
-			<main className="max-inline-316 inline-full @container/main mx-auto">
+			<main className="@container/main mx-auto inline-full max-inline-316">
 				<Outlet />
 			</main>
 

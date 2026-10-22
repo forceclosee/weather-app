@@ -49,14 +49,14 @@ export default function OtpEmail({ type, otp }: Props) {
 				<Head></Head>
 				<Body className="m-0 text-center font-sans">
 					<Preview>{getTitle()}</Preview>
-					<Container className="mbs-6 mx-auto w-full max-w-[640px] rounded-lg p-6 text-neutral-950">
+					<Container className="mx-auto mbs-6 w-full max-w-[640px] rounded-lg p-6 text-neutral-950">
 						<Section className="rounded-[8px] bg-neutral-100 text-center">
 							<Section>
 								<Img
 									src="https://res.cloudinary.com/dspqgpnvq/image/upload/v1791523883/02d_mq4g8w.svg"
 									alt="Logo"
 									width={48}
-									className="mbs-5 mx-auto block"
+									className="mx-auto mbs-5 block"
 								/>
 								<Heading as="h1" className="mbs-8">
 									{getTitle()}
@@ -64,23 +64,23 @@ export default function OtpEmail({ type, otp }: Props) {
 							</Section>
 
 							{type === "change-email" && (
-								<Text className="mbs-4 mx-auto mt-0 max-w-[380px] text-center font-16 text-neutral-700">
+								<Text className="font-16 mx-auto mbs-4 mt-0 max-w-[380px] text-center text-neutral-700">
 									We have receive a request to change your email address.
 								</Text>
 							)}
 
 							{type === "forget-password" && (
-								<Text className="mbs-4 mx-auto mt-0 max-w-[380px] text-center font-16 text-neutral-700">
+								<Text className="font-16 mx-auto mbs-4 mt-0 max-w-[380px] text-center text-neutral-700">
 									We have receive a request to reset your password.
 								</Text>
 							)}
 
-							<Text className="mbs-4 mx-auto mt-0 max-w-[380px] text-center font-16 text-neutral-700">
+							<Text className="font-16 mx-auto mbs-4 mt-0 max-w-[380px] text-center text-neutral-700">
 								{getText()}
 							</Text>
 
 							<Section className="mbs-6 text-center">
-								<Text className="font-bold text-3xl tracking-wide">{otp}</Text>
+								<Text className="text-3xl font-bold tracking-wide">{otp}</Text>
 							</Section>
 
 							<Text className="mbs-6">
@@ -88,7 +88,7 @@ export default function OtpEmail({ type, otp }: Props) {
 								anyone.
 							</Text>
 
-							<Text className="mbs-4 mx-auto mt-8 max-w-[400px] text-center text-neutral-700">
+							<Text className="mx-auto mbs-4 mt-8 max-w-[400px] text-center text-neutral-700">
 								If you didn't request this,
 								<br />
 								please ignore this email.

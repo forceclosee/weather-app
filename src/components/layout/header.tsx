@@ -17,16 +17,16 @@ export default function Header({
 }: Props) {
 	return (
 		<header>
-			<div className="max-inline-316 inline-full mx-auto flex items-center justify-between gap-4 p-fluid-500 *:shrink-0">
+			<div className="mx-auto flex items-center justify-between gap-4 p-fluid-500 inline-full max-inline-316 *:shrink-0">
 				<Link
 					to="/"
-					className="text-(length:--spacing-fluid-400) flex items-center gap-2 *:shrink-0">
+					className="flex items-center gap-2 text-(length:--spacing-fluid-400) *:shrink-0">
 					<img
 						src={icon}
 						alt="ForeCast"
 						width={70}
 						height={70}
-						className="inline-[2em] block-[2em]"
+						className="block-[2em] inline-[2em]"
 					/>
 					<span className="hidden font-bricolage-grotesque font-medium min-[37rem]:inline">
 						ForeCast

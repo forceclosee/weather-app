@@ -25,11 +25,11 @@ export default function HourlyForecast({ className }: Props) {
 	return (
 		<ScrollArea
 			className={cn(
-				"max-block-254 squircle pbe-6 rounded-2xl bg-bg-card",
+				"rounded-2xl bg-bg-card pbe-6 max-block-254 squircle",
 				className,
 			)}
 			contentClassName="px-6">
-			<div className="pbs-6 pbe-4 sticky inset-bs-0 z-[calc(var(--z-card)+1)] flex items-center justify-between gap-2 bg-bg-card">
+			<div className="sticky inset-bs-0 z-[calc(var(--z-card)+1)] flex items-center justify-between gap-2 bg-bg-card pbs-6 pbe-4">
 				<h2>Hourly Forecast</h2>
 				<SelectDayDropdown />
 			</div>
@@ -51,7 +51,7 @@ function SelectDayDropdown() {
 		<MenuTrigger placement="bottom end" popoverClassName="min-inline-32">
 			<Button
 				variant="secondary"
-				className="min-block-9.25 flex gap-2 bg-bg-selected *:shrink-0 hover:bg-bg-selected-hover focus-visible:bg-bg-selected-hover">
+				className="flex gap-2 bg-bg-selected min-block-9.25 *:shrink-0 hover:bg-bg-selected-hover focus-visible:bg-bg-selected-hover">
 				{selectedDay}
 				<ChevronDown strokeWidth={3} className="block-[1.1em] inline-auto" />
 			</Button>

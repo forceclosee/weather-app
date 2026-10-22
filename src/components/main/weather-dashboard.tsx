@@ -20,7 +20,7 @@ export default function WeatherDashboard() {
 				<ErrorBoundary
 					onReset={reset}
 					fallbackRender={({ resetErrorBoundary }) => (
-						<div className="min-block-full flex flex-col items-center justify-center gap-8 px-fluid-500 py-8 text-center">
+						<div className="flex flex-col items-center justify-center gap-8 px-fluid-500 py-8 text-center min-block-full">
 							<h1>Something went wrong</h1>
 							<p className="mbs-8">
 								We couldn't connect to the server (API Error). Please try again

@@ -14,7 +14,7 @@ import FeelsLikeIcon from "#/components/icons/feels-like";
 
 export default function AdditionalInfo() {
 	return (
-		<div className="grid @min-[27rem]/current-weather:grid-cols-2 @min-[56rem]/current-weather:grid-cols-4 gap-fluid-450">
+		<div className="grid gap-fluid-450 @min-[27rem]/current-weather:grid-cols-2 @min-[56rem]/current-weather:grid-cols-4">
 			<Suspense fallback={<AdditionalInfoSkeleton />}>
 				<CurrentWeatherContent />
 			</Suspense>
@@ -74,7 +74,7 @@ function CurrentWeatherContent() {
 				content={wind}
 				icon={
 					<ArrowDown
-						className="block-[1em] inline-auto shrink-0"
+						className="shrink-0 block-[1em] inline-auto"
 						style={{ rotate: `${windDirection}deg` }}
 					/>
 				}

@@ -22,7 +22,7 @@ function RouteComponent() {
 			<LoginForm />
 			<p>
 				Don't have an account?{" "}
-				<Link to="/signup" className="hover-underline text-text-primary">
+				<Link to="/signup" className="text-text-primary hover-underline">
 					Sign up
 				</Link>
 			</p>

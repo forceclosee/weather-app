@@ -110,7 +110,7 @@ export default function ProfileDropdown() {
 				<Button
 					variant="plain"
 					id={ariaLabelledby}
-					className="max-block-none flex gap-1 px-0 *:shrink-0"
+					className="flex gap-1 px-0 max-block-none *:shrink-0"
 					style={{ anchorName: anchorDropdownTrigger }}
 					onClick={() => setIsOpen((prev) => !prev)}
 					onKeyDown={(e) => e.key === "Escape" && setIsOpen(false)}
@@ -136,7 +136,7 @@ export default function ProfileDropdown() {
 					<div
 						role="menu"
 						id={ariaControls}
-						className="squircle min-inline-50 absolute inset-bs-1 grid rounded-xl border border-border-muted bg-bg-card"
+						className="absolute inset-bs-1 grid rounded-xl border border-border-muted bg-bg-card min-inline-50 squircle"
 						style={{
 							positionAnchor: anchorDropdownTrigger,
 							positionArea: " block-end span-inline-start ",
@@ -151,7 +151,7 @@ export default function ProfileDropdown() {
 								</Avatar.Fallback>
 							</Avatar.Root>
 
-							<span className="font-medium text-lg">{user.name}</span>
+							<span className="text-lg font-medium">{user.name}</span>
 							<span>{user.email}</span>
 						</div>
 
@@ -161,7 +161,7 @@ export default function ProfileDropdown() {
 								role="menuitem"
 								tabIndex={index === 0 ? 0 : -1}
 								to="/dashboard"
-								className="trim-capital justify-start gap-2 p-2 font-medium hover:bg-bg-selected focus-visible:bg-bg-selected"
+								className="justify-start gap-2 p-2 font-medium trim-capital hover:bg-bg-selected focus-visible:bg-bg-selected"
 								onClick={() => setIsOpen(false)}>
 								<User className="block-[1.3em] inline-auto" />
 								<span>Dashboard</span>
@@ -172,7 +172,7 @@ export default function ProfileDropdown() {
 								type="button"
 								tabIndex={index === 1 ? 0 : -1}
 								disabled={isLoggingOut}
-								className="trim-capital squircle flex cursor-pointer items-center gap-2 rounded-xl p-2 font-medium text-text-error transition-all duration-200 *:shrink-0 hover:bg-bg-selected focus-visible:bg-bg-selected"
+								className="flex cursor-pointer items-center gap-2 rounded-xl p-2 font-medium text-text-error transition-all duration-200 squircle trim-capital *:shrink-0 hover:bg-bg-selected focus-visible:bg-bg-selected"
 								onClick={handleLogout}>
 								<LogOut className="block-[1.3em] inline-auto" />
 								{isLoggingOut ? (

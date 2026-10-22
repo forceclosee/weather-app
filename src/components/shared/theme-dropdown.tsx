@@ -55,7 +55,7 @@ export default function ThemeDropdown({ className }: Props) {
 				<span className="hidden min-[32rem]:inline">Theme</span>
 				<ChevronDown
 					strokeWidth={3}
-					className="block-[1.1em] inline-auto hidden transition-transform duration-200 group-data-pressed:rotate-180 min-[23rem]:inline"
+					className="hidden transition-transform duration-200 block-[1.1em] inline-auto group-data-pressed:rotate-180 min-[23rem]:inline"
 				/>
 			</Button>
 			<Menu

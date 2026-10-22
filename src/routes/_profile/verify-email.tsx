@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_profile/verify-email")({
 
 function RouteComponent() {
 	return (
-		<div className="max-inline-132 inline-full mx-auto grid gap-12 px-fluid-500 py-8">
+		<div className="mx-auto grid gap-12 px-fluid-500 py-8 inline-full max-inline-132">
 			<h1 className="text-center">Verify Code</h1>
 			<ResendOtp />
 			<OtpVerifyEmailForm />

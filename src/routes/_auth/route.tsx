@@ -14,9 +14,9 @@ export const Route = createFileRoute("/_auth")({
 
 function RouteComponent() {
 	return (
-		<div className="min-block-svh grid grid-rows-[auto_1fr]">
+		<div className="grid grid-rows-[auto_1fr] min-block-svh">
 			<Header />
-			<main className="max-inline-132 inline-full mx-auto px-fluid-500 py-8">
+			<main className="mx-auto px-fluid-500 py-8 inline-full max-inline-132">
 				<Outlet />
 			</main>
 		</div>

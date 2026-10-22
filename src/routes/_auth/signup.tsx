@@ -16,7 +16,7 @@ function RouteComponent() {
 			<SignupForm />
 			<p>
 				Already have an account?{" "}
-				<Link to="/login" className="hover-underline text-text-primary">
+				<Link to="/login" className="text-text-primary hover-underline">
 					Login
 				</Link>
 			</p>

@@ -33,13 +33,13 @@ export default function VerifyBanner({ className }: Props) {
 	return (
 		<div
 			className={cn(
-				"squircle max-block-max flex flex-wrap items-center justify-between gap-2 rounded-xl bg-bg-info px-fluid-500 py-4 text-text-inverse",
+				"flex flex-wrap items-center justify-between gap-2 rounded-xl bg-bg-info px-fluid-500 py-4 text-text-inverse max-block-max squircle",
 				className,
 			)}>
 			<p>
 				<Mail
 					strokeWidth={3}
-					className="block-[1.1em] inline-auto me-2 inline-block"
+					className="me-2 inline-block block-[1.1em] inline-auto"
 				/>
 				<span>Please verify your email address to access all features.</span>
 			</p>

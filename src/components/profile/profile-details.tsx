@@ -20,7 +20,7 @@ export default function ProfileDetails() {
 	return (
 		<div
 			suppressHydrationWarning
-			className="mbs-35 squircle grid gap-x-4 gap-y-12 rounded-ss-xl rounded-se-xl bg-bg-card px-fluid-500 py-(--padding-block) md:grid-cols-[1fr_auto]"
+			className="mbs-35 grid gap-x-4 gap-y-12 rounded-ss-xl rounded-se-xl bg-bg-card px-fluid-500 py-(--padding-block) squircle md:grid-cols-[1fr_auto]"
 			style={{ "--padding-block": "2rem" }}>
 			<div className="grid gap-4">
 				<Avatar.Root
@@ -29,12 +29,15 @@ export default function ProfileDetails() {
 					<Avatar.Image src={user.image} />
 					<Avatar.Fallback>{user.name.charAt(0).toUpperCase()}</Avatar.Fallback>
 				</Avatar.Root>
+
 				<h2 className="text-3xl">{user.name}</h2>
+
 				<span>{user.email}</span>
-				<div className="flex items-center gap-2">
-					<Calendar className="block-[1.1em] inline-auto shrink-0" />
+
+				<p>
+					<Calendar className="me-2 inline-block shrink-0 block-[1.1em] inline-auto" />
 					<span>{`Joined ${date}`}</span>
-				</div>
+				</p>
 			</div>
 
 			<Link to="/settings" className="gap-2">

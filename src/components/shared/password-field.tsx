@@ -48,7 +48,7 @@ export default function PasswordField({
 					<Field.Root className="group">
 						<Field.Label>{label}</Field.Label>
 
-						<div className="inline-full grid grid-cols-[1fr_auto]">
+						<div className="grid grid-cols-[1fr_auto] inline-full">
 							<Input
 								ref={inputRef}
 								type={inputType}
@@ -56,13 +56,13 @@ export default function PasswordField({
 								placeholder={placeholder}
 								value={field.state.value}
 								className={cn(
-									"rounded-se-none rounded-ee-none border-border border-y border-s bg-bg-card ps-4 pe-0 group-has-focus:border-border-input group-has-hover:border-border-input group-has-focus:ring-input-password group-has-hover:ring-input-password",
+									"rounded-se-none rounded-ee-none border-y border-s border-border bg-bg-card ps-4 pe-0 group-has-hover:border-border-input group-has-hover:ring-input-password group-has-focus:border-border-input group-has-focus:ring-input-password",
 									{
-										"border-border-error group-has-focus:border-border-error group-has-hover:border-border-error group-has-focus:ring-input-password-invalid group-has-hover:ring-input-password-invalid":
+										"border-border-error group-has-hover:border-border-error group-has-hover:ring-input-password-invalid group-has-focus:border-border-error group-has-focus:ring-input-password-invalid":
 											isInputInvalid,
 									},
 									{
-										"border-border-success group-has-focus:border-border-success group-has-hover:border-border-success group-has-focus:ring-input-password-valid group-has-hover:ring-input-password-valid":
+										"border-border-success group-has-hover:border-border-success group-has-hover:ring-input-password-valid group-has-focus:border-border-success group-has-focus:ring-input-password-valid":
 											isInputValid,
 									},
 								)}
@@ -75,13 +75,13 @@ export default function PasswordField({
 							<button
 								type="button"
 								className={cn(
-									"block-12 inline-12 squircle inset-e-0 cursor-pointer justify-items-center rounded-se-xl rounded-ee-xl border-border border-y border-e bg-bg-card text-text-muted transition-all duration-200 hover:text-text focus:text-text focus-visible:outline-offset-0 group-has-focus:border-border-input group-has-hover:border-border-input group-has-focus:ring-input-reveal group-has-hover:ring-input-reveal",
+									"inset-e-0 cursor-pointer justify-items-center rounded-se-xl rounded-ee-xl border-y border-e border-border bg-bg-card text-text-muted transition-all duration-200 block-12 inline-12 squircle group-has-hover:border-border-input group-has-hover:ring-input-reveal group-has-focus:border-border-input group-has-focus:ring-input-reveal hover:text-text focus:text-text focus-visible:outline-offset-0",
 									{
-										"border-border-error group-has-focus:border-border-error group-has-hover:border-border-error group-has-focus:ring-input-reveal-invalid group-has-hover:ring-input-reveal-invalid":
+										"border-border-error group-has-hover:border-border-error group-has-hover:ring-input-reveal-invalid group-has-focus:border-border-error group-has-focus:ring-input-reveal-invalid":
 											isInputInvalid,
 									},
 									{
-										"border-border-success group-has-focus:border-border-success group-has-hover:border-border-success group-has-focus:ring-input-reveal-valid group-has-hover:ring-input-reveal-valid":
+										"border-border-success group-has-hover:border-border-success group-has-hover:ring-input-reveal-valid group-has-focus:border-border-success group-has-focus:ring-input-reveal-valid":
 											isInputValid,
 									},
 								)}
@@ -107,8 +107,8 @@ export default function PasswordField({
 						{havePasswordRules && (
 							<ul
 								className={cn(
-									"block-0 group-has-aria-[invalid=true]:block-auto group-has-focus:block-auto starting:block-0! hidden overflow-clip opacity-0 starting:opacity-0! transition-all transition-discrete duration-200 group-has-aria-[invalid=true]:block group-has-focus:block group-has-aria-[invalid=true]:opacity-100 group-has-focus:opacity-100",
-									{ "hidden! block-0! opacity-0!": isInputValid },
+									"hidden overflow-clip opacity-0 transition-all transition-discrete duration-200 block-0 group-has-focus:block group-has-focus:opacity-100 group-has-focus:block-auto group-has-aria-[invalid=true]:block group-has-aria-[invalid=true]:opacity-100 group-has-aria-[invalid=true]:block-auto starting:opacity-0! starting:block-0!",
+									{ "hidden! opacity-0! block-0!": isInputValid },
 								)}>
 								{passwordRules.map((rule) => {
 									const isPassed = rule.test(field.state.value || "");
@@ -128,7 +128,7 @@ export default function PasswordField({
 											) : (
 												<X
 													strokeWidth={3}
-													className="block-[1em] inline-auto text-text-error"
+													className="text-text-error block-[1em] inline-auto"
 												/>
 											)}
 

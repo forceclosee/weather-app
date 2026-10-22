@@ -23,7 +23,7 @@ function RouteComponent() {
 	if (isLoading) {
 		return (
 			<div
-				className="block-full grid items-center justify-items-center"
+				className="grid items-center justify-items-center block-full"
 				aria-hidden>
 				<div className="page-loader" aria-hidden></div>
 			</div>
@@ -31,10 +31,10 @@ function RouteComponent() {
 	}
 
 	return (
-		<div className={cn("block-full", { "border-border border-bs": isDesktop })}>
+		<div className={cn("block-full", { "border-bs border-border": isDesktop })}>
 			<div
-				className={cn("max-inline-316 inline-full mx-auto grid px-fluid-500", {
-					"block-full grid-cols-[15rem_1fr] items-start gap-4": isDesktop,
+				className={cn("mx-auto grid px-fluid-500 inline-full max-inline-316", {
+					"grid-cols-[15rem_1fr] items-start gap-4 block-full": isDesktop,
 				})}>
 				{isDesktop && <SettingsDesktopSidebar />}
 

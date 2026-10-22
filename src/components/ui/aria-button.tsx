@@ -19,9 +19,9 @@ export function Button({
 	return (
 		<AriaButton
 			className={cn(
-				"min-block-10.75 max-block-max trim-text squircle flex cursor-pointer items-center justify-center rounded-xl px-4 font-medium text-text transition-all duration-200 *:shrink-0 active:not-disabled:scale-95 disabled:cursor-not-allowed",
+				"flex cursor-pointer items-center justify-center rounded-xl px-4 font-medium text-text transition-all duration-200 max-block-max min-block-10.75 squircle trim-text *:shrink-0 active:not-disabled:scale-95 disabled:cursor-not-allowed",
 				{
-					"scheme-dark bg-bg-primary hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
+					"bg-bg-primary scheme-dark hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
 						variant === "primary",
 				},
 				{

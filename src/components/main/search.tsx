@@ -74,7 +74,7 @@ export default function Search({ className }: Props) {
 		<FocusTrap active={isOpen}>
 			<div
 				ref={containerRef}
-				className={cn("max-inline-2xl inline-full mx-auto", className)}
+				className={cn("mx-auto inline-full max-inline-2xl", className)}
 				style={{ anchorName: "--search-container" }}>
 				<search>
 					<form onSubmit={(e) => handleSearch(e)}>
@@ -82,7 +82,7 @@ export default function Search({ className }: Props) {
 							Search Location
 						</label>
 
-						<div className="min-block-14 grid grid-cols-[1fr_auto] gap-4">
+						<div className="grid grid-cols-[1fr_auto] gap-4 min-block-14">
 							<input
 								ref={inputRef}
 								id="search"
@@ -115,7 +115,7 @@ export default function Search({ className }: Props) {
 
 							<Button
 								type="submit"
-								className="max-block-none flex gap-4 px-6 text-text text-xl"
+								className="flex gap-4 px-6 text-xl text-text max-block-none"
 								aria-label="Search location">
 								<SearchIcon
 									strokeWidth={3}
@@ -243,7 +243,7 @@ function SearchDropdown({
 	return (
 		<div
 			role="dialog"
-			className="inline-[anchor-size(--search-container_inline)] sm:inline-[anchor-size(--search-input_inline)] squircle absolute inset-bs-1 z-dropdown rounded-xl border border-border-muted bg-bg-card p-4 shadow-xl [position-anchor:--search-container] sm:[position-anchor:--search-input]"
+			className="absolute inset-bs-1 z-dropdown rounded-xl border border-border-muted bg-bg-card p-4 shadow-xl [position-anchor:--search-container] inline-[anchor-size(--search-container_inline)] squircle sm:[position-anchor:--search-input] sm:inline-[anchor-size(--search-input_inline)]"
 			style={{
 				positionArea: "block-end span-all",
 			}}>
@@ -255,7 +255,7 @@ function SearchDropdown({
 
 			{/* error state */}
 			{isError && (
-				<p className="font-medium text-base text-text-error">
+				<p className="text-base font-medium text-text-error">
 					No location found, Please use a different search term
 				</p>
 			)}
@@ -273,13 +273,13 @@ function SearchDropdown({
 							tabIndex={selected === index ? 0 : -1}
 							onClick={() => handleItemClick(index as Selected)}
 							onKeyDown={(e) => handleItemKeyDown(e, index as Selected)}
-							className="squircle grid cursor-pointer grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 rounded-xl border border-border-muted p-2 hover:bg-bg-selected focus-visible:bg-bg-selected">
+							className="grid cursor-pointer grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 rounded-xl border border-border-muted p-2 squircle hover:bg-bg-selected focus-visible:bg-bg-selected">
 							<img
 								src={`https://hatscripts.github.io/circle-flags/flags/${location.country_code.toLowerCase()}.svg`}
 								alt={`${location.country} flag`}
 								width={48}
 								height={48}
-								className="inline-[1em] block-auto inline-block shrink-0"
+								className="inline-block shrink-0 block-auto inline-[1em]"
 							/>
 
 							<span className="font-medium">

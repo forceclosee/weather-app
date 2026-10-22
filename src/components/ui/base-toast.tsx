@@ -15,7 +15,7 @@ export const ToastProvider = ({ children }: ProviderProps) => {
 		<BaseToast.Provider>
 			{children}
 			<BaseToast.Portal>
-				<BaseToast.Viewport className="inline-[calc(100vw-2rem)] max-inline-90 fixed inset-be-4 inset-e-4 z-1">
+				<BaseToast.Viewport className="fixed inset-e-4 inset-be-4 z-1 inline-[calc(100vw-2rem)] max-inline-90">
 					<List />
 				</BaseToast.Viewport>
 			</BaseToast.Portal>
@@ -51,7 +51,7 @@ const List = () => {
 						<BaseToast.Close>
 							<X
 								strokeWidth={3}
-								className="block-4 inline-auto text-text-inverse"
+								className="text-text-inverse block-4 inline-auto"
 							/>
 						</BaseToast.Close>
 					</BaseToast.Content>

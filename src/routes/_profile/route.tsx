@@ -18,7 +18,7 @@ function RouteComponent() {
 	return (
 		<div
 			suppressHydrationWarning
-			className="min-block-svh grid grid-rows-[auto_1fr_auto]">
+			className="grid grid-rows-[auto_1fr_auto] min-block-svh">
 			<Header haveProfileDropdown />
 
 			<main>

@@ -49,8 +49,8 @@ export function Skeleton({
 	return (
 		<div
 			className={cn(
-				"motion-safe:wave inline-full starting:opacity-0 transition-all transition-discrete duration-75 motion-safe:bg-linear-to-r motion-safe:bg-size-[200%_100%] motion-safe:from-gray-400/60 motion-safe:via-gray-600/60 motion-safe:to-gray-400/60 motion-reduce:animate-pulse motion-reduce:bg-gray-500/80",
-				circle ? "rounded-full" : "squircle rounded-lg",
+				"transition-all transition-discrete duration-75 inline-full motion-safe:wave motion-safe:bg-linear-to-r motion-safe:from-gray-400/60 motion-safe:via-gray-600/60 motion-safe:to-gray-400/60 motion-safe:bg-size-[200%_100%] motion-reduce:animate-pulse motion-reduce:bg-gray-500/80 starting:opacity-0",
+				circle ? "rounded-full" : "rounded-lg squircle",
 				className,
 			)}
 			style={{

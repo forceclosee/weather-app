@@ -14,7 +14,7 @@ const Root = (props: RootProps) => {
 	return (
 		<BaseField.Root
 			{...props}
-			className={cn("inline-full grid items-start gap-2", props.className)}
+			className={cn("grid items-start gap-2 inline-full", props.className)}
 		/>
 	);
 };
@@ -28,7 +28,7 @@ const Label = (props: LabelProps) => {
 		<BaseField.Label
 			{...props}
 			className={cn(
-				"flex gap-1 font-bold text-sm after:text-text-error after:content-['*']",
+				"flex gap-1 text-sm font-bold after:text-text-error after:content-['*']",
 				props.className,
 			)}
 		/>
@@ -92,7 +92,7 @@ export function Input(props: InputProps) {
 		<BaseInput
 			{...props}
 			className={cn(
-				"min-block-12 squircle rounded-xl outline-transparent transition-all duration-200",
+				"rounded-xl outline-transparent transition-all duration-200 min-block-12 squircle",
 				props.className,
 			)}
 		/>

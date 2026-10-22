@@ -15,13 +15,13 @@ import bgDesktop from "#/images/bg-today-large.svg";
 
 export default function CurrentWeather() {
 	return (
-		<div className="scheme-dark squircle max-block-max min-block-71.5 relative isolate grid items-center overflow-clip rounded-2xl text-text">
+		<div className="relative isolate grid items-center overflow-clip rounded-2xl text-text scheme-dark max-block-max min-block-71.5 squircle">
 			<picture className="absolute inset-0 z-[-1]" aria-hidden>
 				<source media="(width >= 48rem)" srcSet={bgDesktop} />
 				<img
 					src={bgMobile}
 					alt=""
-					className="block-full origin-center scale-110 object-cover"
+					className="origin-center scale-110 object-cover block-full"
 				/>
 			</picture>
 
@@ -70,16 +70,16 @@ function CurrentWeatherContent() {
 		weatherCode === 86;
 
 	return (
-		<div className="grid @3xl/current-weather:grid-cols-[1fr_auto] items-center @3xl/current-weather:justify-items-start justify-items-center gap-8 p-6 pe-8 text-center @3xl/current-weather:text-start">
+		<div className="grid items-center justify-items-center gap-8 p-6 pe-8 text-center @3xl/current-weather:grid-cols-[1fr_auto] @3xl/current-weather:justify-items-start @3xl/current-weather:text-start">
 			<div className="grid gap-2">
-				<h2 className="font-medium text-[1.85rem]">
+				<h2 className="text-[1.85rem] font-medium">
 					<span>{`${city}, ${country}`}</span>
 					<img
 						src={countryFlagUrl}
 						alt=""
 						width={48}
 						height={48}
-						className="inline-[1em] block-auto ms-4 inline-block shrink-0"
+						className="ms-4 inline-block shrink-0 block-auto inline-[1em]"
 					/>
 				</h2>
 				<span className="text-lg text-text/77">{fullDate}</span>
@@ -87,7 +87,7 @@ function CurrentWeatherContent() {
 			</div>
 
 			<div className="grid gap-2">
-				<div className="flex @min-[30rem]/current-weather:flex-row flex-col items-center gap-8 *:shrink-0">
+				<div className="flex flex-col items-center gap-8 *:shrink-0 @min-[30rem]/current-weather:flex-row">
 					<img
 						src={image}
 						alt={description}
@@ -97,7 +97,7 @@ function CurrentWeatherContent() {
 							"invert-weather-icon-color": shouldInvertColor,
 						})}
 					/>
-					<span className="trim-capital text-(length:--spacing-fluid-1600) font-bricolage-grotesque font-semibold italic">
+					<span className="font-bricolage-grotesque font-semibold text-(length:--spacing-fluid-1600) italic trim-capital">
 						{temperature}
 					</span>
 				</div>
@@ -148,15 +148,15 @@ function TimeDisplay() {
 
 function CurrentWeatherSkeleton() {
 	return (
-		<div className="grid @3xl/current-weather:grid-cols-[1fr_auto] items-center gap-8 p-6">
-			<div className="grid @3xl/current-weather:justify-items-start justify-items-center gap-2">
+		<div className="grid items-center gap-8 p-6 @3xl/current-weather:grid-cols-[1fr_auto]">
+			<div className="grid justify-items-center gap-2 @3xl/current-weather:justify-items-start">
 				<Skeleton width={285} height={30} />
 				<Skeleton width={260} />
 				<Skeleton width={140} />
 			</div>
 
 			<div className="grid justify-items-center gap-2">
-				<div className="flex @min-[30rem]/current-weather:flex-row flex-col items-center gap-8">
+				<div className="flex flex-col items-center gap-8 @min-[30rem]/current-weather:flex-row">
 					<Skeleton
 						minWidth={70}
 						width={70}

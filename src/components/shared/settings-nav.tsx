@@ -43,7 +43,7 @@ export default function SettingsNav({ className, isSidebar }: Props) {
 		<nav
 			className={cn(
 				"grid",
-				isSidebar ? "gap-1" : "squircle rounded-xl bg-bg-card",
+				isSidebar ? "gap-1" : "rounded-xl bg-bg-card squircle",
 				className,
 			)}>
 			{navItems.map((navItem) => (
@@ -55,7 +55,7 @@ export default function SettingsNav({ className, isSidebar }: Props) {
 						"gap-2 py-3",
 						{ "not-last:border-be not-last:border-border": !isSidebar },
 						{
-							"squircle rounded-xl hover:bg-bg-card focus-visible:bg-bg-card data-[status=active]:bg-bg-card":
+							"rounded-xl squircle hover:bg-bg-card focus-visible:bg-bg-card data-[status=active]:bg-bg-card":
 								isSidebar,
 						},
 					)}>

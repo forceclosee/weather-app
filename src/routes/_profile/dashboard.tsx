@@ -16,12 +16,12 @@ function RouteComponent() {
 	const { user } = RouteApi.useRouteContext();
 
 	return (
-		<div className="max-inline-316 inline-full mx-auto grid gap-8 px-fluid-500 py-8">
+		<div className="mx-auto grid gap-8 px-fluid-500 py-8 inline-full max-inline-316">
 			<h1 className="sr-only">Profile Dashboard</h1>
 
 			{!user?.emailVerified && <VerifyBanner />}
 
-			<div className="squircle isolate grid overflow-clip rounded-xl *:col-start-1 *:col-end-2 *:row-start-1 *:row-end-2">
+			<div className="isolate grid overflow-clip rounded-xl squircle *:col-start-1 *:col-end-2 *:row-start-1 *:row-end-2">
 				<div className="z-[-1] bg-bg-primary" aria-hidden></div>
 				<ProfileDetails />
 			</div>
