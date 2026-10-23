@@ -17,6 +17,11 @@ export const auth = betterAuth({
 	},
 	plugins: [
 		emailOTP({
+			changeEmail: {
+				enabled: true,
+			},
+			overrideDefaultEmailVerification: true,
+
 			async sendVerificationOTP({ type, email, otp }) {
 				switch (type) {
 					case "email-verification":
@@ -26,9 +31,16 @@ export const auth = betterAuth({
 							otp: otp,
 						});
 						break;
+
+					case "change-email":
+						await sendEmail({
+							type: "change-email",
+							to: email,
+							otp: otp,
+						});
+						break;
 				}
 			},
-			overrideDefaultEmailVerification: true,
 		}),
 		tanstackStartCookies(),
 	],

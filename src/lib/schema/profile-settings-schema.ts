@@ -11,3 +11,9 @@ export const editProfileSchema = z.object({
 });
 
 export type editProfileSchema = z.infer<typeof editProfileSchema>;
+
+export const changeEmailSchema = z.object({
+	newEmail: z.email("Please enter a valid email address"),
+});
+
+export type changeEmailSchema = z.infer<typeof changeEmailSchema>;
