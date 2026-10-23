@@ -36,7 +36,7 @@ export default function WeatherDashboard() {
 						</div>
 					)}>
 					<div className="@container/weather-dashboard grid gap-x-8 gap-y-fluid-925 px-fluid-500 py-12 lg:grid-cols-[1fr_24rem]">
-						<h1 className="order-1 text-center font-bricolage-grotesque lg:col-span-2">
+						<h1 className="order-1 text-center font-bricolage-grotesque text-[3.3rem]/16 lg:col-span-2">
 							How's the sky looking today?
 						</h1>
 

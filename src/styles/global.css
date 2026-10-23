@@ -160,7 +160,7 @@
 
 	/* TYPOGRAPHY */
 	h1 {
-		@apply font-semibold text-[3.3rem]/16;
+		@apply font-semibold text-3xl;
 	}
 
 	h2 {
