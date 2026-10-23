@@ -9,7 +9,7 @@ interface Props {
 	labelSubmitting: string | JSX.Element;
 }
 
-export default function EditProfileSubmitButton({
+export default function AccountSettingsSubmitButton({
 	label,
 	labelSubmitting,
 }: Props) {

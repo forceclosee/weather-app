@@ -1,11 +1,11 @@
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 
-import OtpField from "#/components/shared/otp-field";
-import PasswordField from "#/components/shared/password-field";
-import VerifyOtpSubmitButton from "#/components/shared/verify-otp-submit-button";
-import SubmitButton from "#/components/shared/submit-button";
-import TextField from "#/components/shared/text-field";
-import EditProfileSubmitButton from "#/components/shared/edit-profile-submit-button";
+import TextField from "#/components/field-and-form-components/text-field";
+import PasswordField from "#/components/field-and-form-components/password-field";
+import OtpField from "#/components/field-and-form-components/otp-field";
+import SubmitButton from "#/components/field-and-form-components/submit-button";
+import VerifyOtpSubmitButton from "#/components/field-and-form-components/verify-otp-submit-button";
+import AccountSettingsSubmitButton from "#/components/field-and-form-components/account-settings-submit-button";
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
 	createFormHookContexts();
@@ -17,6 +17,6 @@ export const { useAppForm } = createFormHook({
 	formComponents: {
 		SubmitButton,
 		VerifyOtpSubmitButton,
-		EditProfileSubmitButton,
+		AccountSettingsSubmitButton,
 	},
 });
