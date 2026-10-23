@@ -14,7 +14,12 @@ import { useToastManager } from "#/components/ui/base-toast";
 
 const RouteApi = getRouteApi("__root__");
 
-export default function ResendOtp() {
+interface Props {
+	type: "email-verification" | "change-email";
+	newEmail?: string;
+}
+
+export default function ResendOtp({ type, newEmail }: Props) {
 	const { user } = RouteApi.useRouteContext();
 
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -26,44 +31,62 @@ export default function ResendOtp() {
 	const handleClick = async () => {
 		if (!user) return;
 
+		const sendOtp = () => {
+			switch (type) {
+				case "change-email":
+					return authClient.emailOtp.requestEmailChange({
+						newEmail: newEmail ?? "",
+					});
+
+				case "email-verification":
+					return authClient.emailOtp.sendVerificationOtp({
+						email: user.email,
+						type: "email-verification",
+					});
+			}
+		};
+
 		startTransition(async () => {
 			// send OTP
-			await authClient.emailOtp.sendVerificationOtp({
-				email: user.email,
-				type: "email-verification",
+			const { error } = await sendOtp();
 
-				fetchOptions: {
-					// error state
-					onError: ({ error }) => {
-						toastManager.add({
-							type: "error",
-							title: "Resend OTP failed",
-							description: error.message
-								? `${error.message}, Please try again later`
-								: "Something went wrong, Please try again later",
-						});
-					},
+			if (error) {
+				toastManager.add({
+					type: "error",
+					title: "Resend OTP failed",
+					description: error.message
+						? `${error.message}, Please try again later`
+						: "Something went wrong, Please try again later",
+				});
 
-					// success state
-					onSuccess: () => {
-						setIsDisabled(true);
+				return;
+			}
 
-						toastManager.add({
-							type: "success",
-							title: "Successfully sent new OTP",
-							description: "New OTP has been sent to your email address",
-						});
-					},
-				},
+			setIsDisabled(true);
+
+			toastManager.add({
+				type: "success",
+				title: "Successfully sent new OTP",
+				description: "New OTP has been sent to your email address",
 			});
 		});
+	};
+
+	const userEmailDisplay = () => {
+		switch (type) {
+			case "change-email":
+				return newEmail;
+
+			case "email-verification":
+				return user?.email;
+		}
 	};
 
 	return (
 		<div className="text-center">
 			<p>
 				Please enter the OTP we just send to your email address{" "}
-				<strong className="font-semibold">{user?.email}</strong>
+				<strong className="font-semibold">{userEmailDisplay()}</strong>
 			</p>
 
 			<p className="mbs-6">Didn't receive the OTP?</p>

@@ -80,7 +80,7 @@ export default function EditProfileForm() {
 					)}
 				</form.AppField>
 
-				<form.EditProfileSubmitButton
+				<form.AccountSettingsSubmitButton
 					label="Save Changes"
 					labelSubmitting={<span className="edit-profile-loader"></span>}
 				/>

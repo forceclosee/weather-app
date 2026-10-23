@@ -19,7 +19,7 @@ function RouteComponent() {
 	return (
 		<div className="mx-auto grid gap-12 px-fluid-500 py-8 inline-full max-inline-132">
 			<h1 className="text-center">Verify Code</h1>
-			<ResendOtp />
+			<ResendOtp type="email-verification" />
 			<OtpVerifyEmailForm />
 		</div>
 	);
