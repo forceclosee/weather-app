@@ -141,7 +141,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 const themeScript = `(function() {
   try {
-    const savedTheme = localStorage.getItem("theme") || "system";
+    const raw = localStorage.getItem("theme");
+    const savedTheme =  raw ? JSON.parse(raw) : "system";
 		document.documentElement.setAttribute("data-theme", savedTheme);
   } catch (e) {}
 })();`;

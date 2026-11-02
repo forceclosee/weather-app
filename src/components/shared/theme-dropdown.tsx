@@ -1,7 +1,9 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId } from "react";
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
 
 import { ChevronDown, Laptop, Moon, Sun } from "lucide-react";
+
+import { useLocalStorage } from "#/hook/use-local-storage";
 
 import { MenuTrigger, Menu, MenuItem } from "#/components/ui/aria-menu";
 import { Button } from "#/components/ui/aria-button";
@@ -13,19 +15,11 @@ interface Props extends Omit<AriaPopoverProps, "children"> {
 export default function ThemeDropdown({ className }: Props) {
 	type Theme = "light" | "dark" | "system";
 
-	// get saved theme from local storage
-	const getInitialTheme = (): Theme => {
-		if (typeof window === "undefined") return "system";
+	const [theme, setTheme] = useLocalStorage<Theme>("theme", "system");
 
-		return (localStorage.getItem("theme") as Theme) || "system";
-	};
-
-	const [theme, setTheme] = useState<Theme>(getInitialTheme());
-
-	// set theme and save to local storage
+	// html data attribute with selected theme
 	useEffect(() => {
 		document.documentElement.setAttribute("data-theme", theme);
-		localStorage.setItem("theme", theme);
 	}, [theme]);
 
 	const getThemeIcon = () => {
