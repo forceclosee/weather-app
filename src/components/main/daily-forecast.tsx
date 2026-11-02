@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { classList, cn } from "#/utils/class-helper";
@@ -15,19 +15,25 @@ interface Props {
 }
 
 export default function DailyForecast({ className }: Props) {
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
+
 	return (
 		<div className={cn("grid gap-4.75", className)}>
 			<h2>Daily Forecast</h2>
 			<div className="grid grid-cols-[repeat(auto-fit,minmax(7.6rem,1fr))] gap-4">
-				<Suspense fallback={<CurrentWeatherSkeleton />}>
-					<CurrentWeatherContent />
+				<Suspense fallback={<DailyWeatherSkeleton />}>
+					{isLoading ? <DailyWeatherSkeleton /> : <DailyWeatherContent />}
 				</Suspense>
 			</div>
 		</div>
 	);
 }
 
-function CurrentWeatherContent() {
+function DailyWeatherContent() {
 	const timezone = getPartialWeatherState("timezone");
 
 	const weatherParams = getWeatherState();
@@ -131,7 +137,7 @@ function CurrentWeatherContent() {
 	);
 }
 
-function CurrentWeatherSkeleton() {
+function DailyWeatherSkeleton() {
 	const minWidth = [60, 83, 90, 90, 90, 90, 90];
 	// update width
 

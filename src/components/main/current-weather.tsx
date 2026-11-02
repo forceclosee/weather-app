@@ -14,6 +14,12 @@ import bgMobile from "#/images/bg-today-small.svg";
 import bgDesktop from "#/images/bg-today-large.svg";
 
 export default function CurrentWeather() {
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
+
 	return (
 		<div className="relative isolate grid items-center overflow-clip rounded-2xl text-text scheme-dark max-block-max min-block-71.5 squircle">
 			<picture className="absolute inset-0 z-[-1]" aria-hidden>
@@ -26,7 +32,7 @@ export default function CurrentWeather() {
 			</picture>
 
 			<Suspense fallback={<CurrentWeatherSkeleton />}>
-				<CurrentWeatherContent />
+				{isLoading ? <CurrentWeatherSkeleton /> : <CurrentWeatherContent />}
 			</Suspense>
 		</div>
 	);

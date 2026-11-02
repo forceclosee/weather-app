@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { ArrowDown, CloudRainWind, Droplet, Info, Wind } from "lucide-react";
@@ -13,10 +13,16 @@ import { Popover } from "#/components/ui/base-popover";
 import FeelsLikeIcon from "#/components/icons/feels-like";
 
 export default function AdditionalInfo() {
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
+
 	return (
 		<div className="grid gap-fluid-450 @min-[27rem]/current-weather:grid-cols-2 @min-[56rem]/current-weather:grid-cols-4">
 			<Suspense fallback={<AdditionalInfoSkeleton />}>
-				<CurrentWeatherContent />
+				{isLoading ? <AdditionalInfoSkeleton /> : <CurrentWeatherContent />}
 			</Suspense>
 		</div>
 	);

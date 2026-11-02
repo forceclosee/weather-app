@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { ChevronDown } from "lucide-react";
@@ -22,6 +22,12 @@ interface Props {
 }
 
 export default function HourlyForecast({ className }: Props) {
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
+
 	return (
 		<ScrollArea
 			className={cn(
@@ -36,7 +42,7 @@ export default function HourlyForecast({ className }: Props) {
 
 			<div className="z-card grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4">
 				<Suspense fallback={<HourlyWeatherSkeleton />}>
-					<HourlyWeatherContent />
+					{isLoading ? <HourlyWeatherSkeleton /> : <HourlyWeatherContent />}
 				</Suspense>
 			</div>
 		</ScrollArea>
