@@ -161,7 +161,7 @@ export default function ProfileDropdown() {
 								role="menuitem"
 								tabIndex={index === 0 ? 0 : -1}
 								to="/dashboard"
-								className="justify-start gap-2 p-2 font-medium trim-capital hover:bg-bg-selected focus-visible:bg-bg-selected"
+								className="justify-start gap-2 rounded-xl p-2 font-medium squircle trim-capital hover:bg-bg-selected focus-visible:bg-bg-selected"
 								onClick={() => setIsOpen(false)}>
 								<User className="block-[1.3em] inline-auto" />
 								<span>Dashboard</span>
