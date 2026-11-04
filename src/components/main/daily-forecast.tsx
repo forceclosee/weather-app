@@ -1,11 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { useWeatherParams } from "#/hook/use-weather-params";
 import { classList, cn } from "#/utils/class-helper";
 import { getFormattedDate } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
-import { createWeatherQueryOptions } from "#/query-options/weather";
-import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
+import { weatherQueryOptions } from "#/query-options/weather";
+import { getPartialLocations } from "#/utils/location-store";
 
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
@@ -34,11 +35,11 @@ export default function DailyForecast({ className }: Props) {
 }
 
 function DailyWeatherContent() {
-	const timezone = getPartialWeatherState("timezone");
+	const timezone = getPartialLocations("timezone");
 
-	const weatherParams = getWeatherState();
+	const weatherParams = useWeatherParams();
 
-	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
+	const { data } = useSuspenseQuery(weatherQueryOptions(weatherParams));
 
 	// format first 2 days with relative day
 	const relativeDays = data.daily.time.slice(0, 2).map((time) => {

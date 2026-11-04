@@ -70,27 +70,33 @@ export function useLocalStorage<T>(
 		window.dispatchEvent(new StorageEvent("local-storage", { key }));
 	}, [key, initialValue]);
 
-	const handleStorageChange = (event: StorageEvent) => {
-		if (event.key !== key) return;
-
+	// re-read storage so every hook instance (this tab or another) sees the change
+	const syncValue = useCallback(() => {
 		try {
-			// If the item was deleted, fallback to initialValue, otherwise parse the new value
-			const newValue = event.newValue
-				? JSON.parse(event.newValue)
-				: initialValue;
+			const item = window.localStorage.getItem(key);
 
-			setStoredValue(newValue);
+			setStoredValue(item ? JSON.parse(item) : initialValue);
 		} catch (error) {
 			console.error(`Error parsing synced localStorage value:`, error);
 		}
+	}, [key, initialValue]);
+
+	const handleStorageChange = (event: StorageEvent) => {
+		if (event.key !== key) return;
+		syncValue();
 	};
 
-	// synchronize changes across different tabs
 	useEffect(() => {
+		// native event: other tabs
 		window.addEventListener("storage", handleStorageChange);
+		// custom event: same tab (our setValue/removeValue dispatch this)
+		window.addEventListener("local-storage", syncValue);
 
-		return () => window.removeEventListener("storage", handleStorageChange);
-	}, [key, initialValue]);
+		return () => {
+			window.removeEventListener("storage", handleStorageChange);
+			window.removeEventListener("local-storage", syncValue);
+		};
+	}, [key, handleStorageChange, syncValue]);
 
 	return [storedValue, setValue, removeValue];
 }

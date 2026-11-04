@@ -1,12 +1,13 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { getWeatherState, getPartialWeatherState } from "#/utils/weather-store";
+import { getPartialLocations } from "#/utils/location-store";
 
+import { useWeatherParams } from "#/hook/use-weather-params";
 import { classList } from "#/utils/class-helper";
 import { getFormattedDate, getFormattedCurrentTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
-import { createWeatherQueryOptions } from "#/query-options/weather";
+import { weatherQueryOptions } from "#/query-options/weather";
 
 import { Skeleton } from "#/components/ui/skeleton";
 
@@ -39,16 +40,16 @@ export default function CurrentWeather() {
 }
 
 function CurrentWeatherContent() {
-	const timezone = getPartialWeatherState("timezone");
-	const city = getPartialWeatherState("city");
-	const country = getPartialWeatherState("country");
-	const countryCode = getPartialWeatherState("countryCode");
+	const timezone = getPartialLocations("timezone");
+	const city = getPartialLocations("city");
+	const country = getPartialLocations("country");
+	const countryCode = getPartialLocations("countryCode");
 
 	const countryFlagUrl = `https://hatscripts.github.io/circle-flags/flags/${countryCode}.svg`;
 
-	const weatherParams = getWeatherState();
+	const weatherParams = useWeatherParams();
 
-	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
+	const { data } = useSuspenseQuery(weatherQueryOptions(weatherParams));
 
 	const temperature = `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`;
 
@@ -114,7 +115,7 @@ function CurrentWeatherContent() {
 }
 
 function TimeDisplay() {
-	const timezone = getPartialWeatherState("timezone");
+	const timezone = getPartialLocations("timezone");
 
 	const [currentTime, setCurrentTime] = useState(() =>
 		getFormattedCurrentTime(timezone),

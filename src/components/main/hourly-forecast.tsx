@@ -3,13 +3,14 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { ChevronDown } from "lucide-react";
 
+import { useWeatherParams } from "#/hook/use-weather-params";
 import type { Days } from "#/types";
-import { getPartialWeatherState, getWeatherState } from "#/utils/weather-store";
+import { getPartialLocations } from "#/utils/location-store";
 import { getFormattedDate, getFormattedTime } from "#/utils/date";
 import { getWeatherDetails } from "#/utils/weather";
 import { classList, cn } from "#/utils/class-helper";
 import { getPartialDaysState, updateDaysState } from "#/utils/days-store";
-import { createWeatherQueryOptions } from "#/query-options/weather";
+import { weatherQueryOptions } from "#/query-options/weather";
 
 import { Button } from "#/components/ui/aria-button";
 import { Menu, MenuItem, MenuTrigger } from "#/components/ui/aria-menu";
@@ -82,13 +83,13 @@ function SelectDayDropdown() {
 }
 
 function HourlyWeatherContent() {
-	const timezone = getPartialWeatherState("timezone");
+	const timezone = getPartialLocations("timezone");
 
 	const selectedDay = getPartialDaysState("selectedDay");
 
-	const weatherParams = getWeatherState();
+	const weatherParams = useWeatherParams();
 
-	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
+	const { data } = useSuspenseQuery(weatherQueryOptions(weatherParams));
 
 	// format first 2 days with relative day
 	const relativeDays = data.hourly.time.slice(0, 48).map((time) => {

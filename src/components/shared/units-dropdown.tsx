@@ -1,16 +1,11 @@
-import { useEffect } from "react";
 import { ChevronDown, Settings } from "lucide-react";
-import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
-import { Header } from "react-aria-components/Menu";
 
-import { useLocalStorage } from "#/hook/use-local-storage";
-
+import { useUnits } from "#/hook/use-units";
 import { cn } from "#/utils/class-helper";
-import type { Temperature, WindSpeed, Precipitation } from "#/types";
-import {
-	getPartialWeatherState,
-	updateWeatherState,
-} from "#/utils/weather-store";
+import type { Temperature, WindSpeed, Precipitation, Units } from "#/types";
+
+import { Header } from "react-aria-components/Menu";
+import type { PopoverProps as AriaPopoverProps } from "react-aria-components/Popover";
 
 import {
 	MenuTrigger,
@@ -26,30 +21,14 @@ interface Props extends Omit<AriaPopoverProps, "children"> {
 }
 
 export default function UnitsDropdown({ className }: Props) {
-	interface Units {
-		temperature: Temperature;
-		windSpeed: WindSpeed;
-		precipitation: Precipitation;
-	}
-
-	const temperature = getPartialWeatherState("temperature");
-	const windSpeed = getPartialWeatherState("windSpeed");
-	const precipitation = getPartialWeatherState("precipitation");
-
-	const initialUnits: Units = {
-		temperature,
-		windSpeed,
-		precipitation,
-	};
-
-	const [units, setUnits] = useLocalStorage<Units>("units", initialUnits);
+	const { units, setUnits } = useUnits();
 
 	const setUnit = (newState: Partial<Units>) =>
 		setUnits((prev) => ({ ...prev, ...newState }));
 
 	const handleSelect = (
 		value: string | undefined,
-		target: "temperature" | "windSpeed" | "precipitations",
+		target: "temperature" | "windSpeed" | "precipitation",
 	) => {
 		if (!value) return;
 
@@ -62,20 +41,11 @@ export default function UnitsDropdown({ className }: Props) {
 				setUnit({ windSpeed: value as WindSpeed });
 				break;
 
-			case "precipitations":
+			case "precipitation":
 				setUnit({ precipitation: value as Precipitation });
 				break;
 		}
 	};
-
-	// synchoronize store with the local storage
-	useEffect(() => {
-		updateWeatherState({
-			temperature: units.temperature,
-			windSpeed: units.windSpeed,
-			precipitation: units.precipitation,
-		});
-	}, [units]);
 
 	return (
 		<MenuTrigger
@@ -140,7 +110,7 @@ export default function UnitsDropdown({ className }: Props) {
 					selectionMode="single"
 					selectedKeys={[units.precipitation]}
 					onSelectionChange={([key]) =>
-						handleSelect(key as string, "precipitations")
+						handleSelect(key as string, "precipitation")
 					}>
 					<MenuItem<Precipitation>
 						hasCheck

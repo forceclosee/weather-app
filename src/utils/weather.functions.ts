@@ -1,12 +1,15 @@
 import { createServerFn } from "@tanstack/react-start";
 
 import { weatherSchema } from "#/lib/schema/weather-schema";
-import type { WeatherStore } from "#/utils/weather-store";
+import type { LocationsStore } from "#/utils/location-store";
+import type { Units } from "#/types";
+
+export type WeatherParams = LocationsStore & Units;
 
 class FetchError extends Error {}
 
 export const getWeather = createServerFn()
-	.validator((data: WeatherStore) => data)
+	.validator((data: WeatherParams) => data)
 	.handler(async ({ data }) => {
 		const {
 			coordinates: { latitude, longitude },

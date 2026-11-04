@@ -4,9 +4,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowDown, CloudRainWind, Droplet, Info, Wind } from "lucide-react";
 
 import { getNamedDirection } from "#/utils/weather";
-import { createWeatherQueryOptions } from "#/query-options/weather";
-import { getWeatherState } from "#/utils/weather-store";
+import { weatherQueryOptions } from "#/query-options/weather";
 
+import { useWeatherParams } from "#/hook/use-weather-params";
 import { Card } from "#/components/ui/card";
 import { Skeleton } from "#/components/ui/skeleton";
 import { Popover } from "#/components/ui/base-popover";
@@ -29,9 +29,9 @@ export default function AdditionalInfo() {
 }
 
 function CurrentWeatherContent() {
-	const weatherParams = getWeatherState();
+	const weatherParams = useWeatherParams();
 
-	const { data } = useSuspenseQuery(createWeatherQueryOptions(weatherParams));
+	const { data } = useSuspenseQuery(weatherQueryOptions(weatherParams));
 
 	const feelsLike = `${Math.round(data.current.apparent_temperature)}${data.current_units.apparent_temperature}`;
 	const humidity = `${data.current.relative_humidity_2m}${data.current_units.relative_humidity_2m}`;

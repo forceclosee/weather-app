@@ -14,9 +14,9 @@ import { FocusTrap } from "focus-trap-react";
 
 import { useOutsideClick } from "#/hook/use-outside-click";
 import { usePreventScroll } from "#/hook/use-prevent-scroll";
-import { updateWeatherState } from "#/utils/weather-store";
+import { updateLocations } from "#/utils/location-store";
 import { classList, cn } from "#/utils/class-helper";
-import { createLocationQueryOptions } from "#/query-options/geocoding";
+import { locationQueryOptions } from "#/query-options/geocoding";
 
 import { Button } from "#/components/ui/aria-button";
 
@@ -158,7 +158,7 @@ function SearchDropdown({
 	const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
 	const { data, isPending, isError, isSuccess } = useQuery(
-		createLocationQueryOptions(searchValue),
+		locationQueryOptions(searchValue),
 	);
 
 	const locations = data?.results;
@@ -171,7 +171,7 @@ function SearchDropdown({
 		setIsOpen(false);
 
 		// update weather state
-		updateWeatherState({
+		updateLocations({
 			coordinates: {
 				latitude: locations[target].latitude,
 				longitude: locations[target].longitude,
@@ -219,7 +219,7 @@ function SearchDropdown({
 				if (!locations) return;
 
 				// update weather state
-				updateWeatherState({
+				updateLocations({
 					coordinates: {
 						latitude: locations[target].latitude,
 						longitude: locations[target].longitude,

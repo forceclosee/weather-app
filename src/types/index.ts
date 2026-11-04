@@ -14,3 +14,9 @@ export type Days =
 	| "Thursday"
 	| "Friday"
 	| "Saturday";
+
+export interface Units {
+	temperature: Temperature;
+	windSpeed: WindSpeed;
+	precipitation: Precipitation;
+}
