@@ -21,14 +21,17 @@ const Root = (props: RootProps) => {
 
 interface LabelProps
 	extends Omit<BaseField.Label.Props, "className">,
-		ClassNameProps {}
+		ClassNameProps {
+	isFieldNotRequired?: boolean;
+}
 
-const Label = (props: LabelProps) => {
+const Label = ({ isFieldNotRequired, ...props }: LabelProps) => {
 	return (
 		<BaseField.Label
 			{...props}
 			className={cn(
-				"flex gap-1 text-sm font-bold after:text-text-error after:content-['*']",
+				"flex gap-1 text-sm font-bold",
+				{ "after:text-text-error after:content-['*']": !isFieldNotRequired },
 				props.className,
 			)}
 		/>

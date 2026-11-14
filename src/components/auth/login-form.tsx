@@ -19,6 +19,7 @@ export default function LoginForm() {
 		defaultValues: {
 			loginEmail: "",
 			loginPassword: "",
+			loginRememberMe: true,
 		},
 		validators: {
 			onChange: loginSchema,
@@ -29,6 +30,7 @@ export default function LoginForm() {
 			const { data, error } = await authClient.signIn.email({
 				email: value.loginEmail,
 				password: value.loginPassword,
+				rememberMe: value.loginRememberMe,
 			});
 
 			if (error) {
@@ -51,10 +53,8 @@ export default function LoginForm() {
 				description: `Welcome back ${data.user.name}`,
 			});
 
-			/* redirect to previous user route, fallback to homepage */
-			setTimeout(() => {
-				navigate({ to: redirect || "/", replace: true });
-			}, 1000);
+			// redirect to previous user route, fallback to homepage
+			navigate({ to: redirect || "/", replace: true });
 		},
 
 		onSubmitInvalid() {
@@ -95,7 +95,15 @@ export default function LoginForm() {
 				</form.AppField>
 
 				<div className="flex flex-wrap items-center justify-between gap-4">
-					<span>checkbox aaaaaaa</span>
+					<form.AppField name="loginRememberMe">
+						{(field) => (
+							<field.CheckboxField
+								label="Remember me?"
+								description="If checked, you will stay logged in after closing the browser tab."
+							/>
+						)}
+					</form.AppField>
+
 					<Link
 						variant="plain"
 						to="/reset-password"

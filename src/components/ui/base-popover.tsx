@@ -5,7 +5,7 @@ interface Props {
 	trigger: ReactNode;
 	triggerAriaLabel?: string;
 	title: string;
-	description: string;
+	description?: string;
 }
 
 export function Popover({
@@ -28,9 +28,12 @@ export function Popover({
 						<BasePopover.Title className="text-lg text-text-inverse">
 							{title}
 						</BasePopover.Title>
-						<BasePopover.Description className="mbs-4 text-base text-text-inverse/80 trim-text">
-							{description}
-						</BasePopover.Description>
+
+						{description && (
+							<BasePopover.Description className="mbs-4 text-base text-text-inverse/80 trim-text">
+								{description}
+							</BasePopover.Description>
+						)}
 					</BasePopover.Popup>
 				</BasePopover.Positioner>
 			</BasePopover.Portal>
