@@ -15,11 +15,12 @@ import { useToastManager } from "#/components/ui/base-toast";
 const RouteApi = getRouteApi("__root__");
 
 interface Props {
-	type: "email-verification" | "change-email";
+	type: "email-verification" | "change-email" | "reset-password";
+	email?: string;
 	newEmail?: string;
 }
 
-export default function ResendOtp({ type, newEmail }: Props) {
+export default function ResendOtp({ type, email, newEmail }: Props) {
 	const { user } = RouteApi.useRouteContext();
 
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -29,8 +30,6 @@ export default function ResendOtp({ type, newEmail }: Props) {
 	const toastManager = useToastManager();
 
 	const handleClick = async () => {
-		if (!user) return;
-
 		const sendOtp = () => {
 			switch (type) {
 				case "change-email":
@@ -40,8 +39,13 @@ export default function ResendOtp({ type, newEmail }: Props) {
 
 				case "email-verification":
 					return authClient.emailOtp.sendVerificationOtp({
-						email: user.email,
+						email: user?.email ?? "",
 						type: "email-verification",
+					});
+
+				case "reset-password":
+					return authClient.emailOtp.requestPasswordReset({
+						email: email ?? "",
 					});
 			}
 		};

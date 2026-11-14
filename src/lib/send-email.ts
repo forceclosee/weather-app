@@ -28,7 +28,7 @@ export async function sendEmail({ type, to, otp }: SendEmailParams) {
 			case "change-email":
 				return "Confirm your new email address";
 			case "forget-password":
-				return "Confirm your password change";
+				return "Confirm your password reset";
 		}
 	};
 

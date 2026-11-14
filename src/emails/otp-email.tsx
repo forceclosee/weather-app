@@ -26,7 +26,7 @@ export default function OtpEmail({ type, otp }: Props) {
 			case "change-email":
 				return "Confirm your new email address";
 			case "forget-password":
-				return "Confirm your password change";
+				return "Confirm your password reset";
 		}
 	};
 

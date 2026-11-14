@@ -16,8 +16,9 @@ import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as ProfileDashboardRouteImport } from './routes/_profile/dashboard'
+import { Route as ProfileResetPasswordRouteImport } from './routes/_profile/reset-password'
 import { Route as ProfileSettingsRouteRouteImport } from './routes/_profile/settings/route'
-import { Route as ProfileVerifyEmailRouteImport } from './routes/_profile/verify-email'
+import { Route as ProfileVerifyRouteImport } from './routes/_profile/verify'
 import { Route as ProfileSettingsIndexRouteImport } from './routes/_profile/settings/index'
 import { Route as ProfileSettingsEmailRouteImport } from './routes/_profile/settings/email'
 import { Route as ProfileSettingsPasswordRouteImport } from './routes/_profile/settings/password'
@@ -56,14 +57,19 @@ const ProfileDashboardRoute = ProfileDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
+const ProfileResetPasswordRoute = ProfileResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
 const ProfileSettingsRouteRoute = ProfileSettingsRouteRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
-const ProfileVerifyEmailRoute = ProfileVerifyEmailRouteImport.update({
-  id: '/verify-email',
-  path: '/verify-email',
+const ProfileVerifyRoute = ProfileVerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 const ProfileSettingsIndexRoute = ProfileSettingsIndexRouteImport.update({
@@ -98,7 +104,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ProfileDashboardRoute
-  '/verify-email': typeof ProfileVerifyEmailRoute
+  '/reset-password': typeof ProfileResetPasswordRoute
+  '/verify': typeof ProfileVerifyRoute
   '/settings/email': typeof ProfileSettingsEmailRoute
   '/settings/password': typeof ProfileSettingsPasswordRoute
   '/settings/profile': typeof ProfileSettingsProfileRoute
@@ -110,7 +117,8 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ProfileDashboardRoute
-  '/verify-email': typeof ProfileVerifyEmailRoute
+  '/reset-password': typeof ProfileResetPasswordRoute
+  '/verify': typeof ProfileVerifyRoute
   '/settings/email': typeof ProfileSettingsEmailRoute
   '/settings/password': typeof ProfileSettingsPasswordRoute
   '/settings/profile': typeof ProfileSettingsProfileRoute
@@ -126,7 +134,8 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_profile/dashboard': typeof ProfileDashboardRoute
-  '/_profile/verify-email': typeof ProfileVerifyEmailRoute
+  '/_profile/reset-password': typeof ProfileResetPasswordRoute
+  '/_profile/verify': typeof ProfileVerifyRoute
   '/_main/': typeof MainIndexRoute
   '/_profile/settings/email': typeof ProfileSettingsEmailRoute
   '/_profile/settings/password': typeof ProfileSettingsPasswordRoute
@@ -142,7 +151,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard'
-    | '/verify-email'
+    | '/reset-password'
+    | '/verify'
     | '/settings/email'
     | '/settings/password'
     | '/settings/profile'
@@ -154,7 +164,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard'
-    | '/verify-email'
+    | '/reset-password'
+    | '/verify'
     | '/settings/email'
     | '/settings/password'
     | '/settings/profile'
@@ -169,7 +180,8 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/signup'
     | '/_profile/dashboard'
-    | '/_profile/verify-email'
+    | '/_profile/reset-password'
+    | '/_profile/verify'
     | '/_main/'
     | '/_profile/settings/email'
     | '/_profile/settings/password'
@@ -236,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileDashboardRouteImport
       parentRoute: typeof ProfileRouteRoute
     }
+    '/_profile/reset-password': {
+      id: '/_profile/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ProfileResetPasswordRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
     '/_profile/settings': {
       id: '/_profile/settings'
       path: '/settings'
@@ -243,11 +262,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileSettingsRouteRouteImport
       parentRoute: typeof ProfileRouteRoute
     }
-    '/_profile/verify-email': {
-      id: '/_profile/verify-email'
-      path: '/verify-email'
-      fullPath: '/verify-email'
-      preLoaderRoute: typeof ProfileVerifyEmailRouteImport
+    '/_profile/verify': {
+      id: '/_profile/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof ProfileVerifyRouteImport
       parentRoute: typeof ProfileRouteRoute
     }
     '/_profile/settings/': {
@@ -334,13 +353,15 @@ const ProfileSettingsRouteRouteWithChildren =
 interface ProfileRouteRouteChildren {
   ProfileSettingsRouteRoute: typeof ProfileSettingsRouteRouteWithChildren
   ProfileDashboardRoute: typeof ProfileDashboardRoute
-  ProfileVerifyEmailRoute: typeof ProfileVerifyEmailRoute
+  ProfileResetPasswordRoute: typeof ProfileResetPasswordRoute
+  ProfileVerifyRoute: typeof ProfileVerifyRoute
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
   ProfileSettingsRouteRoute: ProfileSettingsRouteRouteWithChildren,
   ProfileDashboardRoute: ProfileDashboardRoute,
-  ProfileVerifyEmailRoute: ProfileVerifyEmailRoute,
+  ProfileResetPasswordRoute: ProfileResetPasswordRoute,
+  ProfileVerifyRoute: ProfileVerifyRoute,
 }
 
 const ProfileRouteRouteWithChildren = ProfileRouteRoute._addFileChildren(

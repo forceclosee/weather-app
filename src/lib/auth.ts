@@ -39,6 +39,14 @@ export const auth = betterAuth({
 							otp: otp,
 						});
 						break;
+
+					case "forget-password":
+						await sendEmail({
+							type: "forget-password",
+							to: email,
+							otp: otp,
+						});
+						break;
 				}
 			},
 		}),

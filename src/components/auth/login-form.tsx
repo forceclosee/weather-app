@@ -5,6 +5,7 @@ import { loginSchema } from "#/lib/schema/login-schema";
 import { authClient } from "#/lib/auth-client";
 
 import { useToastManager } from "#/components/ui/base-toast";
+import Link from "../ui/link";
 
 const routeApi = getRouteApi("/_auth/login");
 
@@ -92,6 +93,16 @@ export default function LoginForm() {
 						/>
 					)}
 				</form.AppField>
+
+				<div className="flex flex-wrap items-center justify-between gap-4">
+					<span>checkbox aaaaaaa</span>
+					<Link
+						variant="plain"
+						to="/reset-password"
+						className="text-text-primary hover-underline">
+						Forget password?
+					</Link>
+				</div>
 
 				<form.SubmitButton
 					label="Login"
