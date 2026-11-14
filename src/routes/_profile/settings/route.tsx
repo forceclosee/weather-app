@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "#/hook/use-media-query";
@@ -7,6 +7,15 @@ import { cn } from "#/utils/class-helper";
 import SettingsDesktopSidebar from "#/components/layout/settings-desktop-sidebar";
 
 export const Route = createFileRoute("/_profile/settings")({
+	beforeLoad: async ({ context, location }) => {
+		if (!context.user) {
+			throw redirect({
+				to: "/login",
+				search: { redirect: location.href },
+			});
+		}
+	},
+
 	component: RouteComponent,
 });
 

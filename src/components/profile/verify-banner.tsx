@@ -27,7 +27,7 @@ export default function VerifyBanner({ className }: Props) {
 			type: "email-verification",
 		});
 
-		navigate({ to: "/verify-email" });
+		navigate({ to: "/verify" });
 	};
 
 	return (

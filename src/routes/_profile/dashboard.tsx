@@ -1,4 +1,4 @@
-import { createFileRoute, getRouteApi } from "@tanstack/react-router";
+import { createFileRoute, getRouteApi, redirect } from "@tanstack/react-router";
 
 import ProfileDetails from "#/components/profile/profile-details";
 import VerifyBanner from "#/components/profile/verify-banner";
@@ -7,6 +7,16 @@ export const Route = createFileRoute("/_profile/dashboard")({
 	head: () => ({
 		meta: [{ title: "Dashboard | ForeCast" }],
 	}),
+
+	beforeLoad: async ({ context, location }) => {
+		if (!context.user) {
+			throw redirect({
+				to: "/login",
+				search: { redirect: location.href },
+			});
+		}
+	},
+
 	component: RouteComponent,
 });
 
