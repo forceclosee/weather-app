@@ -96,6 +96,7 @@
 	--z-card: 10;
 	--z-nav: 100;
 	--z-dropdown: 200;
+	--z-modal: 300;
 	--z-toast: 500;
 }
 
@@ -629,6 +630,10 @@
 
 @utility z-dropdown {
 	z-index: var(--z-dropdown);
+}
+
+@utility z-modal {
+	z-index: var(--z-modal);
 }
 
 @utility wave {

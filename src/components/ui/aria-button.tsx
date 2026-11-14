@@ -1,10 +1,12 @@
 import { cn } from "#/utils/class-helper";
+import type { Ref } from "react";
 import {
 	Button as AriaButton,
 	type ButtonProps as AriaButtonProps,
 } from "react-aria-components/Button";
 
 interface Props extends MakeRequired<AriaButtonProps, "children"> {
+	ref?: Ref<HTMLButtonElement>;
 	variant?: "plain" | "primary" | "secondary";
 	className?: string;
 }
@@ -12,20 +14,21 @@ interface Props extends MakeRequired<AriaButtonProps, "children"> {
 export function Button({
 	children,
 	variant = "primary",
+	type = "button",
 	className,
-
 	...props
 }: Props) {
 	return (
 		<AriaButton
+			type={type}
 			className={cn(
-				"flex cursor-pointer items-center justify-center rounded-xl px-4 font-medium text-text transition-all duration-200 max-block-max min-block-10.75 squircle trim-text *:shrink-0 active:not-disabled:scale-95 disabled:cursor-not-allowed",
+				"flex cursor-pointer items-center justify-center font-medium text-text transition-all duration-200 trim-text *:shrink-0 active:not-disabled:scale-95 disabled:cursor-not-allowed",
 				{
-					"bg-bg-primary scheme-dark hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
+					"rounded-xl bg-bg-primary px-4 scheme-dark max-block-max min-block-10.75 squircle hover:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled":
 						variant === "primary",
 				},
 				{
-					"bg-bg-secondary hover:bg-bg-secondary-hover focus-visible:bg-bg-secondary-hover":
+					"rounded-xl bg-bg-secondary px-4 max-block-max min-block-10.75 squircle hover:bg-bg-secondary-hover focus-visible:bg-bg-secondary-hover":
 						variant === "secondary",
 				},
 				className,
