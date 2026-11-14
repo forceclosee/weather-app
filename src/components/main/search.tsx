@@ -29,6 +29,8 @@ export default function Search({ className }: Props) {
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
+	const [isInputDisabled, setIsInputDisabled] = useState(false);
+
 	// user input value
 	const [inputValue, setInputValue] = useState("");
 
@@ -71,7 +73,17 @@ export default function Search({ className }: Props) {
 	};
 
 	return (
-		<FocusTrap active={isOpen}>
+		<FocusTrap
+			active={isOpen}
+			focusTrapOptions={{
+				onDeactivate: () => {
+					setIsInputDisabled(true);
+					setTimeout(() => {
+						setIsInputDisabled(false);
+					});
+				},
+				returnFocusOnDeactivate: false,
+			}}>
 			<div
 				ref={containerRef}
 				className={cn("mx-auto inline-full max-inline-2xl", className)}
@@ -87,6 +99,7 @@ export default function Search({ className }: Props) {
 								ref={inputRef}
 								id="search"
 								type="search"
+								disabled={isInputDisabled}
 								placeholder="Search for a place..."
 								value={inputValue}
 								onChange={(e) => setInputValue(e.target.value)}
