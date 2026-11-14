@@ -3,7 +3,11 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import OtpVerifyEmailForm from "#/components/profile/otp-verify-email-form";
 import ResendOtp from "#/components/profile/resend-otp";
 
-export const Route = createFileRoute("/_profile/verify-email")({
+export const Route = createFileRoute("/_profile/verify")({
+	head: () => ({
+		meta: [{ title: "Verify OTP | ForeCast" }],
+	}),
+
 	beforeLoad: async ({ context }) => {
 		if (context.user?.emailVerified) {
 			throw redirect({
