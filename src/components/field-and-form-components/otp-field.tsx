@@ -20,8 +20,8 @@ export default function OtpField() {
 				const isInputInvalid = !isValid && submissionAttempts > 0;
 
 				return (
-					<Field.Root>
-						<Field.Label className="sr-only">Verification code</Field.Label>
+					<Field.Root className="justify-items-center">
+						<Field.Label>Verification code</Field.Label>
 
 						<OTPField.Root
 							length={OTP_LENGTH}

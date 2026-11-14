@@ -6,7 +6,7 @@ import { Button } from "#/components/ui/aria-button";
 
 interface Props {
 	label: string | JSX.Element;
-	labelSubmitting: string | JSX.Element;
+	labelSubmitting?: string | JSX.Element;
 }
 
 export default function SubmitButton({ label, labelSubmitting }: Props) {
@@ -16,7 +16,7 @@ export default function SubmitButton({ label, labelSubmitting }: Props) {
 		<form.Subscribe selector={(state) => state.isSubmitting}>
 			{(isSubmitting) => (
 				<Button type="submit" isDisabled={isSubmitting}>
-					{isSubmitting ? labelSubmitting : label}
+					{isSubmitting && labelSubmitting ? labelSubmitting : label}
 				</Button>
 			)}
 		</form.Subscribe>
