@@ -84,11 +84,18 @@ export default function SearchResult({
 			},
 			timezone: location.timezone,
 			city: location.name,
+			province: location.admin1,
 			country: location.country,
 			countryCode: location.country_code.toLowerCase(),
 		});
 
 		handleOpenChange(false);
+	};
+
+	const handleFavourite = (e: MouseEvent) => {
+		e.stopPropagation();
+
+		// ...
 	};
 
 	return (
@@ -128,7 +135,7 @@ export default function SearchResult({
 								onClick={() => handleSelectLocation(location)}
 								onKeyDown={(e) => handleItemKeyDown(e, index)}
 								excludeFromTabOrder={activeIndex !== index}
-								className="grid flex-1 grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 rounded-lg text-start outline-transparent">
+								className="grid flex-1 grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 text-start outline-transparent">
 								<img
 									src={`https://hatscripts.github.io/circle-flags/flags/${location.country_code.toLowerCase()}.svg`}
 									alt={`${location.country} flag`}
@@ -151,6 +158,7 @@ export default function SearchResult({
 								variant="plain"
 								excludeFromTabOrder={activeIndex !== index}
 								className="shrink-0 p-2"
+								onClick={() => handleFavourite}
 								aria-label="Add to favourites">
 								<Star strokeWidth={3} className="block-[1.1em] inline-auto" />
 							</Button>

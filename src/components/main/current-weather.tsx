@@ -47,6 +47,8 @@ function CurrentWeatherContent() {
 
 	const countryFlagUrl = `https://hatscripts.github.io/circle-flags/flags/${countryCode}.svg`;
 
+	const locationLabel = country ? `${city}, ${country}` : city;
+
 	const weatherParams = useWeatherParams();
 
 	const { data } = useSuspenseQuery(weatherQueryOptions(weatherParams));
@@ -80,14 +82,17 @@ function CurrentWeatherContent() {
 		<div className="grid items-center justify-items-center gap-8 p-6 pe-8 text-center @3xl/current-weather:grid-cols-[1fr_auto] @3xl/current-weather:justify-items-start @3xl/current-weather:text-start">
 			<div className="grid gap-2">
 				<h2 className="text-[1.85rem] font-medium">
-					<span>{`${city}, ${country}`}</span>
-					<img
-						src={countryFlagUrl}
-						alt=""
-						width={48}
-						height={48}
-						className="ms-4 inline-block shrink-0 block-auto inline-[1em]"
-					/>
+					<span>{locationLabel}</span>
+
+					{countryCode && (
+						<img
+							src={countryFlagUrl}
+							alt=""
+							width={48}
+							height={48}
+							className="ms-4 inline-block shrink-0 block-auto inline-[1em]"
+						/>
+					)}
 				</h2>
 				<span className="text-lg text-text/77">{fullDate}</span>
 				<TimeDisplay />

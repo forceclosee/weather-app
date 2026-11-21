@@ -12,6 +12,7 @@ import {
 	ModalOverlay,
 } from "#/components/ui/aria-modal";
 import SearchResult from "#/components/search/search-result";
+import CurrentLocation from "#/components/search/current-location";
 
 interface Props extends ComponentProps<"div"> {}
 
@@ -49,24 +50,28 @@ export default function Search({ className }: Props) {
 	};
 
 	return (
-		<div className={cn("mx-auto inline-full max-inline-2xl", className)}>
+		<div className={cn("@container/search inline-full", className)}>
 			<Button
 				variant="secondary"
 				onClick={() => setIsOpen(true)}
 				aria-haspopup="dialog"
-				className="gap-3 rounded-xl text-start text-text-muted inline-full min-block-14 squircle">
+				className="gap-3 rounded-xl text-start text-text-muted inline-full min-block-12 squircle">
 				<SearchIcon strokeWidth={3} className="block-[1.1em] inline-auto" />
 				<span className="flex-1">Search for a place...</span>
-				<span className="hidden text-base text-text sm:inline">Search</span>
+				<span className="hidden text-base text-text @min-lg/search:inline">
+					Search
+				</span>
 			</Button>
 
 			<ModalOverlay
 				isOpen={isOpen}
 				onOpenChange={handleOpenChange}
 				isDismissable>
-				<Modal>
+				<Modal className="max-inline-2xl">
 					<Dialog>
 						<Heading slot="title">Search location</Heading>
+
+						<CurrentLocation />
 
 						<search className="flex items-center gap-2 rounded-xl border border-border bg-bg-secondary px-4 outline-2 -outline-offset-2 outline-transparent squircle focus-within:outline-2 focus-within:outline-inherit">
 							<label htmlFor={inputId} className="sr-only">
@@ -83,6 +88,7 @@ export default function Search({ className }: Props) {
 								className="flex-1 hide-default-clear bg-transparent py-3 outline-transparent"
 							/>
 
+							{/* clear input */}
 							{inputValue && (
 								<button
 									type="button"

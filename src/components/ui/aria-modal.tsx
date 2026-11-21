@@ -42,7 +42,7 @@ export function Modal({ className, children, ...props }: ModalProps) {
 	return (
 		<AriaModal
 			className={cn(
-				"rounded-2xl border border-border-muted bg-bg-card p-6 text-text shadow-xl outline-none inline-full max-block-[calc(var(--visual-viewport-height)*0.9)] max-inline-2xl squircle",
+				"overflow-y-auto rounded-2xl border border-border-muted bg-bg-card p-6 text-text shadow-xl outline-none inline-full max-block-[calc(var(--visual-viewport-height)*0.9)] squircle",
 				className,
 			)}
 			{...props}>
@@ -69,10 +69,5 @@ interface HeadingProps
 		ClassNameProps {}
 
 export function Heading({ className, ...props }: HeadingProps) {
-	return (
-		<AriaHeading
-			className={cn("relative grid gap-6 outline-none", className)}
-			{...props}
-		/>
-	);
+	return <AriaHeading className={cn("text-center", className)} {...props} />;
 }
