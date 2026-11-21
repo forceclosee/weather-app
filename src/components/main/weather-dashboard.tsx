@@ -12,6 +12,7 @@ import AdditionalInfo from "#/components/main/additional-info";
 import DailyForecast from "#/components/main/daily-forecast";
 import HourlyForecast from "#/components/main/hourly-forecast";
 import Search from "#/components/search/search";
+import Geolocation from "#/components/main/geolocation";
 
 export default function WeatherDashboard() {
 	return (
@@ -40,7 +41,10 @@ export default function WeatherDashboard() {
 							How's the sky looking today?
 						</h1>
 
-						<Search className="order-2 lg:col-span-2" />
+						<div className="order-2 mx-auto grid items-center justify-items-center gap-4 inline-full max-inline-3xl lg:col-span-2 @min-2xl/weather-dashboard:grid-cols-[1fr_auto]">
+							<Search />
+							<Geolocation />
+						</div>
 
 						<div className="@container/current-weather order-3 grid gap-fluid-550">
 							<CurrentWeather />

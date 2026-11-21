@@ -6,6 +6,15 @@ declare module "react" {
 }
 
 declare global {
+	interface HTMLGeolocationElement extends HTMLElement {
+		readonly position: GeolocationPosition | null;
+		readonly error: GeolocationPositionError | null;
+		readonly isValid: boolean;
+		watch: boolean;
+		autolocate: boolean;
+		accuracymode: "precise" | "coarse";
+	}
+
 	/**
 	 * utility to make attribute required
 	 *

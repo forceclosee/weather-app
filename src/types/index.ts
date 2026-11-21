@@ -20,3 +20,8 @@ export interface Units {
 	windSpeed: WindSpeed;
 	precipitation: Precipitation;
 }
+
+export interface Coordinates {
+	latitude: number;
+	longitude: number;
+}

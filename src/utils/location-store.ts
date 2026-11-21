@@ -1,14 +1,12 @@
 import { createStore, useSelector } from "@tanstack/react-store";
 
-interface Coordinates {
-	latitude: number;
-	longitude: number;
-}
+import type { Coordinates } from "#/types";
 
 export interface LocationsStore {
 	coordinates: Coordinates;
 	timezone: string;
 	city: string;
+	province: string;
 	country: string;
 	countryCode: string;
 }
@@ -20,6 +18,7 @@ export const locationsStore = createStore<LocationsStore>({
 	},
 	timezone: "Europe/Berlin",
 	city: "Berlin",
+	province: "Berlin",
 	country: "Germany",
 	countryCode: "de",
 });
