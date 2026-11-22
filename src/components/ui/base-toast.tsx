@@ -15,7 +15,7 @@ export const ToastProvider = ({ children }: ProviderProps) => {
 		<BaseToast.Provider>
 			{children}
 			<BaseToast.Portal>
-				<BaseToast.Viewport className="fixed inset-e-4 inset-be-4 z-1 inline-[calc(100vw-2rem)] max-inline-90">
+				<BaseToast.Viewport className="fixed inset-e-4 inset-be-4 z-toast inline-[calc(100vw-2rem)] max-inline-90">
 					<List />
 				</BaseToast.Viewport>
 			</BaseToast.Portal>

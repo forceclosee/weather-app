@@ -5,7 +5,7 @@ import {
 	type ButtonProps as AriaButtonProps,
 } from "react-aria-components/Button";
 
-interface Props extends MakeRequired<AriaButtonProps, "children"> {
+export interface ButtonProps extends MakeRequired<AriaButtonProps, "children"> {
 	ref?: Ref<HTMLButtonElement>;
 	variant?: "plain" | "primary" | "secondary";
 	className?: string;
@@ -17,7 +17,7 @@ export function Button({
 	type = "button",
 	className,
 	...props
-}: Props) {
+}: ButtonProps) {
 	return (
 		<AriaButton
 			type={type}

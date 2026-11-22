@@ -12,7 +12,8 @@ import {
 	ModalOverlay,
 } from "#/components/ui/aria-modal";
 import SearchResult from "#/components/search/search-result";
-import CurrentLocation from "#/components/search/current-location";
+import SelectedLocation from "#/components/search/selected-location";
+import FavouriteLocationList from "#/components/search/favourite-location-list";
 
 interface Props extends ComponentProps<"div"> {}
 
@@ -54,6 +55,7 @@ export default function Search({ className }: Props) {
 			<Button
 				variant="secondary"
 				onClick={() => setIsOpen(true)}
+				aria-expanded={isOpen}
 				aria-haspopup="dialog"
 				className="gap-3 rounded-xl text-start text-text-muted inline-full min-block-12 squircle">
 				<SearchIcon strokeWidth={3} className="block-[1.1em] inline-auto" />
@@ -71,7 +73,7 @@ export default function Search({ className }: Props) {
 					<Dialog>
 						<Heading slot="title">Search location</Heading>
 
-						<CurrentLocation />
+						<SelectedLocation />
 
 						<search className="flex items-center gap-2 rounded-xl border border-border bg-bg-secondary px-4 outline-2 -outline-offset-2 outline-transparent squircle focus-within:outline-2 focus-within:outline-inherit">
 							<label htmlFor={inputId} className="sr-only">
@@ -109,14 +111,13 @@ export default function Search({ className }: Props) {
 						/>
 
 						{/* favourite locations */}
-						<section className="grid gap-2">
-							<h3 className="font-medium">Favourites</h3>
+						<FavouriteLocationList
+							handleOpenChange={handleOpenChange}
+							activeIndex={activeIndex}
+							setActiveIndex={setActiveIndex}
+						/>
 
-							<p className="text-base text-text-muted">
-								No favourite locations yet.
-							</p>
-						</section>
-
+						{/* close button */}
 						<Button
 							slot="close"
 							variant="plain"

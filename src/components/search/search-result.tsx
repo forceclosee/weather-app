@@ -6,13 +6,12 @@ import {
 } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { Star } from "lucide-react";
-
-import type { Location } from "#/lib/schema/geocoding-schema";
+import type { Locations } from "#/types";
 import { updateLocations } from "#/utils/location-store";
 import { locationQueryOptions } from "#/query-options/geocoding";
 
 import { Button } from "#/components/ui/aria-button";
+import AddToFavouriteButton from "#/components/search/add-to-favourite-button";
 
 interface Props {
 	searchValue: string;
@@ -33,7 +32,21 @@ export default function SearchResult({
 		locationQueryOptions(searchValue),
 	);
 
-	const locations = data?.results ?? [];
+	const locations =
+		data?.results.map((loc) => {
+			const location = {
+				coordinates: {
+					latitude: loc.latitude,
+					longitude: loc.longitude,
+				},
+				timezone: loc.timezone,
+				city: loc.name,
+				province: loc.admin1,
+				country: loc.country,
+				countryCode: loc.country_code.toLowerCase(),
+			};
+			return location;
+		}) ?? [];
 
 	const itemCount = isSuccess ? locations.length : 0;
 
@@ -76,26 +89,10 @@ export default function SearchResult({
 		}
 	};
 
-	const handleSelectLocation = (location: Location) => {
-		updateLocations({
-			coordinates: {
-				latitude: location.latitude,
-				longitude: location.longitude,
-			},
-			timezone: location.timezone,
-			city: location.name,
-			province: location.admin1,
-			country: location.country,
-			countryCode: location.country_code.toLowerCase(),
-		});
+	const handleSelectLocation = (location: Locations) => {
+		updateLocations(location);
 
 		handleOpenChange(false);
-	};
-
-	const handleFavourite = (e: MouseEvent) => {
-		e.stopPropagation();
-
-		// ...
 	};
 
 	return (
@@ -125,7 +122,7 @@ export default function SearchResult({
 				<ul className="grid gap-1">
 					{locations.map((location, index) => (
 						<li
-							key={location.id}
+							key={`${location.coordinates.latitude}, ${location.coordinates.longitude}`}
 							className="flex items-center justify-between gap-4 rounded-xl border border-border-muted p-2 squircle focus-within:bg-bg-selected focus-within:outline-2 hover:bg-bg-selected">
 							<Button
 								ref={(el) => {
@@ -137,7 +134,7 @@ export default function SearchResult({
 								excludeFromTabOrder={activeIndex !== index}
 								className="grid flex-1 grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 text-start outline-transparent">
 								<img
-									src={`https://hatscripts.github.io/circle-flags/flags/${location.country_code.toLowerCase()}.svg`}
+									src={`https://hatscripts.github.io/circle-flags/flags/${location.countryCode}.svg`}
 									alt={`${location.country} flag`}
 									width={48}
 									height={48}
@@ -145,23 +142,19 @@ export default function SearchResult({
 								/>
 
 								<span className="font-medium">
-									{`${location.name}, ${location.country}`}
+									{`${location.city}, ${location.country}`}
 								</span>
 
 								<span className="col-span-2 text-text-muted">
-									{`${location.admin1} (${location.latitude}°N, ${location.longitude}°E)`}
+									{`${location.province} (${location.coordinates.latitude}°N, ${location.coordinates.longitude}°E)`}
 								</span>
 							</Button>
 
 							{/* add to favourite button */}
-							<Button
-								variant="plain"
+							<AddToFavouriteButton
+								location={location}
 								excludeFromTabOrder={activeIndex !== index}
-								className="shrink-0 p-2"
-								onClick={() => handleFavourite}
-								aria-label="Add to favourites">
-								<Star strokeWidth={3} className="block-[1.1em] inline-auto" />
-							</Button>
+							/>
 						</li>
 					))}
 				</ul>

@@ -74,7 +74,7 @@ export default function Geolocation() {
 				description: error?.message ?? "Something went wrong",
 			});
 		}
-	}, [isError]);
+	}, [isError, error, toastManager]);
 
 	const locality = () => {
 		if (!data?.locality) {

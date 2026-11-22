@@ -646,6 +646,10 @@
 	z-index: var(--z-modal);
 }
 
+@utility z-toast {
+	z-index: var(--z-toast);
+}
+
 @utility wave {
 	animation: wave 2s linear infinite;
 }
