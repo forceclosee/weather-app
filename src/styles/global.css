@@ -328,6 +328,26 @@
 		animation: l3 1s infinite linear;
 	}
 
+	.bubble-loader {
+		--page-loader-color-1: light-dark(oklch(0 0 none), oklch(1 0 none));
+		--page-loader-color-2: light-dark(oklch(0 0 none / 0), oklch(1 0 none / 0));
+
+		width: 1.2rem;
+		aspect-ratio: 2;
+		--_g: no-repeat
+			radial-gradient(
+				circle closest-side,
+				var(--page-loader-color-1) 90%,
+				var(--page-loader-color-2)
+			);
+		background:
+			var(--_g) 0% 50%,
+			var(--_g) 50% 50%,
+			var(--_g) 100% 50%;
+		background-size: calc(100% / 3) 50%;
+		animation: l3 1s infinite linear;
+	}
+
 	@keyframes l3 {
 		20% {
 			background-position:

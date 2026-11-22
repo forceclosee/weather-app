@@ -22,6 +22,7 @@ import "@fontsource-variable/dm-sans";
 import "@fontsource-variable/bricolage-grotesque";
 
 import { ToastProvider } from "#/components/ui/base-toast";
+import { Tooltip } from "#/components/ui/base-tooltip";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -105,7 +106,9 @@ function RootComponent() {
 		<RootDocument>
 			<ThemeProvider>
 				<ToastProvider>
-					<Outlet />
+					<Tooltip.Provider delay={200}>
+						<Outlet />
+					</Tooltip.Provider>
 				</ToastProvider>
 			</ThemeProvider>
 		</RootDocument>

@@ -4,14 +4,14 @@ import {
 	type KeyboardEvent,
 	type SetStateAction,
 } from "react";
-import { Trash } from "lucide-react";
 
 import type { Locations } from "#/types";
 import { useFavouriteLocations } from "#/hook/use-favourite-locations";
-import type { FavouriteLocation } from "#/utils/favourites";
+
 import { updateLocations } from "#/utils/location-store";
 
 import { Button } from "#/components/ui/aria-button";
+import RemoveFavouriteButton from "./remove-favourite-location-button";
 
 interface Props {
 	handleOpenChange: (open: boolean) => void;
@@ -26,12 +26,7 @@ export default function FavouriteLocationList({
 }: Props) {
 	const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-	const {
-		favouriteLocations,
-		locationsStatus,
-		deleteFavouriteLocation,
-		isDeleteLocationPending,
-	} = useFavouriteLocations();
+	const { favouriteLocations, locationsStatus } = useFavouriteLocations();
 
 	const itemCount = favouriteLocations ? favouriteLocations.length : 0;
 
@@ -80,26 +75,25 @@ export default function FavouriteLocationList({
 		handleOpenChange(false);
 	};
 
-	const handleDelete = (location: FavouriteLocation) => {
-		deleteFavouriteLocation(location);
-	};
-
 	return (
 		<section className="grid gap-2">
 			<h3 className="font-medium">Favourites</h3>
 
+			{/* unauthenticated user placeholder */}
 			{locationsStatus === "unauthenticated" && (
 				<p className="text-base text-text-muted">
 					Login to to add location to favourites
 				</p>
 			)}
 
+			{/* unverified user placeholder */}
 			{locationsStatus === "email_unverified" && (
 				<p className="text-base text-text-muted">
 					Verify your email address to to add location to favourites
 				</p>
 			)}
 
+			{/* empty placeholder */}
 			{locationsStatus === "ready" && favouriteLocations.length === 0 && (
 				<p className="text-base text-text-muted">No favourite locations yet.</p>
 			)}
@@ -137,14 +131,10 @@ export default function FavouriteLocationList({
 							</Button>
 
 							{/* remove location from favourite button */}
-							<Button
-								variant="plain"
-								onClick={() => handleDelete(location)}
-								isDisabled={isDeleteLocationPending}
-								className="shrink-0 p-2 text-text-error hover:text-text-error/70 focus-visible:text-text-error/70"
-								aria-label="Delete location from favourites">
-								<Trash strokeWidth={3} className="block-[1.1em] inline-auto" />
-							</Button>
+							<RemoveFavouriteButton
+								location={location}
+								tabIndex={activeIndex === index ? 0 : -1}
+							/>
 						</li>
 					))}
 				</ul>

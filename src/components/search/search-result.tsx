@@ -153,7 +153,7 @@ export default function SearchResult({
 							{/* add to favourite button */}
 							<AddToFavouriteButton
 								location={location}
-								excludeFromTabOrder={activeIndex !== index}
+								tabIndex={activeIndex === index ? 0 : -1}
 							/>
 						</li>
 					))}
