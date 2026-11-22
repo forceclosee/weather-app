@@ -2,8 +2,9 @@ import { defineRelations } from "drizzle-orm";
 
 import * as authSchema from "#/db/schema/auth-schema";
 import * as unitsSchema from "#/db/schema/units-schema";
+import * as favouriteLocationSchema from "#/db/schema/favourite-locations-schema";
 
-const schema = { ...authSchema, ...unitsSchema };
+const schema = { ...authSchema, ...unitsSchema, ...favouriteLocationSchema };
 
 export const relations = defineRelations(schema, (r) => ({
 	user: {
@@ -18,6 +19,10 @@ export const relations = defineRelations(schema, (r) => ({
 		units: r.one.units({
 			from: r.user.id,
 			to: r.units.userId,
+		}),
+		favouriteLocations: r.many.favouriteLocations({
+			from: r.user.id,
+			to: r.favouriteLocations.userId,
 		}),
 	},
 
@@ -38,6 +43,13 @@ export const relations = defineRelations(schema, (r) => ({
 	units: {
 		user: r.one.user({
 			from: r.units.userId,
+			to: r.user.id,
+		}),
+	},
+
+	favouriteLocations: {
+		user: r.one.user({
+			from: r.favouriteLocations.userId,
 			to: r.user.id,
 		}),
 	},

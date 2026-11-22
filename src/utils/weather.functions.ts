@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 
 import { weatherSchema } from "#/lib/schema/weather-schema";
-import type { LocationsStore } from "#/utils/location-store";
-import type { Units } from "#/types";
 
-export type WeatherParams = LocationsStore & Units;
+import type { Locations, Units } from "#/types";
+
+export interface WeatherParams extends Locations, Units {}
 
 class FetchError extends Error {}
 

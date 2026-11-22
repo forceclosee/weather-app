@@ -1,3 +1,5 @@
+import type { Location as InputLocation } from "#/lib/schema/location-schema";
+
 export type Temperature = "celcius" | "fahrenheit";
 
 export type WindSpeed = "kmh" | "mph" | "ms" | "kn";
@@ -25,3 +27,5 @@ export interface Coordinates {
 	latitude: number;
 	longitude: number;
 }
+
+export interface Locations extends InputLocation {}

@@ -1,17 +1,9 @@
 import { createStore, useSelector } from "@tanstack/react-store";
 
-import type { Coordinates } from "#/types";
+import type { Locations } from "#/types";
+import { normalizeCoordinates } from "#/utils/location";
 
-export interface LocationsStore {
-	coordinates: Coordinates;
-	timezone: string;
-	city: string;
-	province: string;
-	country: string;
-	countryCode: string;
-}
-
-export const locationsStore = createStore<LocationsStore>({
+export const locationsStore = createStore<Locations>({
 	coordinates: {
 		latitude: 52.5244,
 		longitude: 13.4105,
@@ -23,23 +15,29 @@ export const locationsStore = createStore<LocationsStore>({
 	countryCode: "de",
 });
 
-export const getLocations = (): LocationsStore => {
+export const getLocations = (): Locations => {
 	return useSelector(locationsStore);
 };
 
-export const getPartialLocations = <K extends keyof LocationsStore>(
+export const getPartialLocations = <K extends keyof Locations>(
 	param: K,
-): LocationsStore[K] => {
+): Locations[K] => {
 	return useSelector(locationsStore, (state) => state[param]);
 };
 
-export const setLocations = (newState: LocationsStore) => {
-	locationsStore.setState(() => newState);
+export const setLocations = (newState: Locations) => {
+	locationsStore.setState(() => ({
+		...newState,
+		coordinates: normalizeCoordinates(newState.coordinates),
+	}));
 };
 
-export const updateLocations = (newState: Partial<LocationsStore>) => {
+export const updateLocations = (newState: Partial<Locations>) => {
 	locationsStore.setState((prev) => ({
 		...prev,
 		...newState,
+		coordinates: newState.coordinates
+			? normalizeCoordinates(newState.coordinates)
+			: prev.coordinates,
 	}));
 };
