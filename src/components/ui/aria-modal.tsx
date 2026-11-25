@@ -1,4 +1,6 @@
 import {
+	DialogTrigger as AriaDialogTrigger,
+	type DialogTriggerProps,
 	Dialog as AriaDialog,
 	type DialogProps as AriaDialogProps,
 	Heading as AriaHeading,
@@ -14,6 +16,10 @@ import type { ReactNode } from "react";
 
 interface ClassNameProps {
 	className?: string;
+}
+
+export function DialogTrigger(props: DialogTriggerProps) {
+	return <AriaDialogTrigger {...props} />;
 }
 
 interface ModalOverlayProps

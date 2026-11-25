@@ -1,12 +1,8 @@
-import {
-	useRef,
-	type Dispatch,
-	type KeyboardEvent,
-	type SetStateAction,
-} from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import type { Locations } from "#/types";
+import { useRovingTabindex } from "#/hook/use-roving-tabindex";
 import { updateLocations } from "#/utils/location-store";
 import { locationQueryOptions } from "#/query-options/geocoding";
 
@@ -15,17 +11,10 @@ import AddToFavouriteButton from "#/components/search/add-to-favourite-button";
 
 interface Props {
 	searchValue: string;
-	handleOpenChange: (open: boolean) => void;
-	activeIndex: number;
-	setActiveIndex: Dispatch<SetStateAction<number>>;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function SearchResult({
-	searchValue,
-	handleOpenChange,
-	activeIndex,
-	setActiveIndex,
-}: Props) {
+export default function SearchResult({ searchValue, setIsOpen }: Props) {
 	const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
 	const { data, isPending, isError, isSuccess } = useQuery(
@@ -48,60 +37,29 @@ export default function SearchResult({
 			return location;
 		}) ?? [];
 
+	const [activeIndex, setActiveIndex] = useState(0);
+
 	const itemCount = isSuccess ? locations.length : 0;
 
-	const focusItem = (index: number) => {
-		if (itemCount === 0) return;
-
-		const next = (index + itemCount) % itemCount;
-
-		setActiveIndex(next);
-		itemRefs.current[next]?.focus();
-	};
-
-	const handleItemKeyDown = (
-		e: KeyboardEvent<HTMLButtonElement>,
-		index: number,
-	) => {
-		switch (e.key) {
-			case "ArrowDown":
-				e.preventDefault();
-				focusItem(index + 1);
-				break;
-
-			case "ArrowUp":
-				e.preventDefault();
-				focusItem(index - 1);
-				break;
-
-			case "Home":
-				e.preventDefault();
-				focusItem(0);
-				break;
-
-			case "End":
-				e.preventDefault();
-				focusItem(itemCount - 1);
-				break;
-
-			default:
-				break;
-		}
-	};
+	const { handleItemKeyDown } = useRovingTabindex({
+		itemRefs,
+		setActiveIndex,
+		itemCount,
+	});
 
 	const handleSelectLocation = (location: Locations) => {
 		updateLocations(location);
 
-		handleOpenChange(false);
+		setIsOpen(false);
 	};
 
 	return (
 		<section className="grid gap-2">
-			<h3 className="font-medium">Results</h3>
+			<h3 className="font-medium">Search results</h3>
 
 			{/* empty state */}
 			{!searchValue && (
-				<p className="text-base text-text-muted">Type the city name</p>
+				<p className="text-base text-text-muted">Type the city name...</p>
 			)}
 
 			{/* loading state */}
@@ -110,12 +68,11 @@ export default function SearchResult({
 			)}
 
 			{/* error state */}
-			{isError ||
-				(isSuccess && locations.length === 0 && (
-					<p className="text-base font-medium text-text-error">
-						No location found, Please use a different search term
-					</p>
-				))}
+			{(isError || (isSuccess && locations.length === 0)) && (
+				<p className="text-base font-medium text-text-error">
+					No location found, Please use a different search term.
+				</p>
+			)}
 
 			{/* success state */}
 			{isSuccess && locations.length > 0 && (
@@ -123,7 +80,7 @@ export default function SearchResult({
 					{locations.map((location, index) => (
 						<li
 							key={`${location.coordinates.latitude}, ${location.coordinates.longitude}`}
-							className="flex items-center justify-between gap-4 rounded-xl border border-border-muted p-2 squircle focus-within:bg-bg-selected focus-within:outline-2 hover:bg-bg-selected">
+							className="flex items-center justify-between gap-4 rounded-xl border border-border-muted p-2 transition-all duration-200 squircle focus-within:bg-bg-selected focus-within:outline-2 hover:bg-bg-selected active:scale-95">
 							<Button
 								ref={(el) => {
 									itemRefs.current[index] = el;
@@ -132,7 +89,7 @@ export default function SearchResult({
 								onClick={() => handleSelectLocation(location)}
 								onKeyDown={(e) => handleItemKeyDown(e, index)}
 								excludeFromTabOrder={activeIndex !== index}
-								className="grid flex-1 grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 text-start outline-transparent">
+								className="grid flex-1 grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 text-start outline-transparent active:not-disabled:scale-100">
 								<img
 									src={`https://hatscripts.github.io/circle-flags/flags/${location.countryCode}.svg`}
 									alt={`${location.country} flag`}
