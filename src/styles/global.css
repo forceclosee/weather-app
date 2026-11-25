@@ -605,9 +605,7 @@
 		padding: 0.5rem;
 		opacity: 1;
 		block-size: 3rem;
-		min-inline-size: 12rem;
-		border-radius: 0.5rem;
-		corner-shape: squircle;
+		inline-size: 100%;
 	}
 
 	@keyframes animloader {

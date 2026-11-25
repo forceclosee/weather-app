@@ -112,5 +112,10 @@ export default function Geolocation() {
 		});
 	}, [coordinate, data]);
 
-	return <div ref={containerRef} />;
+	return (
+		<div
+			ref={containerRef}
+			className="overflow-clip rounded-xl bg-bg-card min-block-12 min-inline-52 squircle"
+		/>
+	);
 }
