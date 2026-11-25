@@ -5,11 +5,20 @@ import { authClient } from "#/lib/auth-client";
 import { verifyOtpSchema } from "#/lib/schema/profile-settings-schema";
 
 import { useToastManager } from "#/components/ui/base-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { favouriteLocationsQueryOptions } from "#/query-options/favourite-locations";
 
 const RouteApi = getRouteApi("__root__");
 
 export default function OtpVerifyEmailForm() {
 	const { user } = RouteApi.useRouteContext();
+
+	const queryClient = useQueryClient();
+	const options = useMemo(
+		() => favouriteLocationsQueryOptions(user?.id ?? ""),
+		[user?.id],
+	);
 
 	const navigate = useNavigate();
 
@@ -47,6 +56,9 @@ export default function OtpVerifyEmailForm() {
 
 			formApi.reset();
 
+			// invalidate favourite locations query
+			queryClient.invalidateQueries({ queryKey: options.queryKey });
+
 			toastManager.add({
 				type: "success",
 				title: "Your email has been verified",
@@ -54,9 +66,7 @@ export default function OtpVerifyEmailForm() {
 			});
 
 			/* redirect to dashboard */
-			setTimeout(() => {
-				navigate({ to: "/dashboard", replace: true });
-			}, 1000);
+			navigate({ to: "/dashboard", replace: true });
 		},
 
 		onSubmitInvalid() {

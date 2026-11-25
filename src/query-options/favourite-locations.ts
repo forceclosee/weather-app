@@ -9,5 +9,3 @@ export const favouriteLocationsQueryOptions = (userId: string) => {
 		staleTime: Infinity,
 	});
 };
-
-// invalidate query setelah user verify email

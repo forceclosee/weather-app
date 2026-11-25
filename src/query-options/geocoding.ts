@@ -7,6 +7,7 @@ export const locationQueryOptions = (input: string) => {
 		queryFn: () => getLocation({ data: input }),
 		enabled: !!input,
 		refetchOnWindowFocus: false,
+		refetchOnMount: false,
 		staleTime: Infinity,
 		retry: false,
 	});
