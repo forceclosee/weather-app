@@ -19,23 +19,17 @@ interface SendEmailParams {
 }
 
 export async function sendEmail({ type, to, otp }: SendEmailParams) {
-	const emailSubject = () => {
-		switch (type) {
-			case "email-verification":
-				return "Verify your email address";
-			case "sign-in":
-				return "Verify your login";
-			case "change-email":
-				return "Confirm your new email address";
-			case "forget-password":
-				return "Confirm your password reset";
-		}
+	const subject = {
+		"email-verification": "Verify your email address",
+		"sign-in": "Verify your login",
+		"change-email": "Confirm your new email address",
+		"forget-password": "Confirm your password reset",
 	};
 
 	await resend.emails.send({
 		from: "Forecast <no-reply@verify.forecast.web.id>",
 		to: to,
-		subject: emailSubject(),
+		subject: subject[type],
 		react: OtpEmail({ type, otp }),
 	});
 }
