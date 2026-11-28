@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import SignupForm from "#/components/auth/signup-form";
+import AuthCard from "#/components/shared/auth-card";
 
 export const Route = createFileRoute("/_auth/signup")({
 	head: () => ({
@@ -11,15 +12,8 @@ export const Route = createFileRoute("/_auth/signup")({
 
 function RouteComponent() {
 	return (
-		<div className="grid gap-8">
-			<h1 className="text-center">Sign up</h1>
+		<AuthCard type="sign-up" title="Sign up">
 			<SignupForm />
-			<p>
-				Already have an account?{" "}
-				<Link to="/login" className="text-text-primary hover-underline">
-					Login
-				</Link>
-			</p>
-		</div>
+		</AuthCard>
 	);
 }
