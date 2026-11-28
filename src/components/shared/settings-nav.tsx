@@ -6,7 +6,7 @@ import {
 	Pencil,
 	type LucideIcon,
 } from "lucide-react";
-import Link from "../ui/link";
+import Link from "#/components/ui/link";
 import { cn } from "#/utils/class-helper";
 
 interface Props {
@@ -52,7 +52,7 @@ export default function SettingsNav({ className, isSidebar }: Props) {
 					to={navItem.to}
 					variant="plain"
 					className={cn(
-						"gap-2 py-3",
+						"gap-2 py-3 px-4",
 						{ "not-last:border-be not-last:border-border": !isSidebar },
 						{
 							"rounded-xl squircle hover:bg-bg-card focus-visible:bg-bg-card data-[status=active]:bg-bg-card":

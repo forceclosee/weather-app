@@ -8,16 +8,14 @@ import { changeEmailSchema } from "#/lib/schema/profile-settings-schema";
 import { useToastManager } from "#/components/ui/base-toast";
 
 const routeApi = getRouteApi("__root__");
-const changeEmailRouteApi = getRouteApi("/_profile/settings/email");
 
 interface Props {
+	setInputMode: Dispatch<SetStateAction<"email" | "otp">>;
 	setNewEmail: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export default function ChangeEmailForm({ setNewEmail }: Props) {
+export default function ChangeEmailForm({ setInputMode, setNewEmail }: Props) {
 	const { user } = routeApi.useRouteContext();
-
-	const navigate = changeEmailRouteApi.useNavigate();
 
 	const toastManager = useToastManager();
 
@@ -53,14 +51,8 @@ export default function ChangeEmailForm({ setNewEmail }: Props) {
 				description: "OTP has been sent to your email address",
 			});
 
+			setInputMode("otp");
 			setNewEmail(value.newEmail);
-
-			// add 'verifyOtp' search params to show verify otp form and hide change email form
-			navigate({
-				search: {
-					verifyOtp: true,
-				},
-			});
 		},
 
 		onSubmitInvalid() {
