@@ -19,10 +19,8 @@ import { Button } from "#/components/ui/aria-button";
 import { Avatar } from "#/components/ui/base-avatar";
 import Link from "#/components/ui/link";
 
-const RouteApi = getRouteApi("__root__");
-
 export default function ProfileDropdown() {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const containerRef = useRef<HTMLDivElement>(null);
 

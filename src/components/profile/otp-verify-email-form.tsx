@@ -9,10 +9,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { favouriteLocationsQueryOptions } from "#/query-options/favourite-locations";
 
-const RouteApi = getRouteApi("__root__");
-
 export default function OtpVerifyEmailForm() {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const queryClient = useQueryClient();
 	const options = useMemo(

@@ -6,10 +6,8 @@ import { Calendar, Settings } from "lucide-react";
 import { Avatar } from "#/components/ui/base-avatar";
 import Link from "#/components/ui/link";
 
-const RouteApi = getRouteApi("__root__");
-
 export default function ProfileDetails() {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	if (!user) {
 		return null;

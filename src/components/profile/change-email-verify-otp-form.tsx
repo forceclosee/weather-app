@@ -7,7 +7,6 @@ import { verifyOtpSchema } from "#/lib/schema/profile-settings-schema";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
-const RouteApi = getRouteApi("__root__");
 const changeEmailRouteApi = getRouteApi("/_profile/settings/email");
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export default function ChangeEmailVerifyOtpForm({ newEmail }: Props) {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const router = useRouter();
 	const navigate = changeEmailRouteApi.useNavigate();

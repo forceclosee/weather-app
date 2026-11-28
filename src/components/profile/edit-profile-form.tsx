@@ -6,10 +6,8 @@ import { editProfileSchema } from "#/lib/schema/profile-settings-schema";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
-const RouteApi = getRouteApi("__root__");
-
 export default function EditProfileForm() {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const router = useRouter();
 

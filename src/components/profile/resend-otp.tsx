@@ -12,8 +12,6 @@ import { classList } from "#/utils/class-helper";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
-const RouteApi = getRouteApi("__root__");
-
 interface Props {
 	type: "email-verification" | "change-email" | "reset-password";
 	email?: string;
@@ -21,7 +19,7 @@ interface Props {
 }
 
 export default function ResendOtp({ type, email, newEmail }: Props) {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const [isDisabled, setIsDisabled] = useState(true);
 

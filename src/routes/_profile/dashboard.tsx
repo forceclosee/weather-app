@@ -20,10 +20,8 @@ export const Route = createFileRoute("/_profile/dashboard")({
 	component: RouteComponent,
 });
 
-const RouteApi = getRouteApi("__root__");
-
 function RouteComponent() {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	return (
 		<div className="mx-auto grid gap-8 px-fluid-500 py-8 inline-full max-inline-316">

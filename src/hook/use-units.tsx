@@ -11,8 +11,6 @@ import type { Units, Temperature, WindSpeed, Precipitation } from "#/types";
 import { unitsQueryOptions } from "#/query-options/units";
 import { seedUnits, updateUnits } from "#/utils/units.functions";
 
-const routeApi = getRouteApi("__root__");
-
 // module-level guard so multiple useUnits() consumers don't seed the same user twice
 const seededUsers = new Set<string>();
 
@@ -23,7 +21,7 @@ const defaultUnits: Units = {
 };
 
 export function useUnits() {
-	const { user } = routeApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const [localUnits, setLocalUnits] = useLocalStorage<Units>(
 		"units",

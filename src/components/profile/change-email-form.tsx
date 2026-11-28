@@ -7,15 +7,13 @@ import { changeEmailSchema } from "#/lib/schema/profile-settings-schema";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
-const routeApi = getRouteApi("__root__");
-
 interface Props {
 	setInputMode: Dispatch<SetStateAction<"email" | "otp">>;
 	setNewEmail: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export default function ChangeEmailForm({ setInputMode, setNewEmail }: Props) {
-	const { user } = routeApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const toastManager = useToastManager();
 

@@ -8,14 +8,12 @@ import { cn } from "#/utils/class-helper";
 
 import { Button } from "#/components/ui/aria-button";
 
-const RouteApi = getRouteApi("__root__");
-
 interface Props {
 	className?: string;
 }
 
 export default function VerifyBanner({ className }: Props) {
-	const { user } = RouteApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const navigate = useNavigate();
 

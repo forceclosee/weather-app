@@ -22,8 +22,6 @@ import { coordinateKey } from "#/utils/location";
 
 import { useToastManager } from "#/components/ui/base-toast";
 
-const routeApi = getRouteApi("__root__");
-
 const EMPTY: FavouriteLocation[] = [];
 
 const addFavouriteLocationErrorMessages = {
@@ -44,7 +42,7 @@ const deleteFavouriteLocationErrorMessages = {
 } satisfies Record<DeleteFavouriteErrorReason, string>;
 
 export function useFavouriteLocations() {
-	const { user } = routeApi.useRouteContext();
+	const { user } = getRouteApi("__root__").useRouteContext();
 
 	const toastManager = useToastManager();
 
